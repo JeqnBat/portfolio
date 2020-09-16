@@ -1,0 +1,117 @@
+/**
+ * Author : Jean-Baptiste Pellier
+ * Project Name : My Own Private Portfolio
+ * Description : Build a website to display my projects & skills
+ * Tags : JS / ES6 / CCS 3 / HTML 5 / BOOTSTRAP / OOP / GITHUB / jQuery
+ */
+
+/* ======================= INDEX =======================
+
+ 1. HTML & BODY
+ 2. HOME SCREEN & TITLE
+ 3. MAIN PAGE LAYOUT
+ 4. MEDIA QUERIES
+
+*/
+
+/* 1. HTML & BODY
+______________________________________________________ */
+html, body {
+	height: 100%;
+	background: #debe68;
+	overflow: hidden;
+	color: white;
+}
+.roboto {
+	font-family: 'Roboto', sans-serif!important;
+}
+
+/* 2. HOME SCREEN & TITLE
+______________________________________________________ */
+/* Home screen container */
+#home-screen {
+	margin-top: 0;
+					transition: margin 1.5s ease-in-out;
+	-webkit-transition: margin 1.5s ease-in-out;
+}
+.slide-up {
+	margin-top: -100vh!important;
+}
+/* Big centered title */
+.title {
+	font-family: "Courier New", Courier, monospace;
+	font-size: 9rem;
+	text-transform: uppercase;
+	/* offset-x | offset-y | blur-radius | color | opacity */
+	text-shadow: 0px 0px 10px rgb(81,81,81, .3);
+	cursor: pointer;
+}
+.title:hover {
+}
+
+/* 3. MAIN PAGE LAYOUT
+______________________________________________________ */
+/* Header container */
+#header {
+	height: 15vh;
+}
+/* Left logo */
+.logo {
+	text-align: left;
+	font-family: "Courier New bolder", Courier, monospace;
+	font-size: 3.8rem;
+	text-transform: uppercase;
+	text-shadow: 0px 0px 10px rgb(81,81,81, .3);
+}
+/* Language switch */
+.fr-engl {
+	font-size: 1.05rem;
+}
+/* Right social icons navigation */
+.social-icons {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+.social-icons img {
+	height: 40px;
+	width: 40px;
+	margin: 4px 15px 0 15px;
+}
+/* Portfolio's text presentation */
+#presentation {
+	height: 13vh;
+}
+.text {
+	border-left: 2px solid rgb(94, 86, 65, .7);
+	font-size: 1.1rem;
+	line-height: 1.6rem;
+	width: 40%;
+	text-align: justify;
+}
+/* Main section w/ miniatures navigation */
+#central-nav {
+	height: 50vh;
+	opacity: .8;
+}
+/* Miniatures */
+.miniature {
+	margin: 0 .15%;
+	width: 13.5%;
+	height: 100%;
+	background-color: white;
+	box-shadow: 0px 0px 15px rgb(81,81,81, .4);
+}
+/* Footer */
+#footer {
+	height: 20vh;
+	margin: 0;
+	padding: 0;
+}
+.star-nav {
+	font-family: "Courier New", Courier, monospace;
+	font-size: 2.1rem;
+	text-shadow: 0px 0px 8px rgb(81,81,81, 1);
+	padding-top: 5vh;
+	letter-spacing: 0px;
+}
