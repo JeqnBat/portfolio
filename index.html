@@ -11,46 +11,45 @@
   <body>
     <!-- HOME SCREEN SECTION -->
     <section id="home-screen" class="d-flex h-100 w-100 justify-content-center align-items-center">
-      <header class="title">portfolio</header>
+      <header class="title"><h1>portfolio</h1></header>
     </section>
     <!-- MAIN PAGE CONTAINER -->
-    <section class="d-flex flex-nowrap flex-column h-100 w-100 px-4 justify-content-start align-items-center z-index">
+    <section id="home" class="d-flex flex-nowrap flex-column justify-content-center align-items-center z-index">
       <!-- HEADER -->
-      <section id="header" class="d-flex w-100 justify-content-center mt-2">
+      <section id="header" class="d-flex justify-content-center align-items-center">
         <header class="w-75 logo">
-          #portfolio
+          <h2 style="display: inline;">#portfolio</h2>
           <!-- LANGUAGE BUTTONS -->
-          <span id="FR" class="pl-4 roboto fr-engl lang-button-active">FR </span>
-          <span class="roboto fr-engl">| </span>
-          <span id="EN" class="roboto fr-engl">EN</span>
+          <span id="FR" class="pl-5 fr-engl"><h3>FR</h3></span>
+          <span class="fr-engl"><h3>|</h3></span>
+          <span id="EN" class="fr-engl"><h3>EN</h3></span>
         </header>
         <!-- SOCIAL ICONS -->
-        <nav class="w-25 mr-5 social-icons">
-          <img src="Graphics/menuIcons/NAVlinkedin.png" alt="linkedin-icon" height="100px" width="100px">
-          <img src="Graphics/menuIcons/NAVgithub.png" alt="github-icon" height="100px" width="100px">
+        <nav class="w-25 social-icons">
+          <img src="Graphics/menuIcons/NAVlinkedin.svg" alt="linkedin-icon" height="40px" width="40px">
+          <img src="Graphics/menuIcons/NAVgithub.svg" alt="github-icon" height="40px" width="40px">
         </nav>
       </section>
       <!-- PORTFOLIO'S PRESENTATION -->
-      <section id="presentation" class="d-flex w-100">
-        <div class="d-flex ml-5 pl-3 pr-5 align-items-center text roboto">
-          <span id="descr" item="lang">Ces 7 projets ont été réalisés dans le cadre de ma formation Développeur Front-End auprès d’OpenClassRooms.
-          Survolez une vignette pour afficher ses détails, cliquez dessus pour visiter le site web du projet.</span>
+      <section id="presentation" class="d-flex">
+        <div class="border-line d-flex align-items-center">
+          <span id="descr" item="lang" class="content-font">
+          </span>
         </div>
       </section>
       <!-- MAIN SECTION -->
-      <main id="central-nav" class="d-flex w-100 mt-5 justify-content-center">
-      </main>
+      <main id="central-nav" class="d-flex justify-content-center"></main>
       <!-- FOOTER -->
-      <footer id="footer" class="d-flex w-100 justify-content-center align-items-center">
-        <div class="star-nav">
-          <span>*</span>
-          <span>*</span>
-          <span>*</span>
-          <span>*</span>
-          <span>*</span>
-          <span>*</span>
-          <span>*</span>
-        </div>
+      <footer id="footer" class="d-flex justify-content-center align-items-center">
+        <nav id="footer-nav">
+          <div class="footer-nav-item"></div>
+          <div class="footer-nav-item"></div>
+          <div class="footer-nav-item"></div>
+          <div class="footer-nav-item"></div>
+          <div class="footer-nav-item"></div>
+          <div class="footer-nav-item"></div>
+          <div class="footer-nav-item"></div>
+        </nav>
       </footer>
     </section>
     <!-- sliding colored BG -->
@@ -58,12 +57,12 @@
   </body>
   <script src="js/dependencies/jquery-3.4.1.min.js"></script>
   <script src="js/dependencies/bootstrap.min.js"></script>
-  <script src="js/content.js"></script>
+  <script src="js/templates.js"></script>
   <script src="js/Project.js"></script>
   <script src="js/View.js"></script>
   <script src="js/Model.js"></script>
   <script src="js/Controller.js"></script>
-  <!-- <script src="js/Page.js"></script> -->
+  <script src="js/Page.js"></script>
   <script src="js/functions.js"></script>
 </html>
 
