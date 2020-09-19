@@ -16,10 +16,11 @@
  * @param {github} string link to the project's repository on github
  */
 class Project {
-  constructor(title, number, descr, img, date, color, icons, resp, github) {
+  constructor(title, number, descr, skills, img, date, color, icons, resp, github) {
     this.title = title
     this.id = number
     this.descr = descr
+    this.skills = skills
     this.img = img
     this.date = date
     this.color = color
@@ -27,5 +28,4 @@ class Project {
     this.resp = resp
     this.git = github
   }
-// SLIDE-UP 100% __________________________________________ */
 }

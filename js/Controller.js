@@ -17,10 +17,17 @@ class Controller {
   *
   * @method
   */
-  titleClick() {
+  async titleClick() {
     let that = this
-    $('.title').on('click', function() {
-      that.model.slideUp('#home-screen')
+    return new Promise((resolve, reject) => {
+      $('.title').on('click', function() {
+        pageStatus = 'main-page'
+        that.model.view.slideUp('#home-screen')
+        setTimeout(function() {
+          resolve('logo-clicked')
+        }, 1000)
+        return pageStatus
+      })
     })
   }
 // FR | ENGL CLICK ________________________________________ */
@@ -36,14 +43,15 @@ class Controller {
     let that = this
 
     $('.fr-engl').on('click', function() {
-      let lang = $(this).attr('id')
-      that.model.switchTo(project, lang)
+      lang = $(this).attr('id')
+      that.model.switchTo(project)
     })
   }
-// MINIATURE'S MOUSEOVER __________________________________ */
+// MINIATURE & BOTTOM NAV ITEM'S MOUSEOVER ________________ */
  /**
   * <b>DESCR:</b><br>
-  * Calls
+  * Calls model & view to update the viewport as content is
+  * hovered by mouse.
   *
   * @method
   * @param {object} project the project w/ all its properties
@@ -52,9 +60,67 @@ class Controller {
     let that = this
     $(`[item="OCP#${project.id}"]`).on('mouseenter', function() {
       that.model.focusMiniature(project.color, project.id)
+      that.model.view.updateClass(`#bottomNav${project.id}`, 'add', 'active')
     })
     $(`[item="OCP#${project.id}"]`).on('mouseleave', function() {
       that.model.looseFocus(project.color, project.id)
+      that.model.view.updateClass(`#bottomNav${project.id}`, 'remove', 'active')
     })
+  }
+  bottomNavMouseOver(project) {
+    let that = this
+    $(`#bottomNav${project.id}`).on('mouseenter', function() {
+      switch(pageStatus) {
+        case 'main-page':
+          that.model.focusMiniature(project.color, project.id)
+          that.model.view.updateClass(`#bottomNav${project.id}`, 'add', 'active')
+        break
+        case 'project-details':
+        break
+      }
+    })
+    $(`#bottomNav${project.id}`).on('mouseleave', function() {
+      switch(pageStatus) {
+        case 'main-page':
+          that.model.looseFocus(project.color, project.id)
+          that.model.view.updateClass(`#bottomNav${project.id}`, 'remove', 'active')
+        break
+        case 'project-details':
+        break
+      }
+    })
+  }
+// MINIATURE & BOTTOM NAV ITEM CLICK ______________________ */
+ /** <b>DESCR:</b><br>
+  * Transitions from 'main-page' to 'project-details'
+  * Appends new layout for #central-nav
+  * Changes bg color
+  * Displays project's details & description
+  * Sets page status to 'project-details'
+  *
+  * @method
+  * @param {object} project the project w/ all its properties
+  */
+  miniatureClick(project) {
+    let that = this
+    $(`[item="OCP#${project.id}"]`).on('click', function() {
+      pageStatus = 'project-details'
+      that.model.markThenPrint(project)
+    })
+  }
+// ALL EVENTS _____________________________________________ */
+ /**
+  * <b>DESCR:</b><br>
+  * Gather all event listeners inside one method in order to
+  * call them all only one time in page. Takes all the parameters
+  * from all the methods of this class.
+  *
+  * @method
+  * @param {object} project the project w/ all its properties
+  */
+  allEvents(project) {
+    this.miniMouseOver(project)
+    this.bottomNavMouseOver(project)
+    this.miniatureClick(project)
   }
 }

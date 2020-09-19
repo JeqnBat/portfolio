@@ -12,33 +12,6 @@ class Model {
   constructor(view) {
     this.view = new View()
   }
-// FADE IN ________________________________________________ */
-  /**
-   * <b>DESCR:</b><br>
-   * Adds a CSS class to a DOM element to make it fade in
-   *
-   * @method
-   * @param {string} id the DOM element to add the class to
-   */
-  fadeIn(id) {
-    let that = this
-    this.view.updateClass(id, 'add', 'fade-in')
-   setTimeout(function() {
-    that.view.updateClass(id, 'remove', 'fade-in')
-   }, 600)
-  }
-// SLIDE-UP 100% __________________________________________ */
-  /**
-   * <b>DESCR:</b><br>
-   * Adds css class 'slide-up' to DOM element & moves it
-   * 100% up, outside of the viewport
-   *
-   * @method
-   * @param {string} div the DOM element on which to perform the slide
-   */
-  slideUp(div) {
-    this.view.updateClass(div, 'add', 'slide-up')
-  }
 // SWITCH LANGUAGE ________________________________________ */
   /**
    * <b>DESCR:</b><br>
@@ -47,23 +20,24 @@ class Model {
    * Repaints them all w/ the language defined by 'controller.langClick()'
    *
    * @method
-   * @param {string} lang the ID of the language to switch to
+   * @param {object} project the project w/ all its properties
    */
-  switchTo(project, lang) {
-   let selector = $(document).find(`[item=lang]`)
-   // DOM SECTIONS
-   for (let i = 0; i < selector.length; i++) {
+  switchTo(project) {
+    let selector = $(document).find(`[item=lang]`)
+    for (let i = 0; i < selector.length; i++) {
      switch (selector[i].id) {
       case 'descr':
         this.view.print('text', '#descr', lang == 'FR' ? descr.FR : descr.EN)
-      case 'validation':
+        break
+      case `val${i}`:
       for (let j = 0; j < project.length; j++) {
-        console.log(project[j].id)
         this.view.print('text', `#val${project[j].id}`, lang == 'FR' ? validation.FR : validation.EN)
         this.view.print('text', `#date${project[j].id}`, lang == 'FR' ? project[j].date.FR : project[j].date.EN)
       }
+      break
      }
    }
+
    // NAV BUTTONS
    switch (lang) {
      case 'FR':
@@ -75,28 +49,40 @@ class Model {
        this.view.updateClass('#FR', 'remove', 'lang-button-active')
        break
    }
-   this.fadeIn(selector)
+   this.view.fadeIn(selector)
   }
 // TEMPLATE MARKER ________________________________________ */
   /**
    * <b>DESCR:</b><br>
-   * Takes a template from view & marks it down w/ IDs so it
-   * can be processed.
+   * Takes a template from templates.js
+   * Marks it down w/ IDs
+   * Prints it w/ view.print().
    *
    * @method
    * @param {object} origin the object whose properties will be printed as markers
    */
-   mark(origin) {
-     let marked = miniature.replace(/xxxid/g, `${origin.id}`).replace(/xxxtitle/g, `${origin.title}`)
-     this.view.print('div', '#central-nav', marked)
-     $(`[item="OCP#${origin.id}"]`).css('background-image', `url("${origin.img.mini}")`)
+  markThenPrint(origin) {
+     let that = this
+     switch(pageStatus) {
+       case 'main-page':
+         let markedMiniature = miniature.replace(/xxxid/g, `${origin.id}`).replace(/xxxtitle/g, `${origin.title}`)
+         let markedBottomNav = bottomNav.replace(/xxxid/g, `${origin.id}`)
+         that.view.print('div', '#central-nav', markedMiniature)
+         that.view.updateClass('#central-nav', 'add', 'enters')
+         that.view.updateClass(`[item="OCP#${origin.id}"]`, 'edit', 'background-image', `url("${origin.img.mini}")`)
+         that.view.print('div', '#footer-nav', markedBottomNav)
+       break
+       case 'project-details':
+         that.getDetails(origin)
+       break
+     }
    }
 // REFRESH PAGE AFTER MINIATURE MOUSEOVER _________________ */
   /**
    * <b>DESCR:</b><br>
    * Sets new bg-color to '#colored-bg' & triggers slide-left
-   * Display miniature's details. Second method does the
-   * exact opposite.
+   * Display miniature's details.
+   * Second method does the exact opposite.
    *
    * @method
    * @param {color} string the project's associated color
@@ -111,7 +97,46 @@ class Model {
   looseFocus(color, id) {
     this.view.updateClass('#colored-bg', 'remove', `${color}`)
     this.view.updateClass('#colored-bg', 'remove', 'slide-left')
-    this.view.updateClass('#colored-bg', 'edit', 'opacity', '.8')
+    this.view.updateClass(`[item="OCP#${id}"]`, 'edit', 'opacity', '.9')
     this.view.updateClass(`.${id}`, 'remove', 'slide-down')
   }
+// GET PROJECT'S DETAILS __________________________________ */
+  /**
+   * <b>DESCR:</b><br>
+   * Triggered by 'miniatureClick()' or 'bottomNavClick()'
+   * Updates the DOM w/ new elements to display details
+   * from the selected project.
+   *
+   * @method
+   * @param {project} object the project's object w/ all its properties
+   */
+   getDetails(project) {
+     this.view.print('text', '#central-nav', ' ')
+     this.view.print('text', `#bottomNav${project.id}`, '🔲')
+     this.view.print('text', '#descr', lang == 'FR' ? project.descr.FR : project.descr.EN)
+
+     this.view.print('div', '#presentation', projectTitle)
+     this.view.print('text', '#project-title', project.title)
+
+     this.view.print('text', '#central-nav', detailsTemplate)
+     // Prints project's goals
+     for (let i = 0; i < project.skills.FR.length; i++) {
+       this.view.print('div', '#skills-list', `<li>${lang == 'FR' ? project.skills.FR[i] : project.skills.EN[i]}</li>`)
+     }
+     // Prints IMG
+     let mobileDiv  = screenShotTemplate.replace(/layout/g, 'mobile').replace(/imgFile/g, `${project.img.mobile}`).replace(/xxx/g, '108').replace(/yyy/g, '202')
+     let desktopDiv = screenShotTemplate.replace(/layout/g, 'desktop').replace(/imgFile/g, `${project.img.desktop}`).replace(/xxx/g, '512').replace(/yyy/g, '271')
+     let tabletDiv  = screenShotTemplate.replace(/layout/g, 'tablet').replace(/imgFile/g, `${project.img.tablet}`).replace(/xxx/g, '234').replace(/yyy/g, '311')
+     // mobile
+     this.view.print('div', '#central-nav', mobileDiv)
+     this.view.print('div', `#mobile`, mobileWidth)
+     // desktop
+     this.view.print('div', '#central-nav', desktopDiv)
+     this.view.print('div', `#desktop`, desktopWidth)
+     // tablet
+     this.view.print('div', '#central-nav', tabletDiv)
+     this.view.print('div', `#tablet`, tabletWidth)
+
+     pageStatus = 'project-details'
+   }
 }

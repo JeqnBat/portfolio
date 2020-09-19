@@ -26,11 +26,11 @@ class Page {
    * @method
    * @param {input} string the value returned by a click on the 'FR | EN' buttons
    */
-  async setLanguage(input) {
+  async setLanguage() {
     return new Promise((resolve, reject) => {
       let x = navigator.language
-      $('html').attr('lang', input || x)
-      this.lang = input || x.slice(-2)
+      lang = x.slice(-2)
+      $('html').attr('lang', x)
       resolve('language set')
     })
   }
@@ -46,13 +46,15 @@ class Page {
    */
   async init() {
     await this.setLanguage()
+    // comment to skip intro
+    await this.controller.titleClick()
     for (let i = 0; i < data.length; i++) {
-      this.projects[i] = new Project(data[i].title, i+2, data[i].descr, data[i].img, data[i].date, data[i].color, techIcons, data[i].resp, data[i].github)
-      this.model.mark(this.projects[i])
-      this.controller.miniMouseOver(this.projects[i])
+      this.projects[i] = new Project(data[i].title, i+2, data[i].descr, data[i].skills, data[i].img, data[i].date, data[i].color, techIcons, data[i].resp, data[i].github)
+      this.model.markThenPrint(this.projects[i])
+      this.controller.allEvents(this.projects[i])
     }
-    this.model.switchTo(this.projects, this.lang)
-    this.controller.titleClick()
+
+    this.model.switchTo(this.projects)
     this.controller.langClick(this.projects)
   }
 }
