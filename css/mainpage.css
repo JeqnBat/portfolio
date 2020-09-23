@@ -1,0 +1,144 @@
+/* 3. MAIN PAGE LAYOUT
+______________________________________________________ */
+#home {
+	height: 100vh;
+	width: 100vw;
+}
+#header {
+	height: 17vh;
+	width: 90vw;
+}
+/* Left logo */
+.logo {
+	text-align: left;
+	text-transform: uppercase;
+	text-shadow: 0px 0px 10px rgb(81,81,81, .3);
+	cursor: pointer;
+}
+/* Language switch */
+.fr-engl {
+	opacity: 0;
+	color: rgb(34, 32, 29, .4);
+	text-shadow: none;
+	transition: all .15s ease-out;
+}
+.fr-engl.enters {
+	opacity: 1;
+}
+.fr-engl:hover {
+	opacity: .5;
+}
+.lang-button-active {
+	color: white;
+}
+#FR, #EN {
+	cursor: pointer;
+}
+/* Social Icons Navigation Menu */
+.social-icons {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+.social-icons img {
+	position: relative;
+	height: 50px;
+	width: 50px;
+}
+.social-icons .subtitle {
+	display: flex;
+	align-items: flex-end;
+	height: 54px;
+	width: 120px;
+	font-size: 1.5rem;
+	font-style: italic;
+	text-transform: uppercase;
+	opacity: 0;
+	align-self: baseline;
+	margin-right: -20vw;
+	transition: all .4s ease-in-out;
+}
+.social-icons .subtitle.appear {
+	margin-right: 0;
+	opacity: .6;
+}
+#linkedin {
+	width: 50px;
+	margin: 4px 20px 0 20px;
+	transition: all .15s ease-out;
+}
+#linkedin:hover {
+	/* margin-bottom: -10px; */
+}
+#github {
+	width: 50px;
+	margin: 4px 20px 0 20px;
+	transition: all .15s ease-out;
+}
+#github:hover {
+	/* margin-bottom: -10px; */
+}
+/* Portfolio's text presentation */
+#presentation {
+	opacity: 1;
+	height: 15vh;
+	width: 86vw;
+}
+.border-line {
+	border-left: 2px solid rgb(34, 32, 29, .4);
+	padding-left: 20px;
+	width: 40vw;
+	text-align: justify;
+}
+#spacer {
+	height: 6vh;
+}
+/* Main section w/ miniatures navigation */
+#central-nav {
+	opacity: 0;
+	height: 50vh;
+	width: 90vw;
+	transform: scaleX(.75);
+	transition: all .75s ease-in-out .1s;
+}
+#central-nav.enters {
+	opacity: 1;
+	transform: scaleX(1)
+}
+.miniature {
+	overflow: hidden;
+	opacity: .9;
+	margin: 0 .15%;
+	width: 13.5vw;
+	height: 100%;
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	box-shadow: 0px 0px 15px rgb(81,81,81, .7);
+	cursor: pointer;
+	-webkit-transition: all .2s ease-out;
+					transition: all .2s ease-out;
+}
+.miniature:hover {
+	box-shadow: 0px 0px 20px rgb(255,255,255, .7);
+}
+/* Miniature over screen */
+.over-screen {
+	margin-top: -56vh;
+	font-family: "Courier New bolder", Courier, monospace;
+	font-size: 6rem;
+	text-align: center;
+	opacity: .8;
+	height: 100%;
+	width: 100%;
+	background-color: black;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	-webkit-transition: margin-top .3s ease-in-out .15s;
+					transition: margin-top .3s ease-in-out .15s;
+}
+.over-screen.slide-down {
+	margin-top: 0;
+}
