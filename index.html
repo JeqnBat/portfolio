@@ -4,8 +4,12 @@
     <title>…</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/dependencies/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/homescreen.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/mainpage.css">
+    <link rel="stylesheet" href="css/detailspage.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
   </head>
   <body>
@@ -17,17 +21,26 @@
     <section id="home" class="d-flex flex-nowrap flex-column align-items-center z-index">
       <!-- HEADER -->
       <section id="header" class="d-flex justify-content-center align-items-center">
-        <header class="w-75 logo">
-          <h2 style="display: inline;">#portfolio</h2>
+        <header class="w-75">
+          <h2 class="logo" style="display: inline;">#portfolio</h2>
           <!-- LANGUAGE BUTTONS -->
           <span id="FR" class="pl-5 fr-engl"><h3>FR</h3></span>
-          <span class="fr-engl"><h3>|</h3></span>
+          <span style="color: rgb(34, 32, 29, .2); font-size: 1.2rem;">|</span>
           <span id="EN" class="fr-engl"><h3>EN</h3></span>
         </header>
         <!-- SOCIAL ICONS -->
         <nav class="w-25 social-icons">
-          <img src="Graphics/menuIcons/NAVlinkedin.svg" alt="linkedin-icon" height="40px" width="40px">
-          <img src="Graphics/menuIcons/NAVgithub.svg" alt="github-icon" height="40px" width="40px">
+          <div class="subtitle"></div>
+          <div id="linkedin">
+            <a title="linkedin.com/in/jeanbaptistepellier" href="https://www.linkedin.com/in/jeanbaptistepellier" target="blank">
+              <img src="Graphics/menuIcons/NAVlinkedin.svg" alt="linkedin-icon" height="50px" width="50px">
+            </a>
+          </div>
+          <div id="github">
+            <a title="github.com/JeqnBat" href="https://github.com/JeqnBat" target="blank">
+              <img src="Graphics/menuIcons/NAVgithub.svg" alt="github-icon" height="50px" width="50px">
+            </a>
+          </div>
         </nav>
       </section>
       <!-- PORTFOLIO'S PRESENTATION -->
@@ -42,7 +55,7 @@
       <!-- MAIN SECTION -->
       <main id="central-nav" class="d-flex justify-content-center"></main>
       <!-- FOOTER -->
-      <footer id="footer" class="d-flex justify-content-center align-items-center">
+      <footer id="footer" class="d-flex flex-column justify-content-center">
         <nav id="footer-nav">
         </nav>
       </footer>
@@ -52,6 +65,7 @@
   </body>
   <script src="js/dependencies/jquery-3.4.1.min.js"></script>
   <script src="js/dependencies/bootstrap.min.js"></script>
+  <script src="js/data.js"></script>
   <script src="js/templates.js"></script>
   <script src="js/Project.js"></script>
   <script src="js/View.js"></script>
