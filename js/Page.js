@@ -46,15 +46,13 @@ class Page {
    */
   async init() {
     await this.setLanguage()
-    // comment to skip intro
-    await this.controller.titleClick()
+    // uncomment to play intro
+    await this.controller.delegate(this.projects)
     for (let i = 0; i < data.length; i++) {
-      this.projects[i] = new Project(data[i].title, i+2, data[i].descr, data[i].skills, data[i].img, data[i].date, data[i].color, techIcons, data[i].resp, data[i].github)
+      this.projects[i] = new Project(data[i].title, i+2, data[i].descr, data[i].skills, data[i].img, data[i].tech, data[i].date, data[i].color, techIcons, data[i].resp, data[i].github)
       this.model.markThenPrint(this.projects[i])
-      this.controller.allEvents(this.projects[i])
     }
 
     this.model.switchTo(this.projects)
-    this.controller.langClick(this.projects)
   }
 }

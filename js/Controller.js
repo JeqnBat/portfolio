@@ -17,18 +17,21 @@ class Controller {
   *
   * @method
   */
-  async titleClick() {
-    let that = this
-    return new Promise((resolve, reject) => {
-      $('.title').on('click', function() {
-        pageStatus = 'main-page'
-        that.model.view.slideUp('#home-screen')
-        setTimeout(function() {
-          resolve('logo-clicked')
-        }, 1000)
-        return pageStatus
-      })
-    })
+  titleClick() {
+    pageStatus = 'main-page'
+    this.model.view.updateClass('#home-screen', 'add', 'slide-up')
+  }
+// #PORTFOLIO TOP LEFT LOGO CLICK _________________________ */
+ /**
+  * <b>DESCR:</b><br>
+  * Resets DOM to 'main-page' configuration.
+  * "HOME" button.
+  *
+  * @method
+  */
+  portfolioClick() {
+    pageStatus = 'main-page'
+    this.model.cleanDetails()
   }
 // FR | ENGL CLICK ________________________________________ */
  /**
@@ -37,15 +40,27 @@ class Controller {
   * Uses model.switchtTo(lang, project)
   *
   * @method
-  * @param {object} project w/ all its properties
+  * @param {object} origin one particular project w/ all its properties
   */
-  langClick(project) {
-    let that = this
-
-    $('.fr-engl').on('click', function() {
-      lang = $(this).attr('id')
-      that.model.switchTo(project)
-    })
+  langClick(origin) {
+    this.model.switchTo(origin)
+  }
+// SOCIAL ICONS NAV HOVER _________________________________ */
+  /**
+   * <b>DESCR:</b><br>
+   * Updates classes on SOCIAL ICONS DIVs to create animations
+   * as user is hovering them.
+   *
+   * @method
+   * @param {string} icon the ID of the hovered social nav icon
+   */
+  socialIconsFocus(icon) {
+    this.model.view.print('text', '.subtitle', icon)
+    this.model.view.updateClass('.subtitle', 'add', 'appear')
+  }
+  socialIconsUnfocus() {
+    this.model.view.print('text', '.subtitle', '')
+    this.model.view.updateClass('.subtitle', 'remove', 'appear')
   }
 // MINIATURE & BOTTOM NAV ITEM'S MOUSEOVER ________________ */
  /**
@@ -56,39 +71,17 @@ class Controller {
   * @method
   * @param {object} project the project w/ all its properties
   */
-  miniMouseOver(project) {
-    let that = this
-    $(`[item="OCP#${project.id}"]`).on('mouseenter', function() {
-      that.model.focusMiniature(project.color, project.id)
-      that.model.view.updateClass(`#bottomNav${project.id}`, 'add', 'active')
-    })
-    $(`[item="OCP#${project.id}"]`).on('mouseleave', function() {
-      that.model.looseFocus(project.color, project.id)
-      that.model.view.updateClass(`#bottomNav${project.id}`, 'remove', 'active')
-    })
+  miniatureMouseOver(project) {
+    this.model.focusMiniature(project)
   }
-  bottomNavMouseOver(project) {
-    let that = this
-    $(`#bottomNav${project.id}`).on('mouseenter', function() {
-      switch(pageStatus) {
-        case 'main-page':
-          that.model.focusMiniature(project.color, project.id)
-          that.model.view.updateClass(`#bottomNav${project.id}`, 'add', 'active')
-        break
-        case 'project-details':
-        break
-      }
-    })
-    $(`#bottomNav${project.id}`).on('mouseleave', function() {
-      switch(pageStatus) {
-        case 'main-page':
-          that.model.looseFocus(project.color, project.id)
-          that.model.view.updateClass(`#bottomNav${project.id}`, 'remove', 'active')
-        break
-        case 'project-details':
-        break
-      }
-    })
+  miniatureMouseOut(project) {
+    this.model.looseFocus(project)
+  }
+  footerNavMouseOver(project) {
+    this.model.focusMiniature(project)
+  }
+  footerNavMouseOut(project) {
+    this.model.looseFocus(project)
   }
 // MINIATURE & BOTTOM NAV ITEM CLICK ______________________ */
  /** <b>DESCR:</b><br>
@@ -102,25 +95,117 @@ class Controller {
   * @param {object} project the project w/ all its properties
   */
   miniatureClick(project) {
-    let that = this
-    $(`[item="OCP#${project.id}"]`).on('click', function() {
-      pageStatus = 'project-details'
-      that.model.markThenPrint(project)
-    })
+    pageStatus = 'project-details'
+    this.model.markThenPrint(project)
   }
-// ALL EVENTS _____________________________________________ */
+  bottomNavClick(project) {
+    pageStatus = 'project-details'
+    this.model.markThenPrint(project)
+    this.model.activeBottomNav()
+  }
+// GLOBAL EVENT DELEGATOR _________________________________ */
  /**
   * <b>DESCR:</b><br>
-  * Gather all event listeners inside one method in order to
-  * call them all only one time in page. Takes all the parameters
-  * from all the methods of this class.
+  * Stores all the program's events inside the same method.
+  * Delegates them to the entire document, so they are always
+  * accessible, no matter what changes occur inside of the DOM.
   *
   * @method
-  * @param {object} project the project w/ all its properties
   */
-  allEvents(project) {
-    this.miniMouseOver(project)
-    this.bottomNavMouseOver(project)
-    this.miniatureClick(project)
+  async delegate(projects) {
+    let that = this
+    return new Promise((resolve, reject) => {
+// CLICK EVENTS
+    document.addEventListener('click', () => {
+      // TITLE CLICK
+      if (event.target.matches('.title h1')) {
+        that.titleClick()
+        setTimeout(function() {
+          resolve('logo clicked')
+        }, 1000)
+      // LANG CLICK
+      } else if (event.target.matches('.fr-engl h3')) {
+          lang = $(event.target.parentElement).attr('id')
+          let singleProject = projects[that.model.identify('langDetails', pageStatus)]
+          that.langClick(projects)
+          resolve('language clicked')
+      // LOGO CLICK
+      } else if (event.target.matches('.logo')) {
+          if (pageStatus == 'main-page') {
+            return
+          } else {
+            that.portfolioClick()
+            for (let i = 0; i < projects.length; i++) {
+              that.model.markThenPrint(projects[i])
+            }
+            resolve('#PORTFOLIO clicked')
+          }
+      // MINIATURE CLICK
+      } else if (event.target.closest('.miniature')) {
+          let miniature = event.target.closest('.miniature')
+          let item = miniature.getAttribute('item')
+          that.miniatureClick(projects[that.model.identify('miniature', item)])
+          resolve('miniature clicked')
+      // FOOTER NAVIGATION CLICK
+      } else if (event.target.matches('.footer-nav-item')) {
+          let item = event.target.getAttribute('id')
+          that.bottomNavClick(projects[that.model.identify('bottomNav', item)])
+          resolve('bottomNav clicked')
+      } else {
+        return
+      }
+    }, false)
+// MOUSE OVER EVENTS
+      document.addEventListener('mouseenter', () => {
+        // MOUSE OVER LINKEDIN
+        if (event.target.matches('#linkedin img')) {
+          that.socialIconsFocus('linkedin')
+          resolve('linkedin hovered')
+        // MOUSE OVER GITHUB
+        } else if (event.target.matches('#github img')) {
+          that.socialIconsFocus('github')
+          resolve('github hovered')
+        // MOUSE OVER MINIATURE
+        } else if (event.target.matches('.miniature')) {
+          let item = event.target.getAttribute('item')
+          that.miniatureMouseOver(projects[that.model.identify('miniature', item)])
+          resolve('miniature hovered')
+        // MOUSE OVER FOOTER NAVIGATION
+        } else if (event.target.matches('.footer-nav-item')) {
+          let item = event.target.getAttribute('id')
+          that.footerNavMouseOver(projects[that.model.identify('bottomNav', item)])
+          resolve('bottom nav hovered')
+        } else {
+          return
+        }
+      }, true)
+// MOUSE OUT EVENTS
+      document.addEventListener('mouseleave', () => {
+        // MOUSE OUT LINKEDIN
+        if (event.target.matches('#linkedin img')) {
+          that.socialIconsUnfocus()
+          resolve('linkedin mouseout')
+        }
+        // MOUSE OUT GITHUB
+        if (event.target.matches('#github img')) {
+          that.socialIconsUnfocus()
+          resolve('github mouseout')
+        }
+        // MOUSE OUT MINIATURE
+        if (event.target.matches('.miniature')) {
+          let item = event.target.getAttribute('item')
+          that.miniatureMouseOut(projects[that.model.identify('miniature', item)])
+          resolve('miniature mouseout')
+        }
+        // MOUSE OUT FOOTER NAVIGATION
+        if (event.target.matches('.footer-nav-item')) {
+          let item = event.target.getAttribute('id')
+          that.miniatureMouseOut(projects[that.model.identify('bottomNav', item)])
+          resolve('bottom nav mouseout')
+        } else {
+          return
+        }
+      }, true)
+    })
   }
 }
