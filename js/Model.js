@@ -22,7 +22,7 @@ class Model {
    * @method
    * @param {object} project the project w/ all its properties
    */
-  switchTo(origin) {
+  updateLang(origin) {
     let selector
     let index = parseInt(this.identify('langDetails', pageStatus), 10) - 2
     // For each of these DIVs, IF MAIN PAGE:
@@ -47,23 +47,26 @@ class Model {
      for (let i = 0; i < selector.length; i++) {
        switch (selector[i].id) {
          case 'descr':
-           this.view.projectDescription(origin[index])
+           this.view.print('text', '#descr', lang == 'fr' ? origin[index].descr.FR : origin[index].descr.EN)
          break
          case 'skills-list':
            this.view.print('text', '#skills-list', ' ')
            for (let i = 0; i < origin[index].skills.FR.length; i++) {
-             this.view.print('div', '#skills-list', `<li>${lang == 'FR' ? origin[index].skills.FR[i] : origin[index].skills.EN[i]}</li>`)
+             this.view.print('div', '#skills-list', `<li>${lang == 'fr' ? origin[index].skills.FR[i] : origin[index].skills.EN[i]}</li>`)
            }
          break
          case 'page-details-date':
-           this.view.print('text', '#page-details-date', `<h6>${lang == 'FR' ? validation.FR : validation.EN}</h6><h6>${lang == 'FR' ? origin[index].date.FR : origin[index].date.EN}</h6>`)
+           this.view.print('text', '#page-details-date', `<p>${lang == 'fr' ? validation.FR : validation.EN}</p><p>${lang == 'fr' ? origin[index].date.FR : origin[index].date.EN}</p>`)
+         break
+         case 'skills-title':
+           this.view.print('text', '#skills-title', lang == 'fr' ? skills.FR : skills.EN)
          break
        }
      }
    }
    // NAV BUTTONS
    switch (lang) {
-     case 'FR':
+     case 'fr':
        this.view.activeFR()
        break
      default:
@@ -108,40 +111,52 @@ class Model {
    * @method
    * @param {object} origin the object whose properties will be printed as markers
    */
-  markThenPrint(origin) {
-     switch(pageStatus) {
-       case 'main-page':
-         let markedMiniature = miniatureTemplate
-                                .replace(/xxxid/g, `${origin.id}`)
-                                .replace(/xxxtitle/g, `${origin.title}`)
-         let markedfooterNav = footerNavTemplate
-                                .replace(/xxxid/g, `${origin.id}`)
-         this.view.mainPage(markedMiniature, origin, markedfooterNav)
-       break
-       case 'project-details':
-         let mobileDiv  = screenShotTemplate
-                          .replace(/layout/g, 'mobile')
-                          .replace(/imgFile/g, `${origin.img.mobile}`)
-                          .replace(/color/g, `${origin.color}`)
-                          .replace(/xxx/g, '108')
-                          .replace(/yyy/g, '202')
-         let desktopDiv = screenShotTemplate
-                          .replace(/layout/g, 'desktop')
-                          .replace(/imgFile/g, `${origin.img.desktop}`)
-                          .replace(/color/g, `${origin.color}`)
-                          .replace(/xxx/g, '512')
-                          .replace(/yyy/g, '271')
-         let tabletDiv  = screenShotTemplate
-                          .replace(/layout/g, 'tablet')
-                          .replace(/imgFile/g, `${origin.img.tablet}`)
-                          .replace(/color/g, `${origin.color}`)
-                          .replace(/xxx/g, '234')
-                          .replace(/yyy/g, '311')
-         this.view.transition(origin)
-         this.view.projectDetails(origin, mobileDiv, desktopDiv, tabletDiv)
-         pageStatus = `project-details${origin.id}`
-       break
-     }
+  async markThenPrint(origin) {
+    let that = this
+    return new Promise((resolve, reject) => {
+       switch(pageStatus) {
+         case 'main-page':
+           let markedMiniature = miniatureTemplate
+                                  .replace(/xxxid/g, `${origin.id}`)
+                                  .replace(/xxxtitle/g, `${origin.title}`)
+           let markedfooterNav = footerNavTemplate
+                                  .replace(/xxxid/g, `${origin.id}`)
+           this.view.mainPage(markedMiniature, origin, markedfooterNav)
+         break
+         case 'project-details':
+           let mobileDiv  = screenShotTemplate
+                            .replace(/xxxurl/g, `${origin.url}`)
+                            .replace(/layout/g, 'mobile')
+                            .replace(/imgFile/g, `${origin.img.mobile}`)
+                            .replace(/color/g, `${origin.color}`)
+                            .replace(/xxx/g, '108')
+                            .replace(/yyy/g, '202')
+           let desktopDiv = screenShotTemplate
+                            .replace(/xxxurl/g, `${origin.url}`)
+                            .replace(/layout/g, 'desktop')
+                            .replace(/imgFile/g, `${origin.img.desktop}`)
+                            .replace(/color/g, `${origin.color}`)
+                            .replace(/xxx/g, '512')
+                            .replace(/yyy/g, '271')
+           let tabletDiv  = screenShotTemplate
+                            .replace(/xxxurl/g, `${origin.url}`)
+                            .replace(/layout/g, 'tablet')
+                            .replace(/imgFile/g, `${origin.img.tablet}`)
+                            .replace(/color/g, `${origin.color}`)
+                            .replace(/xxx/g, '234')
+                            .replace(/yyy/g, '311')
+           this.view.transition(origin, 'main-to-details')
+           // TIME OUT TO SET
+           setTimeout(function() {
+             that.view.projectDetails(origin, mobileDiv, desktopDiv, tabletDiv)
+           }, 300)
+           pageStatus = `project-details${origin.id}`
+         break
+       }
+       setTimeout(function () {
+         resolve('page printed')
+       }, 120)
+     })
    }
 // REFRESH PAGE AFTER MINIATURE MOUSEOVER _________________ */
   /**
@@ -174,23 +189,22 @@ class Model {
     }
   }
 // DEAL W/ BOTTOM NAV CLICK _______________________________ */
-/**
- * <b>DESCR:</b><br>
- * A little trick to keep the bottom nav active item visible
- *
- * @method
- */
- activeBottomNav() {
-  this.view.updateClass('#footer-nav>.footer-nav-item.current', 'remove', 'current')
-  let x = parseInt(this.identify('langDetails', pageStatus), 10)
-  this.view.updateClass(`#footerNav${x}`, 'add', 'current')
- }
+  /**
+   * <b>DESCR:</b><br>
+   * A little trick to keep the bottom nav active item visible
+   *
+   * @method
+   */
+   activeBottomNav() {
+    this.view.updateClass('#footer-nav>.footer-nav-item.current', 'remove', 'current')
+    let x = parseInt(this.identify('langDetails', pageStatus), 10)
+    this.view.updateClass(`#footerNav${x}`, 'add', 'current')
+   }
 // CLEAN 'PROJECT'S DETAILS' PAGE _________________________ */
   /**
    * <b>DESCR:</b><br>
    * Sets new bg-color to '#colored-bg' & triggers slide-left
    * Display miniature's details.
-   * Second method does the exact opposite.
    *
    * @method
    * @param {color} string the project's associated color
@@ -202,6 +216,8 @@ class Model {
      this.view.print('text', '#footer-nav', ' ')
      this.view.print('remove', '#project-title')
      this.view.print('remove', '#project-details-menu')
+     this.view.print('remove', '#left')
+     this.view.print('remove', '#right')
      this.view.updateClass('#colored-bg', 'edit', 'background-color', '')
      this.view.updateClass('#colored-bg', 'remove', 'slide-left')
      this.view.projectDescription()

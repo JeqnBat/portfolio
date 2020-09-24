@@ -19,12 +19,17 @@ let footerNavTemplate = '<div id="footerNavxxxid" class="footer-nav-item">🔳</
 let projectTitleTemplate = '<title id="project-title"></title>'
 
 let skillsTemplate = `<div id="skills">
+                        <div id="skills-title" item="lang"></div>
+                        <img src="Graphics/techIcons/gear.svg" class="three-sixty" alt="gears" height="100px" width="100px">
+                        <img src="Graphics/techIcons/gear.svg" class="minus-three-sixty" alt="gears" height="160px" width="160px">
                         <ul id="skills-list" item="lang">
                         </ul>
                        </div>`
 
 let screenShotTemplate = `<section id="layout" class="block">
-                            <img src="imgFile" alt="layout screenshot" width="xxx" height="yyy">
+                            <a href="xxxurl" target="blank">
+                              <img src="imgFile" alt="layout screenshot" width="xxx" height="yyy">
+                            </a>
                             <div class="block-mirror" style="
                               background-image: linear-gradient(color, transparent), url('imgFile');
                               border-image: linear-gradient(0deg, #1f1d1d, color) 1;
@@ -37,12 +42,20 @@ let tabletWidthTemplate   = '<p align="center">- 750px -</p>'
 let desktopWidthTemplate  = '<p align="center">- 1400px -</p>'
 
 let detailsMenuTemplate = `<nav id="project-details-menu">
-                            <div id="tech" class="bottom-menu"><h6>technologies</h6></div>
-                            <div id="responsive" class="bottom-menu"><h6>full responsive</h6></div>
+                            <div id="tech" class="bottom-menu"><p>technologies</p></div>
+                            <div id="responsive" class="bottom-menu"><p>full responsive</p></div>
                             <div id="page-details-date" class="bottom-menu" item="lang"></div>
+                            <div id="projects-github" class="bottom-menu"><img src="Graphics/techIcons/git.svg" width="50px" height="50px"></div>
                            </nav>`
+
+let checkBox = { 'true' : '<div class="check-box true"></div>',
+                 'false' : '<div class="check-box"></div>'
+               }
 
 let techIconTemplate = `<figure>
                            <img src="xxxURL" alt="xxx-icon" height="50px" width="50px">
                            <figcaption>xxx</figcaption>
                         </figure>`
+
+let leftArrow = '<div id="left" class="arrow"></div>'
+let rightArrow = '<div id="right" class="arrow"></div>'

@@ -29,7 +29,7 @@ class Page {
   async setLanguage() {
     return new Promise((resolve, reject) => {
       let x = navigator.language
-      lang = x.slice(-2)
+      lang = x.substring(0, 2)
       $('html').attr('lang', x)
       resolve('language set')
     })
@@ -45,14 +45,18 @@ class Page {
    * @method
    */
   async init() {
+    let that = this
     await this.setLanguage()
     // uncomment to play intro
     await this.controller.delegate(this.projects)
     for (let i = 0; i < data.length; i++) {
-      this.projects[i] = new Project(data[i].title, i+2, data[i].descr, data[i].skills, data[i].img, data[i].tech, data[i].date, data[i].color, techIcons, data[i].resp, data[i].github)
-      this.model.markThenPrint(this.projects[i])
+      this.projects[i] = new Project(data[i].title, i+2, data[i].descr, data[i].skills, data[i].img, data[i].tech, data[i].date, data[i].color, data[i].resp, data[i].github, data[i].url)
+      await this.model.markThenPrint(this.projects[i])
     }
+    this.model.updateLang(this.projects)
+    setTimeout(function() {
+      that.model.view.print('remove', '#blocker')
+    }, 1200)
 
-    this.model.switchTo(this.projects)
   }
 }

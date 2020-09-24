@@ -43,7 +43,7 @@ class Controller {
   * @param {object} origin one particular project w/ all its properties
   */
   langClick(origin) {
-    this.model.switchTo(origin)
+    this.model.updateLang(origin)
   }
 // SOCIAL ICONS NAV HOVER _________________________________ */
   /**
@@ -151,6 +151,28 @@ class Controller {
           let item = event.target.getAttribute('id')
           that.bottomNavClick(projects[that.model.identify('bottomNav', item)])
           resolve('bottomNav clicked')
+      // RIGHT ARROW CLICK
+      } else if (event.target.matches('#right')) {
+          let targetNumber = parseInt(that.model.identify('langDetails', pageStatus), 10) - 1
+          if (targetNumber >= projects.length) {
+            that.model.view.print('remove', '#right')
+            return
+          } else {
+            // NOMMER UNE NOUVELLE METHODE POUR PAS CONFONDRE LES DEUX
+            that.bottomNavClick(projects[targetNumber])
+          }
+          resolve('bottomNav clicked')
+      // LEFT ARROW CLICK
+    } else if (event.target.matches('#left')) {
+          let targetNumber = parseInt(that.model.identify('langDetails', pageStatus), 10) - 3
+          if (targetNumber <= -1) {
+            that.model.view.print('remove', '#left')
+            return
+          } else {
+            // NOMMER UNE NOUVELLE METHODE POUR PAS CONFONDRE LES DEUX
+            that.bottomNavClick(projects[targetNumber])
+          }
+          resolve('bottomNav clicked')
       } else {
         return
       }
@@ -163,18 +185,18 @@ class Controller {
           resolve('linkedin hovered')
         // MOUSE OVER GITHUB
         } else if (event.target.matches('#github img')) {
-          that.socialIconsFocus('github')
-          resolve('github hovered')
+            that.socialIconsFocus('github')
+            resolve('github hovered')
         // MOUSE OVER MINIATURE
         } else if (event.target.matches('.miniature')) {
-          let item = event.target.getAttribute('item')
-          that.miniatureMouseOver(projects[that.model.identify('miniature', item)])
-          resolve('miniature hovered')
+            let item = event.target.getAttribute('item')
+            that.miniatureMouseOver(projects[that.model.identify('miniature', item)])
+            resolve('miniature hovered')
         // MOUSE OVER FOOTER NAVIGATION
         } else if (event.target.matches('.footer-nav-item')) {
-          let item = event.target.getAttribute('id')
-          that.footerNavMouseOver(projects[that.model.identify('bottomNav', item)])
-          resolve('bottom nav hovered')
+            let item = event.target.getAttribute('id')
+            that.footerNavMouseOver(projects[that.model.identify('bottomNav', item)])
+            resolve('bottom nav hovered')
         } else {
           return
         }
@@ -185,23 +207,20 @@ class Controller {
         if (event.target.matches('#linkedin img')) {
           that.socialIconsUnfocus()
           resolve('linkedin mouseout')
-        }
         // MOUSE OUT GITHUB
-        if (event.target.matches('#github img')) {
-          that.socialIconsUnfocus()
-          resolve('github mouseout')
-        }
+        } else if (event.target.matches('#github img')) {
+            that.socialIconsUnfocus()
+            resolve('github mouseout')
         // MOUSE OUT MINIATURE
-        if (event.target.matches('.miniature')) {
-          let item = event.target.getAttribute('item')
-          that.miniatureMouseOut(projects[that.model.identify('miniature', item)])
-          resolve('miniature mouseout')
-        }
+        } else if (event.target.matches('.miniature')) {
+            let item = event.target.getAttribute('item')
+            that.miniatureMouseOut(projects[that.model.identify('miniature', item)])
+            resolve('miniature mouseout')
         // MOUSE OUT FOOTER NAVIGATION
-        if (event.target.matches('.footer-nav-item')) {
-          let item = event.target.getAttribute('id')
-          that.miniatureMouseOut(projects[that.model.identify('bottomNav', item)])
-          resolve('bottom nav mouseout')
+        } else if (event.target.matches('.footer-nav-item')) {
+            let item = event.target.getAttribute('id')
+            that.miniatureMouseOut(projects[that.model.identify('bottomNav', item)])
+            resolve('bottom nav mouseout')
         } else {
           return
         }

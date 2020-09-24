@@ -16,7 +16,7 @@
  * @param {github} string link to the project's repository on github
  */
 class Project {
-  constructor(title, number, descr, skills, img, tech, date, color, resp, github) {
+  constructor(title, number, descr, skills, img, tech, date, color, resp, github, url) {
     this.title = title
     this.id = number
     this.descr = descr
@@ -27,5 +27,6 @@ class Project {
     this.color = color
     this.resp = resp
     this.git = github
+    this.url = url
   }
 }
