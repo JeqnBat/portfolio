@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" dir="ltr">
+<html lang="FR" dir="ltr">
   <head>
     <title>…</title>
     <meta name="viewport" content="initial-scale=1.0">
@@ -17,6 +17,8 @@
     <section id="home-screen" class="d-flex h-100 w-100 justify-content-center align-items-center">
       <header class="title"><h1>portfolio</h1></header>
     </section>
+    <!-- PREVENTS HOVER EFFECT DURING ENTRANCE'S ANIMATIONS, IS REMOVED LATED ON -->
+    <div id="blocker"></div>
     <!-- MAIN PAGE CONTAINER -->
     <section id="home" class="d-flex flex-nowrap flex-column align-items-center z-index">
       <!-- HEADER -->
@@ -24,9 +26,9 @@
         <header class="w-75">
           <h2 class="logo" style="display: inline;">#portfolio</h2>
           <!-- LANGUAGE BUTTONS -->
-          <span id="FR" class="pl-5 fr-engl"><h3>FR</h3></span>
+          <span id="fr" class="pl-5 fr-engl"><h3>FR</h3></span>
           <span style="color: rgb(34, 32, 29, .2); font-size: 1.2rem;">|</span>
-          <span id="EN" class="fr-engl"><h3>EN</h3></span>
+          <span id="en" class="fr-engl"><h3>EN</h3></span>
         </header>
         <!-- SOCIAL ICONS -->
         <nav class="w-25 social-icons">
@@ -53,9 +55,9 @@
       <!-- VERTICAL SPACER -->
       <div id="spacer"></div>
       <!-- MAIN SECTION -->
-      <main id="central-nav" class="d-flex justify-content-center"></main>
+      <main id="central-nav" class="d-flex"></main>
       <!-- FOOTER -->
-      <footer id="footer" class="d-flex flex-column justify-content-center">
+      <footer id="footer">
         <nav id="footer-nav">
         </nav>
       </footer>
