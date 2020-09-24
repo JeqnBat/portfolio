@@ -16,12 +16,32 @@ ______________________________________________________ */
 	content: "”";
 }
 #skills {
-	align-self: center;
+	width: 32vw;
 	padding-right: 20px;
+}
+#skills ul {
+	margin-top: -45px;
 }
 #skills li {
 	font-family: "Roboto", sans-serif;
 	list-style-type: square;
+}
+#skills img {
+	opacity: .15;
+	display: inline;
+	margin: 0 -20px;
+	transition: all 1s ease-in-out;
+}
+#skills-title {
+	display: inline;
+	text-transform: uppercase;
+	font-size: 1.5rem;
+	margin-right: -90px;
+}
+#snapshots {
+	display: flex;
+	height: 100%;
+	width: 68vw;
 }
 .block {
 	margin-left: 10px;
@@ -29,13 +49,23 @@ ______________________________________________________ */
 	display: flex;
 	flex-direction: column;
 	align-self: flex-end;
+	cursor: pointer;
 }
 .block img {
+	opacity: .9;
 	border: 4px solid #1f1d1d;
 	border-radius: 5px;
+	transition: all .3s ease-in-out;
+}
+.block:hover img {
+	opacity: 1;
+	transform: scale(1.01);
+}
+.block:hover .block-mirror {
+	transform: scaleY(-1) scale(1.01);
 }
 .block p {
-	opacity: .75;
+	opacity: .50;
 	font-family: "Roboto", sans-serif;
 	font-size: .9rem;
   margin-bottom: .9rem;
@@ -48,36 +78,45 @@ ______________________________________________________ */
 	margin-top: 1px;
 	border-radius: 0 0 5px 5px;
 	border: 3px solid;
+	transition: all .2s ease-in-out;
 }
 /* Footer menu */
 #project-details-menu {
   width: 90vw;
 	display: flex;
-	height: 5vh;
+	height: 7vh;
+	transition: all 1s ease-in-out .5s;
 }
 .bottom-menu {
 	display: flex;
   width: 100%;
   justify-content: center;
   align-items: center;
-}
-.bottom-menu h6 {
-  margin-right: 40px;
 	text-transform: uppercase;
 }
+.bottom-menu p, a {
+	font-family: "Roboto", sans-serif;
+	font-size: 1.15rem;
+}
+.bottom-menu p {
+	margin: 0 20px 0 0;
+}
 #tech figure {
-	z-index: 5;
-  margin-right: 10px;
-  transition: all .2s ease-in-out;
+	margin-bottom: -10px;
 }
-#tech figure:hover {
-  margin-top: -20px;
+#tech figure img {
+	margin: 0 5px;
+	text-align: center;
+	transition: all .2s ease-in-out;
 }
-#tech figure figcaption:hover {
+#tech figure img:hover {
+	margin-bottom: 10px;
+}
+#tech figure:hover figcaption {
   opacity: 1;
 }
 #tech figcaption {
-	background-color: rgb(94, 86, 65, .6);
+	background-color: rgb(34, 32, 29, .4);
 	font-size: .65rem;
 	text-transform: uppercase;
 	text-align: center;
@@ -89,16 +128,15 @@ ______________________________________________________ */
   position: relative;
   height: 30px;
   width: 30px;
-  margin-bottom: 10px;
   border: 2px solid white;
   border-radius: 4px;
 }
-.check-box::after {
+.check-box.true::after {
   position: absolute;
   content: 'L';
   transform: rotateZ(45deg) rotateY(180deg);
   font-size: 4rem;
-  color: lightgreen;
+  color: #00ff70;
   right: -10px;
   bottom: -20px;
   transition: all .2s ease-out;
@@ -106,12 +144,56 @@ ______________________________________________________ */
 .check-box:hover::after {
   transform: rotateZ(45deg) rotateY(180deg) rotateX(30deg) scale(1.2);
 }
-/* Check box uncomplete */
-.check-box-x {
-  position: relative;
-  height: 30px;
-  width: 30px;
-  margin-bottom: 10px;
-  border: 2px solid white;
-  border-radius: 4px;
+#projects-github {
+	width: 40%;
+	margin: 0;
+}
+#projects-github a {
+	color: white;
+	transition: all .2s ease-in-out;
+}
+#projects-github a:hover {
+	color: #f05133;
+	text-decoration: none;
+}
+#projects-github img {
+	margin: 0 5px;
+	transition: all .5s ease-in-out .1s;
+}
+#projects-github:hover img {
+	transform: rotateZ(360deg);
+}
+
+/* Big navigation arrows */
+.arrow {
+	border-radius: 6px;
+  width: 60px;
+  height: 60px;
+  opacity: .05;
+	top: 46vh;
+	cursor: pointer;
+}
+#left {
+	position: absolute;
+	border-left: 3px solid white;
+	border-top: 3px solid white;
+	transform: rotateZ(-45deg);
+	left: 2vw;
+	transition: all .15s ease-in-out;
+}
+#left:hover {
+	left: 1.6vw;
+	opacity: .4;
+}
+#right {
+	position: absolute;
+	border-right: 3px solid white;
+	border-top: 3px solid white;
+	transform: rotateZ(45deg);
+	right: 2vw;
+	transition: all .15s ease-in-out;
+}
+#right:hover{
+	right: 1.6vw;
+	opacity: .4;
 }
