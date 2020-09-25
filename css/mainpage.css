@@ -1,4 +1,4 @@
-/* 3. MAIN PAGE LAYOUT
+/* 4. MAIN PAGE LAYOUT
 ______________________________________________________ */
 #home {
 	height: 100vh;
@@ -58,7 +58,7 @@ ______________________________________________________ */
 	margin-right: -20vw;
 	transition: all .4s ease-in-out;
 }
-.social-icons .subtitle.appear {
+.social-icons:hover .subtitle {
 	margin-right: 0;
 	opacity: .6;
 }
@@ -97,7 +97,7 @@ ______________________________________________________ */
 #central-nav {
 	opacity: 1;
 	height: 50vh;
-	width: 90vw;
+	width: 89vw;
 	align-items: flex-start;
 	transform: scale(.96);
 	transition: transform 1s ease-in-out 1s;
@@ -109,7 +109,7 @@ ______________________________________________________ */
 	overflow: hidden;
 	opacity: 0;
 	margin: 0 .15%;
-	width: 12.5vw;
+	width: 12.4vw;
 	height: 100%;
 	background-position: center;
 	background-size: cover;
@@ -142,6 +142,11 @@ ______________________________________________________ */
 	-webkit-transition: margin-top .3s ease-in-out .15s;
 					transition: margin-top .3s ease-in-out .15s;
 }
+/* CSS hover */
+.miniature:hover .over-screen {
+	margin-top: 0;
+}
+/* JS hover */
 .over-screen.slide-down {
 	margin-top: 0;
 }

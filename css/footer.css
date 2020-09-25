@@ -1,4 +1,4 @@
-/* 5. FOOTER
+/* 6. FOOTER
 ______________________________________________________ */
 #footer {
 	display: flex;
@@ -13,7 +13,6 @@ ______________________________________________________ */
 	opacity: 0;
 	height: 5vh;
 	align-self: center;
-	margin: 10px;
 	transition: opacity .3s ease-in-out 2s;
 }
 #footer-nav.appears {

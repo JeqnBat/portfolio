@@ -1,4 +1,4 @@
-/* 4. PROJECT DETAILS LAYOUT
+/* 5. PROJECT DETAILS LAYOUT
 ______________________________________________________ */
 /* Project title div */
 #project-title::before {
@@ -166,7 +166,8 @@ ______________________________________________________ */
 
 /* Big navigation arrows */
 .arrow {
-	border-radius: 6px;
+	background: white;
+	border-radius: 60px;
   width: 60px;
   height: 60px;
   opacity: .05;
@@ -175,25 +176,43 @@ ______________________________________________________ */
 }
 #left {
 	position: absolute;
-	border-left: 3px solid white;
-	border-top: 3px solid white;
-	transform: rotateZ(-45deg);
-	left: 2vw;
+	left: 1vw;
 	transition: all .15s ease-in-out;
 }
 #left:hover {
-	left: 1.6vw;
+	left: .5vw;
 	opacity: .4;
+}
+#left::after {
+  position: absolute;
+	content: '';
+  height: 20px;
+  width: 20px;
+  left: 24px;
+  top: 20px;
+  transform: rotateZ(225deg);
+  border-top: 3px solid rgb(34, 32, 29, .4);
+  border-right: 3px solid rgb(34, 32, 29, .4);
+  border-radius: 3px;
 }
 #right {
 	position: absolute;
-	border-right: 3px solid white;
-	border-top: 3px solid white;
-	transform: rotateZ(45deg);
-	right: 2vw;
+	right: 1vw;
 	transition: all .15s ease-in-out;
 }
 #right:hover{
-	right: 1.6vw;
+	right: .5vw;
 	opacity: .4;
+}
+#right::after {
+  position: absolute;
+	content: '';
+  height: 20px;
+  width: 20px;
+  right: 24px;
+  top: 20px;
+  transform: rotateZ(45deg);
+  border-top: 3px solid rgb(34, 32, 29, .4);
+  border-right: 3px solid rgb(34, 32, 29, .4);
+  border-radius: 3px;
 }

@@ -1,0 +1,260 @@
+/* 7. MEDIA QUERIES
+______________________________________________________ */
+/* DESKTOP _
+OVER 2200 PX WIDE */
+@media only screen and (min-width: 2200px) {
+  #header {
+    width: 57vw;
+  }
+  #presentation {
+    width: 56vw;
+  }
+  #central-nav {
+    width: 57vw;
+    height: 35vh;
+  }
+  .miniature {
+    width: 7.5vw!important;
+  }
+  .border-line {
+    width: 25vw;
+  }
+  #footer {
+    width: 57vw;
+  }
+  #right {
+    right: 17vw;
+  }
+  #right:hover {
+    right: 16.5vw;
+  }
+  #left {
+    left: 17vw;
+  }
+  #left:hover {
+    left: 16.5vw;
+  }
+  #project-details-menu {
+    width: 57vw;
+  }
+}
+/* DESKTOP _
+FROM 1850 to 2199 - PX WIDE */
+@media only screen and (min-width: 1850px) and (max-width: 2199px) {
+  #header {
+    width: 67vw;
+  }
+  #presentation {
+    width: 65vw;
+  }
+  #central-nav {
+    width: 67vw;
+    height: 40vh;
+  }
+  .miniature {
+    width: 9vw!important;
+  }
+  .border-line {
+    width: 27vw;
+  }
+  #footer {
+    width: 67vw;
+  }
+  #right {
+    right: 12vw;
+  }
+  #right:hover {
+    right: 11.5vw;
+  }
+  #left {
+    left: 12vw;
+  }
+  #left:hover {
+    left: 11.5vw;
+  }
+  #project-details-menu {
+    width: 67vw;
+  }
+}
+/* DESKTOP _
+FROM 1600 to 1849 - PX WIDE */
+@media only screen and (min-width: 1600px) and (max-width: 1849px) {
+  #header {
+    width: 75vw;
+  }
+  #presentation {
+    width: 71vw;
+  }
+  #central-nav {
+    width: 74vw;
+    height: 45vh;
+  }
+  .miniature {
+    width: 10vw!important;
+  }
+  .border-line {
+    width: 29vw;
+  }
+  #footer {
+    width: 74vw;
+  }
+  #right {
+    right: 8vw;
+  }
+  #right:hover {
+    right: 7.5vw;
+  }
+  #left {
+    left: 8vw;
+  }
+  #left:hover {
+    left: 7.5vw;
+  }
+  #project-details-menu {
+    width: 74vw;
+  }
+}
+/* DESKTOP _
+FROM 1210 to 1310 - PX WIDE */
+@media only screen and (min-width: 1210px) and (max-width: 1310px) {
+  .content-font {
+    font-size: 1rem;
+  }
+  #project-title {
+    font-size: 3rem;
+  }
+  #skills-title img {
+    width: 60%;
+    height: auto;
+  }
+  .bottom-menu p, a {
+    font-size: 1rem;
+  }
+  #snapshots {
+    width: 50vw;
+  }
+  #mobile img {
+    height: 131px;
+    width: 70px;
+  }
+  #mobile .block-mirror {
+    max-width: 70px;
+  }
+  #desktop img {
+    height: 212px;
+    width: 400px;
+  }
+  #desktop .block-mirror {
+    max-width: 400px;
+  }
+  #tablet img {
+    height: 239px;
+    width: 180px;
+  }
+  #tablet .block-mirror {
+    max-width: 180px;
+  }
+}
+/* DESKTOP _
+FROM 1110 to 1209 - PX WIDE */
+@media only screen and (min-width: 1110px) and (max-width: 1209px) {
+  .content-font {
+    font-size: .9rem;
+  }
+  #project-title {
+    font-size: 3rem;
+  }
+  #skills-title img {
+    width: 50%;
+    height: auto;
+  }
+  .bottom-menu p, a {
+    font-size: .9rem;
+  }
+  #mobile img {
+    height: 120px;
+    width: 64px;
+  }
+  #mobile .block-mirror {
+    max-width: 64px;
+  }
+  #desktop img {
+    height: 200px;
+    width: 378px;
+  }
+  #desktop .block-mirror {
+    max-width: 378px;
+  }
+  #tablet img {
+    height: 220px;
+    width: 166px;
+  }
+  #tablet .block-mirror {
+    max-width: 166px;
+  }
+  #skills ul {
+    font-size: .9rem;
+  }
+}
+/* DESKTOP _
+FROM 990 to 1109 - PX WIDE */
+@media only screen and (min-width: 990px) and (max-width: 1109px) {
+  #mobile img {
+    height: 109px;
+    width: 58px;
+  }
+  #mobile .block-mirror {
+    max-width: 58px;
+  }
+  #desktop img {
+    height: 180px;
+    width: 340px;
+  }
+  #desktop .block-mirror {
+    max-width: 340px;
+  }
+  #tablet img {
+    height: 200px;
+    width: 150px;
+  }
+  #tablet .block-mirror {
+    max-width: 150px;
+  }
+  .content-font {
+    font-size: .9rem;
+  }
+  #project-title {
+    font-size: 3rem;
+  }
+  #skills-title img {
+    width: 50%;
+    height: auto;
+  }
+  .bottom-menu p, a {
+    font-size: .9rem;
+  }
+  #skills ul {
+    font-size: .9rem;
+  }
+}
+/* TABLET _
+FROM 300 to 989 - PX WIDE */
+@media only screen and (min-width: 300px) and (max-width: 989px) {
+  body {
+    background-color: transparent!important;
+    background-image: url('../Graphics/BeanResponsive.jpg');
+    background-repeat: no-repeat;
+    background-size: cover!important;
+    background-position: center;
+  }
+  #home-screen {
+    display: none!important;
+  }
+  #blocker {
+    display: none!important;
+  }
+  #home {
+    display: none!important;
+  }
+}
+/* FROM 300 to 899 - PX WIDE */
