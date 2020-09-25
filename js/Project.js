@@ -5,15 +5,17 @@
  *
  * @constructor
  *
- * @param {title} string the project's name
- * @param {id} number use the project's index as an ID
- * @param {descr} string project's introduction written both in EN & FR
- * @param {img} array 4 entries = 4 links to 4 screenshots of the project under different viewport formats
- * @param {validation} string project's validation date
- * @param {color} string the main DIV's background color
- * @param {tech} array links to icons reprensenting technologies (css3, jQuery, WordPress, etc.)
+ * @param {string} title the project's name
+ * @param {number} id use the project's index as an ID
+ * @param {string} descr  project's introduction written both in EN & FR
+ * @param {string} skills describes the skills involved in the project
+ * @param {array} img 4 entries = 4 links to 4 screenshots of the project under different viewport formats
+ * @param {array} tech links to icons representing technologies (css3, jQuery, WordPress, etc.)
+ * @param {string} date project's validation date
+ * @param {string} color the main DIV's background color
  * @param {resp} boolean Is reponsive, TRUE || is not responsive, FALSE
  * @param {github} string link to the project's repository on github
+ * @param {url} string the url of the project
  */
 class Project {
   constructor(title, number, descr, skills, img, tech, date, color, resp, github, url) {

@@ -56,11 +56,9 @@ class Controller {
    */
   socialIconsFocus(icon) {
     this.model.view.print('text', '.subtitle', icon)
-    this.model.view.updateClass('.subtitle', 'add', 'appear')
   }
   socialIconsUnfocus() {
     this.model.view.print('text', '.subtitle', '')
-    this.model.view.updateClass('.subtitle', 'remove', 'appear')
   }
 // MINIATURE & BOTTOM NAV ITEM'S MOUSEOVER ________________ */
  /**
@@ -78,9 +76,11 @@ class Controller {
     this.model.looseFocus(project)
   }
   footerNavMouseOver(project) {
+    this.model.view.updateClass(`.${project.id}`, 'add', 'slide-down')
     this.model.focusMiniature(project)
   }
   footerNavMouseOut(project) {
+    this.model.view.updateClass(`.${project.id}`, 'remove', 'slide-down')
     this.model.looseFocus(project)
   }
 // MINIATURE & BOTTOM NAV ITEM CLICK ______________________ */
@@ -111,6 +111,7 @@ class Controller {
   * accessible, no matter what changes occur inside of the DOM.
   *
   * @method
+  * @param {object} projects sends in all the projects so they can be identified
   */
   async delegate(projects) {
     let that = this
@@ -163,7 +164,7 @@ class Controller {
           }
           resolve('bottomNav clicked')
       // LEFT ARROW CLICK
-    } else if (event.target.matches('#left')) {
+      } else if (event.target.matches('#left')) {
           let targetNumber = parseInt(that.model.identify('langDetails', pageStatus), 10) - 3
           if (targetNumber <= -1) {
             that.model.view.print('remove', '#left')
@@ -219,7 +220,7 @@ class Controller {
         // MOUSE OUT FOOTER NAVIGATION
         } else if (event.target.matches('.footer-nav-item')) {
             let item = event.target.getAttribute('id')
-            that.miniatureMouseOut(projects[that.model.identify('bottomNav', item)])
+            that.footerNavMouseOut(projects[that.model.identify('bottomNav', item)])
             resolve('bottom nav mouseout')
         } else {
           return

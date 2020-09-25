@@ -24,7 +24,6 @@ class Page {
    * Stores the new value in 'this.lang'
    *
    * @method
-   * @param {input} string the value returned by a click on the 'FR | EN' buttons
    */
   async setLanguage() {
     return new Promise((resolve, reject) => {
@@ -57,6 +56,11 @@ class Page {
     setTimeout(function() {
       that.model.view.print('remove', '#blocker')
     }, 1200)
-
   }
+
+  // à l'intérieur de init() créer trois scénarios basés sur la largeur de l'écran :
+  // console.log(window.innerWidth)
+  // si la largeur est inférieure à 990px (plus petite largeur desktop) alors le logiciel
+  // lance init() en mode tablet
+  // si inférieur à 450px lance init() en mode mobile
 }

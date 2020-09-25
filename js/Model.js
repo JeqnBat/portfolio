@@ -12,6 +12,32 @@ class Model {
   constructor(view) {
     this.view = new View()
   }
+// IDENTIFY WHICH PROJECT IS TARGETED _____________________ */
+  /**
+   * <b>DESCR:</b><br>
+   * Use this method before firing events w/ 'Controller'.
+   * It will retrieve & return the targeted project's instance.
+   *
+   * @method
+   * @param {string} when determines the switch's case
+   * @param {number} item the number to deduce the project's id from
+   */
+   identify(when, item) {
+     switch(when) {
+       case 'miniature':
+         let miniatureNumber = item.substring(4) - 2
+         return miniatureNumber
+       break
+       case 'bottomNav':
+         let bottomNavNumber = item.substring(9) - 2
+         return bottomNavNumber
+       break
+       case 'langDetails':
+         let projectNumber = item.substring(15)
+         return projectNumber
+       break
+     }
+   }
 // SWITCH LANGUAGE ________________________________________ */
   /**
    * <b>DESCR:</b><br>
@@ -20,7 +46,7 @@ class Model {
    * Repaints them all w/ the language defined by 'controller.langClick()'
    *
    * @method
-   * @param {object} project the project w/ all its properties
+   * @param {object} origin the project w/ all its properties
    */
   updateLang(origin) {
     let selector
@@ -75,31 +101,7 @@ class Model {
    }
    this.view.fadeIn(selector)
   }
-// IDENTIFY WHICH PROJECT IS TARGETED _____________________ */
-  /**
-   * <b>DESCR:</b><br>
-   * Use this method before firing events w/ 'Controller'.
-   * It will retrieve & return the targeted project's instance.
-   *
-   * @method
-   */
-   identify(when, item) {
-     switch(when) {
-       case 'miniature':
-         let miniatureNumber = item.substring(4) - 2
-         return miniatureNumber
-       break
-       case 'bottomNav':
-         let bottomNavNumber = item.substring(9) - 2
-         return bottomNavNumber
-       break
-       case 'langDetails':
-         let projectNumber = item.substring(15)
-         return projectNumber
-       break
-     }
-   }
-// TEMPLATE MARKER ________________________________________ */
+// TEMPLATE MARKER & PRINTER ______________________________ */
   /**
    * <b>DESCR:</b><br>
    * Scans 'pageStatus' to determine which part of the DOM
@@ -166,22 +168,22 @@ class Model {
    * Second method does the exact opposite.
    *
    * @method
-   * @param {object} project the project w/ all its properties
+   * @param {object} origin the project w/ all its properties
    */
-  focusMiniature(project) {
+  focusMiniature(origin) {
     switch(pageStatus) {
       case 'main-page':
-        this.view.OverScreenDown(project)
+        this.view.OverScreenDown(origin)
       break
       case `page-details${this.identify('langDetails', pageStatus)}`:
         return
       break
     }
   }
-  looseFocus(project) {
+  looseFocus(origin) {
     switch(pageStatus) {
       case 'main-page':
-        this.view.OverScreenUp(project)
+        this.view.OverScreenUp(origin)
       break
       case `page-details${this.identify('langDetails', pageStatus)}`:
         return
@@ -203,12 +205,11 @@ class Model {
 // CLEAN 'PROJECT'S DETAILS' PAGE _________________________ */
   /**
    * <b>DESCR:</b><br>
-   * Sets new bg-color to '#colored-bg' & triggers slide-left
-   * Display miniature's details.
+   * Cleans main DIV from their content in order to prepare the DOM
+   * for a new major print.
+   * Updates 'Page status' to 'main-page'
    *
    * @method
-   * @param {color} string the project's associated color
-   * @param {id} string the project's ID
    */
    cleanDetails() {
      this.view.print('text', '#description', ' ')

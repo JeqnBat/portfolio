@@ -101,7 +101,6 @@ class View {
    projectDescription() {
      this.print('text', '#descr', lang == 'fr' ? descr.FR : descr.EN)
    }
-   /* ATTENTION, ON ENVOIE TOUS LES PROJETS DANS CETTE METHODE, PAS UN SEUL */
    validationDate(origin) {
      for (let j = 0; j < origin.length; j++) {
        this.print('text', `#val${origin[j].id}`, lang == 'fr' ? validation.FR : validation.EN)
@@ -116,17 +115,15 @@ class View {
      this.updateClass(`#en`, 'add', 'lang-button-active')
      this.updateClass('#fr', 'remove', 'lang-button-active')
    }
-   OverScreenDown(project) {
-     this.updateClass('#colored-bg', 'edit', 'background-color', `${project.color}`)
+   OverScreenDown(origin) {
+     this.updateClass('#colored-bg', 'edit', 'background-color', `${origin.color}`)
      this.updateClass('#colored-bg', 'add', 'slide-left')
-     this.updateClass(`.${project.id}`, 'add', 'slide-down')
-     this.updateClass(`#footerNav${project.id}`, 'add', 'active')
+     this.updateClass(`#footerNav${origin.id}`, 'add', 'active')
    }
-   OverScreenUp(project) {
+   OverScreenUp(origin) {
      this.updateClass('#colored-bg', 'edit', 'background-color', '')
      this.updateClass('#colored-bg', 'remove', 'slide-left')
-     this.updateClass(`.${project.id}`, 'remove', 'slide-down')
-     this.updateClass(`#footerNav${project.id}`, 'remove', 'active')
+     this.updateClass(`#footerNav${origin.id}`, 'remove', 'active')
    }
 // DISPLAY PROJECT'S DETAILS PAGE _________________________ */
  /**
@@ -214,7 +211,6 @@ class View {
    * print.
    *
    * @method
-   * @param {string} type the case scenario of the transition
    * @param {object} origin the project's class, necessary to update BG
    */
   transition(origin) {
