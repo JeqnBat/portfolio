@@ -96,11 +96,11 @@ class Controller {
   */
   miniatureClick(project) {
     pageStatus = 'project-details'
-    this.model.markThenPrint(project)
+    this.model.press(project)
   }
   bottomNavClick(project) {
     pageStatus = 'project-details'
-    this.model.markThenPrint(project)
+    this.model.press(project)
     this.model.activeBottomNav()
   }
 // GLOBAL EVENT DELEGATOR _________________________________ */
@@ -137,7 +137,7 @@ class Controller {
           } else {
             that.portfolioClick()
             for (let i = 0; i < projects.length; i++) {
-              that.model.markThenPrint(projects[i])
+              that.model.press(projects[i])
             }
             resolve('#PORTFOLIO clicked')
           }

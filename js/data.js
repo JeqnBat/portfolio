@@ -3,7 +3,8 @@
  * Stores all the datas, page status & language.
  * Call these objects & their properties w/ the 'Model' class.
  */
-// PAGE LANGUAGE & STATUS _________________________________ */
+// PAGE LAYOUT, LANGUAGE & STATUS _________________________ */
+let layout = innerWidth > 1024 ? 'desktop' : 'mobile'
 let lang = $('html').attr('lang')
 let pageStatus = 'home-logo' // RESET 'main-page'
 // BILINGUAL SECTIONS _____________________________________ */
@@ -65,6 +66,7 @@ let data = [
                          ]
                 },
     'img'     : { 'mini'    : `Graphics/miniatures/MINIATURE2.jpg`,
+                  'resp'    : `Graphics/miniatures/RESPONSIVE2.jpg`,
                   'mobile'  : `Graphics/miniatures/MOBILE_mini2.jpg`,
                   'desktop' : `Graphics/miniatures/DESKTOP_mini2.jpg`,
                   'tablet'  : `Graphics/miniatures/TABLET_mini2.jpg`
@@ -104,6 +106,7 @@ let data = [
                          ]
                 },
     'img'     : { 'mini'    : `Graphics/miniatures/MINIATURE3.jpg`,
+                  'resp'    : `Graphics/miniatures/RESPONSIVE3.jpg`,
                   'mobile'  : `Graphics/miniatures/MOBILE_mini3.jpg`,
                   'desktop' : `Graphics/miniatures/DESKTOP_mini3.jpg`,
                   'tablet'  : `Graphics/miniatures/TABLET_mini3.jpg`
@@ -141,6 +144,7 @@ let data = [
                          ]
                 },
     'img'     : { 'mini'    : `Graphics/miniatures/MINIATURE4.jpg`,
+                  'resp'    : `Graphics/miniatures/RESPONSIVE4.jpg`,
                   'mobile'  : `Graphics/miniatures/MOBILE_mini4.jpg`,
                   'desktop' : `Graphics/miniatures/DESKTOP_mini4.jpg`,
                   'tablet'  : `Graphics/miniatures/TABLET_mini4.jpg`
@@ -173,6 +177,7 @@ let data = [
                          ]
                 },
     'img'     : { 'mini'    : `Graphics/miniatures/MINIATURE5.jpg`,
+                  'resp'    : `Graphics/miniatures/RESPONSIVE5.jpg`,
                   'mobile'  : `Graphics/miniatures/MOBILE_mini5.jpg`,
                   'desktop' : `Graphics/miniatures/DESKTOP_mini5.jpg`,
                   'tablet'  : `Graphics/miniatures/TABLET_mini5.jpg`
@@ -206,6 +211,7 @@ let data = [
                          ]
                 },
     'img'     : { 'mini'    : `Graphics/miniatures/MINIATURE6.jpg`,
+                  'resp'    : `Graphics/miniatures/RESPONSIVE6.jpg`,
                   'mobile'  : `Graphics/miniatures/MOBILE_mini6.jpg`,
                   'desktop' : `Graphics/miniatures/DESKTOP_mini6.jpg`,
                   'tablet'  : `Graphics/miniatures/TABLET_mini6.jpg`
@@ -239,6 +245,7 @@ let data = [
                          ]
                 },
     'img'     : { 'mini'    : `Graphics/miniatures/MINIATURE7.jpg`,
+                  'resp'    : `Graphics/miniatures/RESPONSIVE7.jpg`,
                   'mobile'  : `Graphics/miniatures/MOBILE_mini7.jpg`,
                   'desktop' : `Graphics/miniatures/DESKTOP_mini7.jpg`,
                   'tablet'  : `Graphics/miniatures/TABLET_mini7.jpg`
@@ -276,6 +283,7 @@ let data = [
                          ]
                 },
     'img'     : { 'mini'    : `Graphics/miniatures/MINIATURE8.jpg`,
+                  'resp'    : `Graphics/miniatures/RESPONSIVE8.jpg`,
                   'mobile'  : `Graphics/miniatures/MOBILE_mini8.jpg`,
                   'desktop' : `Graphics/miniatures/DESKTOP_mini8.jpg`,
                   'tablet'  : `Graphics/miniatures/TABLET_mini8.jpg`

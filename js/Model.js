@@ -38,6 +38,23 @@ class Model {
        break
      }
    }
+  // TEMPLATE MARKER ________________________________________ */
+   /**
+    * <b>DESCR:</b><br>
+    * Marks a given template w/ a specific chain of charaters
+    * so the template can be identified later by the program.
+    *
+    * @method
+    * @param {string} template the template inside which is located the target
+    * @param {string} target the chain characters to replace
+    * @param {string} identifier the replacement string characters
+    */
+   mark(template, target1, identifier1, target2, identifier2, target3, identifier3) {
+     let x = new RegExp(target1, 'g')
+     let y = new RegExp(target2, 'g')
+     let z = new RegExp(target3, 'g')
+     return template.replace(x, identifier1).replace(y, identifier2).replace(z, identifier3)
+   }
 // SWITCH LANGUAGE ________________________________________ */
   /**
    * <b>DESCR:</b><br>
@@ -51,11 +68,9 @@ class Model {
   updateLang(origin) {
     let selector
     let index = parseInt(this.identify('langDetails', pageStatus), 10) - 2
-    // For each of these DIVs, IF MAIN PAGE:
-    if (pageStatus == 'main-page') {
-      // Stores all the DIVs marked w/ a 'lang' item
-      selector = $(document).find(`[item=lang]`)
 
+    if (pageStatus == 'main-page') {
+      selector = $(document).find(`[item=lang]`)
       for (let i = 0; i < selector.length; i++) {
        switch (selector[i].id) {
         case 'descr':
@@ -67,9 +82,7 @@ class Model {
        }
      }
    } else if (pageStatus == `project-details${this.identify('langDetails', pageStatus)}`) {
-     // Stores all the DIVs marked w/ a 'lang' item
      selector = $(document).find(`[item=lang]`)
-
      for (let i = 0; i < selector.length; i++) {
        switch (selector[i].id) {
          case 'descr':
@@ -101,63 +114,46 @@ class Model {
    }
    this.view.fadeIn(selector)
   }
-// TEMPLATE MARKER & PRINTER ______________________________ */
+// PRINTER ________________________________________________ */
   /**
    * <b>DESCR:</b><br>
    * Scans 'pageStatus' to determine which part of the DOM
    * should be displayed.
    *
-   * Marks it down w/ IDs
+   * Uses the marker to ID the blank templates
    * Prints it w/ view.print().
    *
    * @method
    * @param {object} origin the object whose properties will be printed as markers
    */
-  async markThenPrint(origin) {
+  async press(origin) {
     let that = this
     return new Promise((resolve, reject) => {
        switch(pageStatus) {
          case 'main-page':
-           let markedMiniature = miniatureTemplate
-                                  .replace(/xxxid/g, `${origin.id}`)
-                                  .replace(/xxxtitle/g, `${origin.title}`)
-           let markedfooterNav = footerNavTemplate
-                                  .replace(/xxxid/g, `${origin.id}`)
-           this.view.mainPage(markedMiniature, origin, markedfooterNav)
+           let markedMiniature = this.mark(miniatureTemplate, 'xxxid', `${origin.id}`, 'xxxtitle', `${origin.title}`, '', '')
+           let markedfooterNav = this.mark(footerNavTemplate, 'xxxid', `${origin.id}`, '', '', '', '')
+           this.view.mainPage(markedMiniature, origin, markedfooterNav, layout)
          break
          case 'project-details':
-           let mobileDiv  = screenShotTemplate
-                            .replace(/xxxurl/g, `${origin.url}`)
-                            .replace(/layout/g, 'mobile')
-                            .replace(/imgFile/g, `${origin.img.mobile}`)
-                            .replace(/color/g, `${origin.color}`)
-                            .replace(/xxx/g, '108')
-                            .replace(/yyy/g, '202')
-           let desktopDiv = screenShotTemplate
-                            .replace(/xxxurl/g, `${origin.url}`)
-                            .replace(/layout/g, 'desktop')
-                            .replace(/imgFile/g, `${origin.img.desktop}`)
-                            .replace(/color/g, `${origin.color}`)
-                            .replace(/xxx/g, '512')
-                            .replace(/yyy/g, '271')
-           let tabletDiv  = screenShotTemplate
-                            .replace(/xxxurl/g, `${origin.url}`)
-                            .replace(/layout/g, 'tablet')
-                            .replace(/imgFile/g, `${origin.img.tablet}`)
-                            .replace(/color/g, `${origin.color}`)
-                            .replace(/xxx/g, '234')
-                            .replace(/yyy/g, '311')
-           this.view.transition(origin, 'main-to-details')
-           // TIME OUT TO SET
+           let mobileDiv  = this.mark(screenShotTemplate, 'xxxurl',`${origin.url}`, 'layout', 'mobile', 'imgFile', `${origin.img.mobile}`)
+               mobileDiv  = that.mark(mobileDiv, 'color', `${origin.color}`, 'xxx', '108', 'yyy', '202')
+           let desktopDiv = this.mark(screenShotTemplate, 'xxxurl',`${origin.url}`, 'layout', 'desktop', 'imgFile', `${origin.img.desktop}`)
+               desktopDiv = that.mark(desktopDiv, 'color', `${origin.color}`, 'xxx', '512', 'yyy', '271')
+           let tabletDiv  = this.mark(screenShotTemplate, 'xxxurl',`${origin.url}`, 'layout', 'tablet', 'imgFile', `${origin.img.tablet}`)
+               tabletDiv  = that.mark(tabletDiv, 'color', `${origin.color}`, 'xxx', '234', 'yyy', '311')
+           this.view.transition(origin)
+           // TIME OUT TO SYNCHRONIZE FADE IN
            setTimeout(function() {
              that.view.projectDetails(origin, mobileDiv, desktopDiv, tabletDiv)
            }, 300)
            pageStatus = `project-details${origin.id}`
          break
        }
+       // HOME PAGE MINIATURE PRINT DELAY IN ms
        setTimeout(function () {
          resolve('page printed')
-       }, 120)
+       }, 130)
      })
    }
 // REFRESH PAGE AFTER MINIATURE MOUSEOVER _________________ */

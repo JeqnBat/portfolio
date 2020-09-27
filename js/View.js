@@ -37,7 +37,7 @@ class View {
   /**
    * <b>DESCR:</b><br>
    * Use printer to create HTML nodes & content & display them
-   * inside the DOM. The printer has 4 entry points :
+   * inside the DOM. The printer has 3 entry points :
    *
    * @method
    * @param {string} type the content's type
@@ -85,12 +85,13 @@ class View {
    * @param {string} markedMiniature HTML template marked by model & rdy to print
    * @param {object} origin the project w/ properties to print on the page
    * @param {string} markedfooterNav HTML template marked by model & rdy to print
+   * @param {string} layout the type of layout to determine which miniature's background to display
    */
    mainPage(markedMiniature, origin, markedfooterNav) {
      let that = this
      this.updateClass('.fr-engl', 'add', 'enters')
      this.print('div', '#central-nav', markedMiniature)
-     this.updateClass(`[item="OCP#${origin.id}"]`, 'edit', 'background-image', `url("${origin.img.mini}")`)
+     this.updateClass(`[item="OCP#${origin.id}"]`, 'edit', 'background-image', layout == 'mobile' ? `url("${origin.img.resp}")` : `url("${origin.img.mini}")` )
      this.print('div', '#footer-nav', markedfooterNav)
      setTimeout(function() {
        that.updateClass(`[item="OCP#${origin.id}"]`, 'add', 'appears')

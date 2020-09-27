@@ -11,7 +11,6 @@ class Page {
     this.model = new Model(this.view)
     this.controller = new Controller(this.model)
     this.projects = []
-    this.lang = ''
   }
 // SET PAGE'S LANGUAGE ____________________________________ */
   /**
@@ -21,7 +20,6 @@ class Page {
    *    OR
    *  a language string code from event listener (click on nav menu FR | EN)
    * Updates the <HTML> language's attribute w/ the new value
-   * Stores the new value in 'this.lang'
    *
    * @method
    */
@@ -39,7 +37,7 @@ class Page {
    * Use ASYNC to define a loading sequence as the program
    * is executed for the 1st time.
    * First get browser's language, then return it, then print
-   * page's content w/ 'this.lang' parameter
+   * page's content.
    *
    * @method
    */
@@ -50,17 +48,12 @@ class Page {
     await this.controller.delegate(this.projects)
     for (let i = 0; i < data.length; i++) {
       this.projects[i] = new Project(data[i].title, i+2, data[i].descr, data[i].skills, data[i].img, data[i].tech, data[i].date, data[i].color, data[i].resp, data[i].github, data[i].url)
-      await this.model.markThenPrint(this.projects[i])
+      await this.model.press(this.projects[i])
     }
     this.model.updateLang(this.projects)
-    setTimeout(function() {
+    setTimeout(() => {
       that.model.view.print('remove', '#blocker')
-    }, 1200)
+    }, 1300)
   }
 
-  // à l'intérieur de init() créer trois scénarios basés sur la largeur de l'écran :
-  // console.log(window.innerWidth)
-  // si la largeur est inférieure à 990px (plus petite largeur desktop) alors le logiciel
-  // lance init() en mode tablet
-  // si inférieur à 450px lance init() en mode mobile
 }
