@@ -38,22 +38,24 @@ class Model {
        break
      }
    }
-  // TEMPLATE MARKER ________________________________________ */
-   /**
-    * <b>DESCR:</b><br>
-    * Marks a given template w/ a specific chain of charaters
-    * so the template can be identified later by the program.
-    *
-    * @method
-    * @param {string} template the template inside which is located the target
-    * @param {string} target the chain characters to replace
-    * @param {string} identifier the replacement string characters
-    */
-   mark(template, target1, identifier1, target2, identifier2, target3, identifier3) {
-     let x = new RegExp(target1, 'g')
-     let y = new RegExp(target2, 'g')
-     let z = new RegExp(target3, 'g')
-     return template.replace(x, identifier1).replace(y, identifier2).replace(z, identifier3)
+// TEMPLATE MARKER ________________________________________ */
+  /**
+   * <b>DESCR:</b><br>
+   * Marks a given template w/ a specific chain of charaters
+   * so the template can be identified later by the program.
+   *
+   * @method
+   * @param {string} template the template inside which is located the target
+   * @param {array} target the pair [oldCharacters, newCharacters]
+   */
+  mark(template, ...target) {
+     let y = template
+     for (let i = 0; i < target.length; i++) {
+        let x = new RegExp(target[i][0], 'g')
+        let z = y.replace(x, target[i][1])
+        y = z
+     }
+     return y
    }
 // SWITCH LANGUAGE ________________________________________ */
   /**
@@ -131,17 +133,14 @@ class Model {
     return new Promise((resolve, reject) => {
        switch(pageStatus) {
          case 'main-page':
-           let markedMiniature = this.mark(miniatureTemplate, 'xxxid', `${origin.id}`, 'xxxtitle', `${origin.title}`, '', '')
-           let markedfooterNav = this.mark(footerNavTemplate, 'xxxid', `${origin.id}`, '', '', '', '')
-           this.view.mainPage(markedMiniature, origin, markedfooterNav, layout)
+           let markedMiniature = this.mark(miniatureTemplate, ['xxxid', `${origin.id}`], ['xxxtitle', `${origin.title}`])
+           let markedfooterNav = this.mark(footerNavTemplate, ['xxxid', `${origin.id}`])
+           this.view.mainPage(markedMiniature, origin, markedfooterNav)
          break
          case 'project-details':
-           let mobileDiv  = this.mark(screenShotTemplate, 'xxxurl',`${origin.url}`, 'layout', 'mobile', 'imgFile', `${origin.img.mobile}`)
-               mobileDiv  = that.mark(mobileDiv, 'color', `${origin.color}`, 'xxx', '108', 'yyy', '202')
-           let desktopDiv = this.mark(screenShotTemplate, 'xxxurl',`${origin.url}`, 'layout', 'desktop', 'imgFile', `${origin.img.desktop}`)
-               desktopDiv = that.mark(desktopDiv, 'color', `${origin.color}`, 'xxx', '512', 'yyy', '271')
-           let tabletDiv  = this.mark(screenShotTemplate, 'xxxurl',`${origin.url}`, 'layout', 'tablet', 'imgFile', `${origin.img.tablet}`)
-               tabletDiv  = that.mark(tabletDiv, 'color', `${origin.color}`, 'xxx', '234', 'yyy', '311')
+           let mobileDiv  = this.mark(screenShotTemplate, ['xxxurl',`${origin.url}`], ['layout', 'mobile'], ['imgFile', `${origin.img.mobile}`], ['color', `${origin.color}`], ['xxx', '108'], ['yyy', '202'])
+           let desktopDiv = this.mark(screenShotTemplate, ['xxxurl',`${origin.url}`], ['layout', 'desktop'], ['imgFile', `${origin.img.desktop}`], ['color', `${origin.color}`], ['xxx', '512'], ['yyy', '271'])
+           let tabletDiv  = this.mark(screenShotTemplate, ['xxxurl',`${origin.url}`], ['layout', 'tablet'], ['imgFile', `${origin.img.tablet}`], ['color', `${origin.color}`], ['xxx', '234'], ['yyy', '311'])
            this.view.transition(origin)
            // TIME OUT TO SYNCHRONIZE FADE IN
            setTimeout(function() {

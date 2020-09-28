@@ -85,7 +85,6 @@ class View {
    * @param {string} markedMiniature HTML template marked by model & rdy to print
    * @param {object} origin the project w/ properties to print on the page
    * @param {string} markedfooterNav HTML template marked by model & rdy to print
-   * @param {string} layout the type of layout to determine which miniature's background to display
    */
    mainPage(markedMiniature, origin, markedfooterNav) {
      let that = this

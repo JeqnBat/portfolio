@@ -139,6 +139,7 @@ class Controller {
             for (let i = 0; i < projects.length; i++) {
               that.model.press(projects[i])
             }
+            that.model.updateLang(projects)
             resolve('#PORTFOLIO clicked')
           }
       // MINIATURE CLICK

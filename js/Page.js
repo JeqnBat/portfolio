@@ -44,13 +44,13 @@ class Page {
   async init() {
     let that = this
     await this.setLanguage()
-    // uncomment to play intro
     await this.controller.delegate(this.projects)
     for (let i = 0; i < data.length; i++) {
       this.projects[i] = new Project(data[i].title, i+2, data[i].descr, data[i].skills, data[i].img, data[i].tech, data[i].date, data[i].color, data[i].resp, data[i].github, data[i].url)
       await this.model.press(this.projects[i])
     }
     this.model.updateLang(this.projects)
+    // MAKES MAIN PAGE CLICKABLE
     setTimeout(() => {
       that.model.view.print('remove', '#blocker')
     }, 1300)
