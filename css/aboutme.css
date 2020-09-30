@@ -4,7 +4,7 @@ ______________________________________________________ */
   opacity: 0;
   height: 100vh;
   width: 100vw;
-  padding: 5vw;
+  padding: 6vw;
   background-image: url('../Graphics/aboutme/aboutme.jpg');
   background-size: contain;
   background-repeat: no-repeat;
@@ -15,8 +15,9 @@ ______________________________________________________ */
   opacity: 1;
 }
 #about-me-title {
-  width: auto;
+  width: 80%;
   padding-bottom: 25px;
+  float: left;
 }
 #bio {
   font-family: "Roboto", sans-serif;
@@ -27,13 +28,11 @@ ______________________________________________________ */
 }
 #back-up {
   opacity: .5;
-  position: absolute;
-  right: 10vw;
-  top: 5vw;
   text-align: center;
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   transition: all .2s ease-in-out;
+  float: right;
 }
 #back-up img {
   transform: rotate(180deg);

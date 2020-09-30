@@ -17,7 +17,14 @@
  8. MEDIA QUERIES (media.css)
 
 */
-
+/* IMPORTS
+______________________________________________________ */
+@import url("homescreen.css");
+@import url("mainpage.css");
+@import url("detailspage.css");
+@import url("footer.css");
+@import url("aboutme.css");
+@import url("media.css");
 /* 1. HTML, BODY, FONTS & COLORS
 ______________________________________________________ */
 html, body {
@@ -67,6 +74,18 @@ h6 {
 #about-me-title span, #header span {
 	margin-left: 5px;
 }
+/* Vertical slider */
+#slider {
+	position: relative;
+	z-index: 1;
+	transition: transform 1s ease-in-out;
+}
+.slide-down {
+	transform: translate(0, -100vh);
+}
+.slide-down-2 {
+	transform: translate(0, -200vh);
+}
 /* Blank DIV to prevent user from clicking before animation finishes */
 #blocker {
 	opacity: 0;
@@ -80,6 +99,10 @@ ______________________________________________________ */
 .down {
 	-webkit-animation: down 1s ease-in-out;
 					animation: down 1s ease-in-out;
+}
+.up {
+	-webkit-animation: up 1s ease-in-out;
+					animation: up 1s ease-in-out;
 }
 .invisible {
 	opacity: 0;
@@ -114,20 +137,45 @@ ______________________________________________________ */
 }
 /* Down */
 @-webkit-keyframes down {
-  0% { margin-top: 115vh; opacity: 0; }
-	60% { margin-top: -3vh; }
-	75% { margin-top: 3vh; }
-	85% { margin-top: -1vh; }
-	95% { margin-top: 1vh; }
-  100% { margin-bottom: 0; opacity: 1;}
+  0% { transform: translate(0, 55vh); opacity: 0; }
+	50% { transform: translate(0, -3vh); }
+	60% { transform: translate(0, 3vh); }
+	70% { transform: translate(0, -1vh); }
+	80% { transform: translate(0, 1vh); }
+	85% { transform: translate(0, -0.5vh); }
+	90% { transform: translate(0, .5vh); }
+  100% { transform: translate(0, 0); opacity: 1;}
 }
 @keyframes down {
-	0% { margin-top: 115vh; opacity: 0; }
-	60% { margin-top: -3vh; }
-	75% { margin-top: 3vh; }
-	85% { margin-top: -1vh; }
-	95% { margin-top: 1vh; }
-  100% { margin-bottom: 0; opacity: 1;}
+	0% { transform: translate(0, 55vh); opacity: 0; }
+	50% { transform: translate(0, -3vh); }
+	60% { transform: translate(0, 3vh); }
+	70% { transform: translate(0, -1vh); }
+	80% { transform: translate(0, 1vh); }
+	85% { transform: translate(0, -0.5vh); }
+	90% { transform: translate(0, .5vh); }
+  100% { transform: translate(0, 0); opacity: 1;}
+}
+/* Up */
+@-webkit-keyframes up {
+	0% { transform: translate(0, -55vh); opacity: 0; }
+	50% { transform: translate(0, 3vh); }
+	60% { transform: translate(0, -3vh); }
+	70% { transform: translate(0, 1vh); }
+	80% { transform: translate(0, -1vh); }
+	85% { transform: translate(0, .5vh); }
+	90% { transform: translate(0, -0.5vh); }
+  100% { transform: translate(0, 0); opacity: 1;}
+}
+@keyframes up {
+	0% { transform: translate(0, -55vh); opacity: 0; }
+	50% { transform: translate(0, 3vh); }
+	60% { transform: translate(0, -3vh); }
+	70% { transform: translate(0, 1vh); }
+	80% { transform: translate(0, -1vh); }
+	85% { transform: translate(0, .5vh); }
+	90% { transform: translate(0, -0.5vh); }
+  100% { transform: translate(0, 0); opacity: 1;}
 }
 /* Fade-in */
 @-webkit-keyframes fade-in {

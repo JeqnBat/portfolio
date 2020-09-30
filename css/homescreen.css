@@ -7,11 +7,8 @@ ______________________________________________________ */
 	width: 100%;
 	z-index: 10;
 	margin-top: 0;
-	-webkit-transition: margin .9s ease-in-out .1s;
-					transition: margin .9s ease-in-out .1s;
-}
-.slide-up {
-	margin-top: -100vh!important;
+	-webkit-transition: transform .9s ease-in-out .1s;
+					transition: transform .9s ease-in-out .1s;
 }
 /* Big centered title */
 .title {

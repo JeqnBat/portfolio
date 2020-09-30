@@ -3,8 +3,8 @@ ______________________________________________________ */
 #home {
 	height: 100vh;
 	width: 100vw;
-	-webkit-transition: margin .9s ease-in-out .1s;
-					transition: margin .9s ease-in-out .1s;
+	-webkit-transition: transform .9s ease-in-out .1s;
+					transition: transform .9s ease-in-out .1s;
 }
 #header {
 	height: 15vh;
@@ -128,7 +128,7 @@ ______________________________________________________ */
 }
 /* Miniature over screen */
 .over-screen {
-	margin-top: -56vh;
+	transform: translate(0, -56vh);
 	font-family: "Courier New bolder", Courier, monospace;
 	font-size: 6rem;
 	text-align: center;
@@ -140,14 +140,14 @@ ______________________________________________________ */
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	-webkit-transition: margin-top .3s ease-in-out .15s;
-					transition: margin-top .3s ease-in-out .15s;
+	-webkit-transition: transform .3s ease-in-out .15s;
+					transition: transform .3s ease-in-out .15s;
 }
 /* CSS hover */
 .miniature:hover .over-screen {
-	margin-top: 0;
+	transform: translate(0, 0);
 }
 /* JS hover */
 .over-screen.slide-down {
-	margin-top: 0;
+	transform: translate(0, 0);
 }

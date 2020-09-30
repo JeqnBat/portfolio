@@ -198,6 +198,17 @@ FROM 1210 to 1310 - PX WIDE */
   #tablet .block-mirror {
     max-width: 180px;
   }
+  /* Footer */
+  #project-details-menu {
+    height: 6vh;
+  }
+  #footer-nav {
+    height: 8vh;
+  }
+  /* About me button & page */
+  #bio {
+    font-size: 1.1rem;
+  }
 }
 /* DESKTOP _
 FROM 1110 to 1209 - PX WIDE */
@@ -239,6 +250,10 @@ FROM 1110 to 1209 - PX WIDE */
   #skills ul {
     font-size: .9rem;
   }
+  /* About me button & page */
+  #bio {
+    font-size: 1.05rem;
+  }
 }
 /* DESKTOP _
 FROM 990 to 1109 - PX WIDE */
@@ -279,6 +294,10 @@ FROM 990 to 1109 - PX WIDE */
   }
   #skills ul {
     font-size: .9rem;
+  }
+  /* About me button & page */
+  #bio {
+    font-size: 1rem;
   }
 }
 /* TABLET _
