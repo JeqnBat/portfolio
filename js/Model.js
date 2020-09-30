@@ -57,7 +57,7 @@ class Model {
      }
      return y
    }
-// SWITCH LANGUAGE ________________________________________ */
+// LANGUAGE SWITCH ________________________________________ */
   /**
    * <b>DESCR:</b><br>
    * Selects all the DOM elements containing a "lang" item
@@ -234,7 +234,7 @@ class Model {
   transition(origin, type) {
     switch(type) {
       case 'to-main-page':
-        this.view.updateClass('#home-screen', 'add', 'slide-up')
+        this.view.updateClass('#slider', 'add', 'slide-down')
         break
       case 'to-project-details':
         this.view.toProjectDetails(origin)
@@ -245,25 +245,11 @@ class Model {
         pageStatus = 'main-page'
         break
       case 'to-about-me':
-        let langSwitch = $('#header span')
-        this.view.print('remove', langSwitch)
-        this.view.print('div', '#about-me-title', langSwitch)
-        this.view.updateClass('#home', 'add', 'slide-up')
-        this.view.updateClass('#about-me-details', 'add', 'appears')
-        this.view.print('div', '#about-me-details', bioTemplate)
-        this.view.print('text', '#bio', `${lang == 'fr' ? bio.FR : bio.EN}`)
-        this.view.print('div', '#about-me-details', contactMeTemplate)
-        this.view.print('text', '#contact-me a', `${lang == 'fr' ? contactMe.FR : contactMe.EN}`)
+        this.view.toAboutMe()
         pageStatus = 'about-me'
         break
       case 'back-up':
-        let langSwitch2 = $('#about-me-title span')
-        this.view.print('remove', langSwitch2)
-        this.view.updateClass('#home', 'remove', 'slide-up')
-        this.view.updateClass('#about-me-details', 'remove', 'appears')
-        this.view.print('remove', '#bio')
-        this.view.print('remove', '#contact-me')
-        this.view.print('div', '.w-75', langSwitch2)
+        this.view.backFromAboutMe()
         pageStatus = 'main-page'
         break
     }

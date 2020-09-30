@@ -230,6 +230,7 @@ class View {
       that.print('remove', '#project-title')
       that.print('remove', '#left')
       that.print('remove', '#right')
+      that.updateClass('#about-me', 'edit', 'visibility', 'hidden')
     }, 200)
   }
   backToMainPage() {
@@ -242,6 +243,27 @@ class View {
     this.print('remove', '#right')
     this.updateClass('#colored-bg', 'edit', 'background-color', '')
     this.updateClass('#colored-bg', 'remove', 'slide-left')
+    this.updateClass('#about-me', 'edit', 'visibility', 'visible')
     this.projectDescription()
+  }
+  toAboutMe() {
+    let langSwitch = $('#header span')
+    this.print('remove', langSwitch)
+    this.print('div', '#about-me-title', langSwitch)
+    this.updateClass('#slider', 'add', 'slide-down-2')
+    this.updateClass('#about-me-details', 'add', 'appears')
+    this.print('div', '#about-me-details', bioTemplate)
+    this.print('text', '#bio', `${lang == 'fr' ? bio.FR : bio.EN}`)
+    this.print('div', '#about-me-details', contactMeTemplate)
+    this.print('text', '#contact-me a', `${lang == 'fr' ? contactMe.FR : contactMe.EN}`)
+  }
+  backFromAboutMe() {
+    let langSwitch2 = $('#about-me-title span')
+    this.print('remove', langSwitch2)
+    this.updateClass('#slider', 'remove', 'slide-down-2')
+    this.updateClass('#about-me-details', 'remove', 'appears')
+    this.print('remove', '#bio')
+    this.print('remove', '#contact-me')
+    this.print('div', '.w-75', langSwitch2)
   }
 }

@@ -16,10 +16,11 @@ class Controller {
   * Slides up the home screen outside the viewport
   *
   * @method
+  * @param {object} project the project's instance
   */
-  titleClick(origin) {
+  titleClick(project) {
     pageStatus = 'main-page'
-    this.model.transition(origin, 'to-main-page')
+    this.model.transition(project, 'to-main-page')
   }
 // #PORTFOLIO TOP LEFT LOGO CLICK _________________________ */
  /**
@@ -28,9 +29,10 @@ class Controller {
   * "HOME" button.
   *
   * @method
+  * @param {object} project the project's instance
   */
-  portfolioClick(origin) {
-    this.model.transition(origin, 'back-to-main-page')
+  portfolioClick(project) {
+    this.model.transition(project, 'back-to-main-page')
   }
 // FR | ENGL CLICK ________________________________________ */
  /**
@@ -39,10 +41,10 @@ class Controller {
   * Uses model.switchtTo(lang, project)
   *
   * @method
-  * @param {object} origin one particular project w/ all its properties
+  * @param {object} project the project's instance
   */
-  langClick(origin) {
-    this.model.updateLang(origin)
+  langClick(project) {
+    this.model.updateLang(project)
   }
 // SOCIAL ICONS NAV HOVER _________________________________ */
   /**

@@ -13,9 +13,9 @@
  * @param {array} tech links to icons representing technologies (css3, jQuery, WordPress, etc.)
  * @param {string} date project's validation date
  * @param {string} color the main DIV's background color
- * @param {resp} boolean Is reponsive, TRUE || is not responsive, FALSE
- * @param {github} string link to the project's repository on github
- * @param {url} string the url of the project
+ * @param {boolean} resp Is reponsive, TRUE || is not responsive, FALSE
+ * @param {string} github link to the project's repository on github
+ * @param {string} url the url of the project
  */
 class Project {
   constructor(title, number, descr, skills, img, tech, date, color, resp, github, url) {
