@@ -24,6 +24,29 @@ let validation = {
     'FR': `VALIDÉ LE`,
     'EN': `VALIDATED`
 }
+let bio = {
+    'FR': `Je suis né à Paris en 1983. Titulaire d'un baccalauréat littéraire en 2003, j'ai vécu de petits boulots et
+           d'aventures pendant plusieurs années au cours desquelles j'ai écrit trois romans. Le deuxième a été publié
+           en 2015 aux éditions Daphnis&Chloe. Successivement intérimaire, guide touristique et pianiste accompagnateur,
+           j'ai approfondi en parallèle ma connaissance du code et des outils numériques jusqu'à obtenir un diplôme de
+           développeur d'application Front-End (niveau 6) en 2020.<br><br>
+           Mes valeurs cardinales sont la loyauté, le courage, l'écoute et la bienveillance. J'aime aussi bien travailler
+           seul qu'en équipe et je finis toujours ce que j'entreprends.<br><br>
+           Si vous êtes arrivé jusqu'ici et que vous voulez en savoir plus :
+           `,
+    'EN': `I was born in Paris in 1983. Graduated in 2003 with a major in french literature, I lived off odd jobs &
+           adventures for a couple of years during which I wrote three novels. The second one got published in 2015.
+           Successively temp worker, tour guide & pianist, I managed to increase my knowledge of tech tools & coding
+           meanwhile, up to the point of getting a degree in Front-End development in 2020.<br><br>
+           My paramount values are loyalty, courage, attention to others & benevolence. I like to work on my own as much
+           as I do working with a team & I always finish what I start.<br><br>
+           If you've made it this far & would like to learn more :
+           `
+}
+let contactMe = {
+    'FR': `CONTACTEZ-MOI`,
+    'EN': `CONTACT ME`
+}
 // SET OF TECH ICONS ______________________________________ */
 let techIcons = {
   'bootstrap'   : `Graphics/techIcons/bootstrap.svg`,

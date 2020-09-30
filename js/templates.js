@@ -3,7 +3,7 @@
  * Stores all the HTML templates of the different pages.
  * Call these variables w/ the 'view' class to display them.
  */
-// MAIN TEMPLATES _________________________________________ */
+// MAIN PAGE TEMPLATES ____________________________________ */
 let miniatureTemplate = `<div class="miniature" item="OCP#xxxid">
                           <div class="over-screen xxxid">
                             <p>xxxid</p>
@@ -15,7 +15,7 @@ let miniatureTemplate = `<div class="miniature" item="OCP#xxxid">
                          </div>`
 
 let footerNavTemplate = '<div id="footerNavxxxid" class="footer-nav-item">🔳</div>'
-
+// PROJECT DETAILS TEMPLATES ______________________________ */
 let projectTitleTemplate = '<title id="project-title"></title>'
 
 let skillsTemplate = `<div id="skills">
@@ -59,3 +59,6 @@ let techIconTemplate = `<figure>
 
 let leftArrow = '<div id="left" class="arrow"></div>'
 let rightArrow = '<div id="right" class="arrow"></div>'
+// ABOUT ME TEMPLATES _____________________________________ */
+let bioTemplate = `<article id="bio" item="lang"></article>`
+let contactMeTemplate = '<div id="contact-me" item="lang"><a href="mailto:jbpellier@noos.fr"></a></div>'

@@ -17,9 +17,9 @@ class Controller {
   *
   * @method
   */
-  titleClick() {
+  titleClick(origin) {
     pageStatus = 'main-page'
-    this.model.view.updateClass('#home-screen', 'add', 'slide-up')
+    this.model.transition(origin, 'to-main-page')
   }
 // #PORTFOLIO TOP LEFT LOGO CLICK _________________________ */
  /**
@@ -29,9 +29,8 @@ class Controller {
   *
   * @method
   */
-  portfolioClick() {
-    pageStatus = 'main-page'
-    this.model.cleanDetails()
+  portfolioClick(origin) {
+    this.model.transition(origin, 'back-to-main-page')
   }
 // FR | ENGL CLICK ________________________________________ */
  /**
@@ -83,7 +82,7 @@ class Controller {
     this.model.view.updateClass(`.${project.id}`, 'remove', 'slide-down')
     this.model.looseFocus(project)
   }
-// MINIATURE & BOTTOM NAV ITEM CLICK ______________________ */
+// MINIATURE & BOTTOM NAV & ARROWS CLICK___________________ */
  /** <b>DESCR:</b><br>
   * Transitions from 'main-page' to 'project-details'
   * Appends new layout for #central-nav
@@ -95,13 +94,30 @@ class Controller {
   * @param {object} project the project w/ all its properties
   */
   miniatureClick(project) {
-    pageStatus = 'project-details'
-    this.model.press(project)
+    this.model.showProjectDetails(project)
   }
   bottomNavClick(project) {
-    pageStatus = 'project-details'
-    this.model.press(project)
-    this.model.activeBottomNav()
+    this.model.showProjectDetails(project)
+  }
+  rightArrowClick(project) {
+    this.model.showProjectDetails(project)
+  }
+  leftArrowClick(project) {
+    this.model.showProjectDetails(project)
+  }
+// MORE ABOUT ME CLICK ____________________________________ */
+ /**
+  * <b>DESCR:</b><br>
+  * Toggles the 'More about me' page
+  *
+  * @method
+  * @param {object} project
+  */
+  aboutMeClick(project) {
+    this.model.transition(project, 'to-about-me')
+  }
+  backUpClick(project) {
+    this.model.transition(project, 'back-up')
   }
 // GLOBAL EVENT DELEGATOR _________________________________ */
  /**
@@ -118,83 +134,89 @@ class Controller {
     return new Promise((resolve, reject) => {
 // CLICK EVENTS
     document.addEventListener('click', () => {
-      // TITLE CLICK
+    // TITLE CLICK
       if (event.target.matches('.title h1')) {
-        that.titleClick()
+        that.titleClick(projects)
         setTimeout(function() {
           resolve('logo clicked')
         }, 1000)
-      // LANG CLICK
+    // LANG CLICK
       } else if (event.target.matches('.fr-engl h3')) {
           lang = $(event.target.parentElement).attr('id')
           let singleProject = projects[that.model.identify('langDetails', pageStatus)]
           that.langClick(projects)
           resolve('language clicked')
-      // LOGO CLICK
+    // LOGO CLICK
       } else if (event.target.matches('.logo')) {
           if (pageStatus == 'main-page') {
             return
           } else {
-            that.portfolioClick()
+            that.portfolioClick(projects)
             for (let i = 0; i < projects.length; i++) {
               that.model.press(projects[i])
             }
             that.model.updateLang(projects)
             resolve('#PORTFOLIO clicked')
           }
-      // MINIATURE CLICK
+    // MINIATURE CLICK
       } else if (event.target.closest('.miniature')) {
           let miniature = event.target.closest('.miniature')
           let item = miniature.getAttribute('item')
           that.miniatureClick(projects[that.model.identify('miniature', item)])
           resolve('miniature clicked')
-      // FOOTER NAVIGATION CLICK
+    // FOOTER NAVIGATION CLICK
       } else if (event.target.matches('.footer-nav-item')) {
           let item = event.target.getAttribute('id')
           that.bottomNavClick(projects[that.model.identify('bottomNav', item)])
           resolve('bottomNav clicked')
-      // RIGHT ARROW CLICK
+    // RIGHT ARROW CLICK
       } else if (event.target.matches('#right')) {
           let targetNumber = parseInt(that.model.identify('langDetails', pageStatus), 10) - 1
           if (targetNumber >= projects.length) {
             that.model.view.print('remove', '#right')
             return
           } else {
-            // NOMMER UNE NOUVELLE METHODE POUR PAS CONFONDRE LES DEUX
-            that.bottomNavClick(projects[targetNumber])
+            that.rightArrowClick(projects[targetNumber])
           }
-          resolve('bottomNav clicked')
-      // LEFT ARROW CLICK
+          resolve('right arrow clicked')
+    // LEFT ARROW CLICK
       } else if (event.target.matches('#left')) {
           let targetNumber = parseInt(that.model.identify('langDetails', pageStatus), 10) - 3
           if (targetNumber <= -1) {
             that.model.view.print('remove', '#left')
             return
           } else {
-            // NOMMER UNE NOUVELLE METHODE POUR PAS CONFONDRE LES DEUX
-            that.bottomNavClick(projects[targetNumber])
+            that.leftArrowClick(projects[targetNumber])
           }
-          resolve('bottomNav clicked')
+          resolve('left arrow clicked')
+    // MORE ABOUT ME CLICK
+      } else if (event.target.matches('#about-me')) {
+          that.aboutMeClick(projects)
+          resolve('more about me clicked')
+    // BACK UP CLICK
+      } else if (event.target.matches('#back-up')) {
+          that.backUpClick(projects)
+          resolve('more about me clicked')
       } else {
         return
       }
     }, false)
 // MOUSE OVER EVENTS
       document.addEventListener('mouseenter', () => {
-        // MOUSE OVER LINKEDIN
+      // MOUSE OVER LINKEDIN
         if (event.target.matches('#linkedin img')) {
           that.socialIconsFocus('linkedin')
           resolve('linkedin hovered')
-        // MOUSE OVER GITHUB
+      // MOUSE OVER GITHUB
         } else if (event.target.matches('#github img')) {
             that.socialIconsFocus('github')
             resolve('github hovered')
-        // MOUSE OVER MINIATURE
+      // MOUSE OVER MINIATURE
         } else if (event.target.matches('.miniature')) {
             let item = event.target.getAttribute('item')
             that.miniatureMouseOver(projects[that.model.identify('miniature', item)])
             resolve('miniature hovered')
-        // MOUSE OVER FOOTER NAVIGATION
+      // MOUSE OVER FOOTER NAVIGATION
         } else if (event.target.matches('.footer-nav-item')) {
             let item = event.target.getAttribute('id')
             that.footerNavMouseOver(projects[that.model.identify('bottomNav', item)])
@@ -205,20 +227,20 @@ class Controller {
       }, true)
 // MOUSE OUT EVENTS
       document.addEventListener('mouseleave', () => {
-        // MOUSE OUT LINKEDIN
+      // MOUSE OUT LINKEDIN
         if (event.target.matches('#linkedin img')) {
           that.socialIconsUnfocus()
           resolve('linkedin mouseout')
-        // MOUSE OUT GITHUB
+      // MOUSE OUT GITHUB
         } else if (event.target.matches('#github img')) {
             that.socialIconsUnfocus()
             resolve('github mouseout')
-        // MOUSE OUT MINIATURE
+      // MOUSE OUT MINIATURE
         } else if (event.target.matches('.miniature')) {
             let item = event.target.getAttribute('item')
             that.miniatureMouseOut(projects[that.model.identify('miniature', item)])
             resolve('miniature mouseout')
-        // MOUSE OUT FOOTER NAVIGATION
+      // MOUSE OUT FOOTER NAVIGATION
         } else if (event.target.matches('.footer-nav-item')) {
             let item = event.target.getAttribute('id')
             that.footerNavMouseOut(projects[that.model.identify('bottomNav', item)])

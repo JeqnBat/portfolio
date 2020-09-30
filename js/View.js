@@ -96,6 +96,7 @@ class View {
        that.updateClass(`[item="OCP#${origin.id}"]`, 'add', 'appears')
        that.updateClass('#footer-nav', 'add', 'appears')
        that.updateClass('#central-nav', 'add', 'appears')
+       that.updateClass('.sidekick', 'add', 'appears')
      }, 30)
    }
    projectDescription() {
@@ -110,10 +111,14 @@ class View {
    activeFR() {
      this.updateClass(`#fr`, 'add', 'lang-button-active')
      this.updateClass('#en', 'remove', 'lang-button-active')
+     this.updateClass(`#fr2`, 'add', 'lang-button-active')
+     this.updateClass('#en2', 'remove', 'lang-button-active')
    }
    activeEN() {
      this.updateClass(`#en`, 'add', 'lang-button-active')
      this.updateClass('#fr', 'remove', 'lang-button-active')
+     this.updateClass(`#en2`, 'add', 'lang-button-active')
+     this.updateClass('#fr2', 'remove', 'lang-button-active')
    }
    OverScreenDown(origin) {
      this.updateClass('#colored-bg', 'edit', 'background-color', `${origin.color}`)
@@ -132,94 +137,93 @@ class View {
   * content coming from the projects objects.
   *
   * @method
-
   * @param {object} origin the project w/ properties to print on the page
   * @param {string} mobileDiv HTML template marked by model & rdy to print
   * @param {string} desktopDiv HTML template marked by model & rdy to print
   * @param {string} tabletDiv HTML template marked by model & rdy to print
   */
-   projectDetails(origin, mobileDiv, desktopDiv, tabletDiv) {
-     this.updateClass(`#footerNav${origin.id}`, 'remove', 'active')
-     this.print('text', '#central-nav', ' ')
-     this.print('text', '#descr', lang == 'fr' ? origin.descr.FR : origin.descr.EN)
+  projectDetails(origin, mobileDiv, desktopDiv, tabletDiv) {
+   this.updateClass(`#footerNav${origin.id}`, 'remove', 'active')
+   this.print('text', '#central-nav', ' ')
+   this.print('text', '#descr', lang == 'fr' ? origin.descr.FR : origin.descr.EN)
 
-     this.print('div', '#presentation', projectTitleTemplate)
-     this.print('text', '#project-title', origin.title)
+   this.print('div', '#presentation', projectTitleTemplate)
+   this.print('text', '#project-title', origin.title)
 
-     this.print('text', '#central-nav', skillsTemplate)
-     // Prints project's goals
-     for (let i = 0; i < origin.skills.FR.length; i++) {
-       this.print('div', '#skills-list', `<li>${lang == 'fr' ? origin.skills.FR[i] : origin.skills.EN[i]}</li>`)
-     }
-     this.print('divBefore', '#skills-title', lang == 'fr' ? skills.FR : skills.EN)
-     // screenshots DIV container
-     this.print('div', '#central-nav', '<div id="snapshots"></div>')
-     // mobile
-     this.print('div', '#snapshots', mobileDiv)
-     this.print('divBefore', `#mobile`, mobileWidthTemplate)
-     // desktop
-     this.print('div', '#snapshots', desktopDiv)
-     this.print('divBefore', `#desktop`, desktopWidthTemplate)
-     // tablet
-     this.print('div', '#snapshots', tabletDiv)
-     this.print('divBefore', `#tablet`, tabletWidthTemplate)
-     // bottom "details" nav
-     this.print('divBefore', '#footer', detailsMenuTemplate)
-     this.print('div', '#responsive', `${origin.resp == true ? checkBox.true : checkBox.false}`)
-     this.print('text', '#page-details-date', `<p>${lang == 'fr' ? validation.FR : validation.EN}</p><p>${lang == 'fr' ? origin.date.FR : origin.date.EN}</p>`)
-     this.findIcon(origin)
-     this.print('divBefore', '#projects-github', `<a href="${origin.git}" target="blank">GITHUB</h6>`)
-
-     this.print('div', '#home', leftArrow)
-     this.print('div', '#home', rightArrow)
-     // Removes it so it can be executed again later
-     let that = this
-     setTimeout(function() {
-       that.updateClass('#central-nav', 'remove', 'fade-out-in')
-       that.updateClass('#presentation', 'remove', 'fade-out-in')
-       that.updateClass('#footer', 'remove', 'fade-out-in')
-     }, 600)
+   this.print('text', '#central-nav', skillsTemplate)
+   // Prints project's goals
+   for (let i = 0; i < origin.skills.FR.length; i++) {
+     this.print('div', '#skills-list', `<li>${lang == 'fr' ? origin.skills.FR[i] : origin.skills.EN[i]}</li>`)
    }
+   this.print('divBefore', '#skills-title', lang == 'fr' ? skills.FR : skills.EN)
+   // screenshots DIV container
+   this.print('div', '#central-nav', '<div id="snapshots"></div>')
+   // mobile
+   this.print('div', '#snapshots', mobileDiv)
+   this.print('divBefore', `#mobile`, mobileWidthTemplate)
+   // desktop
+   this.print('div', '#snapshots', desktopDiv)
+   this.print('divBefore', `#desktop`, desktopWidthTemplate)
+   // tablet
+   this.print('div', '#snapshots', tabletDiv)
+   this.print('divBefore', `#tablet`, tabletWidthTemplate)
+   // bottom "details" nav
+   this.print('divBefore', '#footer', detailsMenuTemplate)
+   this.print('div', '#responsive', `${origin.resp == true ? checkBox.true : checkBox.false}`)
+   this.print('text', '#page-details-date', `<p>${lang == 'fr' ? validation.FR : validation.EN}</p><p>${lang == 'fr' ? origin.date.FR : origin.date.EN}</p>`)
+   this.findIcon(origin)
+   this.print('divBefore', '#projects-github', `<a href="${origin.git}" target="blank">GITHUB</h6>`)
+
+   this.print('div', '#home', leftArrow)
+   this.print('div', '#home', rightArrow)
+   // Removes it so it can be executed again later
+   let that = this
+   setTimeout(function() {
+     that.updateClass('#central-nav', 'remove', 'fade-out-in')
+     that.updateClass('#presentation', 'remove', 'fade-out-in')
+     that.updateClass('#footer', 'remove', 'fade-out-in')
+   }, 600)
+  }
 // FIND & PRINT PROJECT'S SPECIFIC TECH ICONS _____________ */
-   /**
-    * <b>DESCR:</b><br>
-    * Compares the 'techIcons' object keys w/ the project's 'tech'
-    * array values.
-    * Prints one icon if a match is found.
-    *
-    * @method
-    * @param {origin} object the project's object w/ all its properties
-    */
-   findIcon(origin) {
-     let techIconsNames = Object.keys(techIcons)
-
-     for (let i = 0; i < origin.tech.length; i++) {
-       techIconsNames.forEach(element => {
-         if (origin.tech[i] == element) {
-           let markedTemplate = techIconTemplate
-                                .replace(/xxxURL/g, `${techIcons[element]}`)
-                                .replace(/xxx/g, `${origin.tech[i]}`)
-           this.print('div', '#tech', markedTemplate)
-         }
-       })
-     }
-   }
-// TRANSITION BETWEEN PROJECT DETAILS _____________________ */
   /**
    * <b>DESCR:</b><br>
-   * Smoothly handles the DOM in transition between 2 PROJECTS
-   * print.
+   * Compares the 'techIcons' object keys w/ the project's 'tech'
+   * array values.
+   * Prints one icon if a match is found.
    *
    * @method
-   * @param {object} origin the project's class, necessary to update BG
+   * @param {origin} object the project's object w/ all its properties
    */
-  transition(origin) {
+  findIcon(origin) {
+   let techIconsNames = Object.keys(techIcons)
+
+   for (let i = 0; i < origin.tech.length; i++) {
+     techIconsNames.forEach(element => {
+       if (origin.tech[i] == element) {
+         let markedTemplate = techIconTemplate
+                              .replace(/xxxURL/g, `${techIcons[element]}`)
+                              .replace(/xxx/g, `${origin.tech[i]}`)
+         this.print('div', '#tech', markedTemplate)
+       }
+     })
+   }
+  }
+// TRANSITIONS ____________________________________________ */
+ /**
+  * <b>DESCR:</b><br>
+  * Updates DOM elements to transition from one page to another
+  *
+  * @method
+  * @param {object} origin the project's class w/ all its properties
+  */
+  toProjectDetails(origin) {
     let that = this
     this.updateClass('#central-nav', 'add', 'fade-out-in')
     this.updateClass('#presentation', 'add', 'fade-out-in')
     this.updateClass('#project-title', 'add', 'fade-out-in')
     this.updateClass('#project-details-menu', 'add', 'fade-out-in')
     this.updateClass('#colored-bg', 'edit', 'background-color', `${origin.color}`)
+    this.updateClass('#about-me', 'remove', 'appears')
     setTimeout(function() {
       that.print('remove', '#project-details-menu')
       that.print('remove', '#description')
@@ -228,5 +232,16 @@ class View {
       that.print('remove', '#right')
     }, 200)
   }
-
+  backToMainPage() {
+    this.print('text', '#description', ' ')
+    this.print('text', '#central-nav', ' ')
+    this.print('text', '#footer-nav', ' ')
+    this.print('remove', '#project-title')
+    this.print('remove', '#project-details-menu')
+    this.print('remove', '#left')
+    this.print('remove', '#right')
+    this.updateClass('#colored-bg', 'edit', 'background-color', '')
+    this.updateClass('#colored-bg', 'remove', 'slide-left')
+    this.projectDescription()
+  }
 }

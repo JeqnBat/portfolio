@@ -27,15 +27,15 @@ class Model {
        case 'miniature':
          let miniatureNumber = item.substring(4) - 2
          return miniatureNumber
-       break
+         break
        case 'bottomNav':
          let bottomNavNumber = item.substring(9) - 2
          return bottomNavNumber
-       break
+         break
        case 'langDetails':
          let projectNumber = item.substring(15)
          return projectNumber
-       break
+         break
      }
    }
 // TEMPLATE MARKER ________________________________________ */
@@ -69,7 +69,6 @@ class Model {
    */
   updateLang(origin) {
     let selector
-    let index = parseInt(this.identify('langDetails', pageStatus), 10) - 2
 
     if (pageStatus == 'main-page') {
       selector = $(document).find(`[item=lang]`)
@@ -77,33 +76,46 @@ class Model {
        switch (selector[i].id) {
         case 'descr':
           this.view.projectDescription(origin)
-        break
+          break
         case `val${i}`:
           this.view.validationDate(origin)
-        break
+          break
        }
      }
    } else if (pageStatus == `project-details${this.identify('langDetails', pageStatus)}`) {
+     let index = parseInt(this.identify('langDetails', pageStatus), 10) - 2
      selector = $(document).find(`[item=lang]`)
      for (let i = 0; i < selector.length; i++) {
        switch (selector[i].id) {
          case 'descr':
            this.view.print('text', '#descr', lang == 'fr' ? origin[index].descr.FR : origin[index].descr.EN)
-         break
+           break
          case 'skills-list':
            this.view.print('text', '#skills-list', ' ')
            for (let i = 0; i < origin[index].skills.FR.length; i++) {
              this.view.print('div', '#skills-list', `<li>${lang == 'fr' ? origin[index].skills.FR[i] : origin[index].skills.EN[i]}</li>`)
            }
-         break
+           break
          case 'page-details-date':
            this.view.print('text', '#page-details-date', `<p>${lang == 'fr' ? validation.FR : validation.EN}</p><p>${lang == 'fr' ? origin[index].date.FR : origin[index].date.EN}</p>`)
-         break
+           break
          case 'skills-title':
            this.view.print('text', '#skills-title', lang == 'fr' ? skills.FR : skills.EN)
-         break
+           break
        }
      }
+   } else if (pageStatus == 'about-me') {
+     selector = $(document).find(`[item=lang]`)
+     for (let i = 0; i < selector.length; i++) {
+      switch (selector[i].id) {
+       case 'bio':
+        this.view.print('text', '#bio', `${lang == 'fr' ? bio.FR : bio.EN}`)
+        break
+       case 'contact-me':
+        this.view.print('text', '#contact-me a', `${lang == 'fr' ? contactMe.FR : contactMe.EN}`)
+        break
+      }
+    }
    }
    // NAV BUTTONS
    switch (lang) {
@@ -136,18 +148,17 @@ class Model {
            let markedMiniature = this.mark(miniatureTemplate, ['xxxid', `${origin.id}`], ['xxxtitle', `${origin.title}`])
            let markedfooterNav = this.mark(footerNavTemplate, ['xxxid', `${origin.id}`])
            this.view.mainPage(markedMiniature, origin, markedfooterNav)
-         break
+           break
          case 'project-details':
            let mobileDiv  = this.mark(screenShotTemplate, ['xxxurl',`${origin.url}`], ['layout', 'mobile'], ['imgFile', `${origin.img.mobile}`], ['color', `${origin.color}`], ['xxx', '108'], ['yyy', '202'])
            let desktopDiv = this.mark(screenShotTemplate, ['xxxurl',`${origin.url}`], ['layout', 'desktop'], ['imgFile', `${origin.img.desktop}`], ['color', `${origin.color}`], ['xxx', '512'], ['yyy', '271'])
            let tabletDiv  = this.mark(screenShotTemplate, ['xxxurl',`${origin.url}`], ['layout', 'tablet'], ['imgFile', `${origin.img.tablet}`], ['color', `${origin.color}`], ['xxx', '234'], ['yyy', '311'])
-           this.view.transition(origin)
            // TIME OUT TO SYNCHRONIZE FADE IN
            setTimeout(function() {
              that.view.projectDetails(origin, mobileDiv, desktopDiv, tabletDiv)
            }, 300)
            pageStatus = `project-details${origin.id}`
-         break
+           break
        }
        // HOME PAGE MINIATURE PRINT DELAY IN ms
        setTimeout(function () {
@@ -169,20 +180,20 @@ class Model {
     switch(pageStatus) {
       case 'main-page':
         this.view.OverScreenDown(origin)
-      break
+        break
       case `page-details${this.identify('langDetails', pageStatus)}`:
         return
-      break
+        break
     }
   }
   looseFocus(origin) {
     switch(pageStatus) {
       case 'main-page':
         this.view.OverScreenUp(origin)
-      break
+        break
       case `page-details${this.identify('langDetails', pageStatus)}`:
         return
-      break
+        break
     }
   }
 // DEAL W/ BOTTOM NAV CLICK _______________________________ */
@@ -197,26 +208,64 @@ class Model {
     let x = parseInt(this.identify('langDetails', pageStatus), 10)
     this.view.updateClass(`#footerNav${x}`, 'add', 'current')
    }
-// CLEAN 'PROJECT'S DETAILS' PAGE _________________________ */
+// SHOW PROJECT'S DETAILS _________________________________ */
+ /**
+  * <b>DESCR:</b><br>
+  * Prints one project details on the full page.
+  *
+  * @method
+  * @param {object} origin the project's class w/ all its properties
+  */
+  showProjectDetails(origin) {
+    this.transition(origin, 'to-project-details')
+    this.press(origin)
+    this.activeBottomNav()
+  }
+// TRANSITION BETWEEN PAGES _______________________________ */
   /**
    * <b>DESCR:</b><br>
-   * Cleans main DIV from their content in order to prepare the DOM
-   * for a new major print.
-   * Updates 'Page status' to 'main-page'
+   * Smoothly handles the DOM in transition between 2 PAGES
+   * print.
    *
    * @method
+   * @param {object} origin the project's class, necessary to update BG
+   * @param {string} type the type of transition
    */
-   cleanDetails() {
-     this.view.print('text', '#description', ' ')
-     this.view.print('text', '#central-nav', ' ')
-     this.view.print('text', '#footer-nav', ' ')
-     this.view.print('remove', '#project-title')
-     this.view.print('remove', '#project-details-menu')
-     this.view.print('remove', '#left')
-     this.view.print('remove', '#right')
-     this.view.updateClass('#colored-bg', 'edit', 'background-color', '')
-     this.view.updateClass('#colored-bg', 'remove', 'slide-left')
-     this.view.projectDescription()
-     pageStatus = 'main-page'
-   }
+  transition(origin, type) {
+    switch(type) {
+      case 'to-main-page':
+        this.view.updateClass('#home-screen', 'add', 'slide-up')
+        break
+      case 'to-project-details':
+        this.view.toProjectDetails(origin)
+        pageStatus = 'project-details'
+        break
+      case 'back-to-main-page':
+        this.view.backToMainPage(origin)
+        pageStatus = 'main-page'
+        break
+      case 'to-about-me':
+        let langSwitch = $('#header span')
+        this.view.print('remove', langSwitch)
+        this.view.print('div', '#about-me-title', langSwitch)
+        this.view.updateClass('#home', 'add', 'slide-up')
+        this.view.updateClass('#about-me-details', 'add', 'appears')
+        this.view.print('div', '#about-me-details', bioTemplate)
+        this.view.print('text', '#bio', `${lang == 'fr' ? bio.FR : bio.EN}`)
+        this.view.print('div', '#about-me-details', contactMeTemplate)
+        this.view.print('text', '#contact-me a', `${lang == 'fr' ? contactMe.FR : contactMe.EN}`)
+        pageStatus = 'about-me'
+        break
+      case 'back-up':
+        let langSwitch2 = $('#about-me-title span')
+        this.view.print('remove', langSwitch2)
+        this.view.updateClass('#home', 'remove', 'slide-up')
+        this.view.updateClass('#about-me-details', 'remove', 'appears')
+        this.view.print('remove', '#bio')
+        this.view.print('remove', '#contact-me')
+        this.view.print('div', '.w-75', langSwitch2)
+        pageStatus = 'main-page'
+        break
+    }
+  }
 }
