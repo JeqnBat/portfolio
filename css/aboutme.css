@@ -23,16 +23,18 @@ ______________________________________________________ */
   font-family: "Roboto", sans-serif;
   font-size: 1.2rem;
   text-align: justify;
+  text-shadow: 0px 0px 1px rgb(81,81,81, .3);
   padding-left: 25px;
   width: 500px;
 }
 #back-up {
-  opacity: .5;
+  opacity: .7;
   text-align: center;
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   transition: all .2s ease-in-out;
   float: right;
+  padding-right: 90px;
 }
 #back-up img {
   transform: rotate(180deg);
@@ -40,7 +42,7 @@ ______________________________________________________ */
   transition: all .2s ease-in-out;
 }
 #back-up:hover {
-  opacity: .9;
+  opacity: 1;
 }
 #back-up:hover img {
   transform: rotate(180deg) translate(0, 10px);

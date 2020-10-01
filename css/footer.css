@@ -35,7 +35,7 @@ ______________________________________________________ */
 	color: rgb(34, 32, 29, .4);
 }
 .footer-nav-item.current {
-	color: rgb(34, 32, 29, .3);
+	color: rgb(34, 32, 29, .4);
 }
 .footer-nav-item::after {
   opacity: 0;
@@ -48,27 +48,27 @@ ______________________________________________________ */
   opacity: 1;
 }
 .sidekick {
-	width: 165px;
+	width: 250px;
 }
 #about-me {
 	opacity: 0;
 	font-family: "Roboto", sans-serif;
 	text-transform: uppercase;
 	text-align: right;
-  padding-right: 15px;
+  padding-right: 100px;
 	margin-bottom: 10px;
 	cursor: pointer;
 	transition: all .2s ease-in-out;
 }
 #about-me.appears {
-	opacity: .5;
+	opacity: .7;
 }
 #about-me img {
 	margin-left: 10px;
 	transition: all .2s ease-in-out;
 }
 #about-me:hover {
-	opacity: .9;
+	opacity: 1;
 }
 #about-me:hover img {
   transform: translate(0, 8px);
@@ -79,7 +79,7 @@ ______________________________________________________ */
 	z-index: 0;
 	top: 0;
 	right: -100vw;
-	transition: all .8s ease-in-out .1s;
+	transition: all 1s ease-in-out .2s;
 }
 #colored-bg.slide-left {
 	right: 0;

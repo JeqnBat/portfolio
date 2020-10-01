@@ -511,12 +511,12 @@ FROM 540 to 768 - PX WIDE */
 FROM 300 to 540 - PX WIDE */
 @media only screen and (max-width: 540px) and (orientation: portrait) {
   html, body {
-    background-image: url('../Graphics/BeanResponsive.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+    background-image: url('../Graphics/BeanResponsive.jpg')!important;
+    background-repeat: no-repeat!important;
+    background-size: cover!important;
+    background-position: center!important;
   }
-  #home-screen, #home {
+  #home-screen, #home, #slider {
     display: none!important;
   }
 }

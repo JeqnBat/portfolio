@@ -86,7 +86,7 @@ ______________________________________________________ */
 	border-radius: 60px;
   width: 60px;
   height: 60px;
-  opacity: .05;
+  opacity: .15;
 	top: 46vh;
 	cursor: pointer;
 }
@@ -97,7 +97,7 @@ ______________________________________________________ */
 }
 #left:hover {
 	left: .5vw;
-	opacity: .4;
+	opacity: .7;
 }
 #left::after {
   position: absolute;
@@ -118,7 +118,7 @@ ______________________________________________________ */
 }
 #right:hover{
 	right: .5vw;
-	opacity: .4;
+	opacity: .7;
 }
 #right::after {
   position: absolute;

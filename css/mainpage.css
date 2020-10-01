@@ -115,7 +115,7 @@ ______________________________________________________ */
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;
-	box-shadow: 0px 0px 15px rgb(81,81,81, .7);
+	box-shadow: 0px 0px 15px rgb(81,81,81, .5);
 	cursor: pointer;
 	-webkit-transition: all .6s ease-in-out;
 					transition: all .6s ease-in-out;

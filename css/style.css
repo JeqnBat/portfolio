@@ -80,10 +80,10 @@ h6 {
 	z-index: 1;
 	transition: transform 1s ease-in-out;
 }
-.slide-down {
+.slider-down {
 	transform: translate(0, -100vh);
 }
-.slide-down-2 {
+.slider-down-2 {
 	transform: translate(0, -200vh);
 }
 /* Blank DIV to prevent user from clicking before animation finishes */
