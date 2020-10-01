@@ -1,0 +1,169 @@
+/* 6. FOOTER
+______________________________________________________ */
+/* Main page */
+#footer {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	align-items: flex-end;
+	width: 90vw;
+	height: 14vh;
+	margin: 0;
+}
+#footer-nav {
+	display: flex;
+	opacity: 0;
+	height: 7vh;
+	transition: opacity .3s ease-in-out 2s;
+}
+#footer-nav.appears {
+	opacity: 1;
+}
+.footer-nav-item {
+	display: flex;
+	align-items: center;
+	position: relative;
+	font-size: .8rem;
+	letter-spacing: 1rem;
+	cursor: pointer;
+	transition: all .15s ease-in-out;
+}
+.footer-nav-item:hover {
+	color: rgb(34, 32, 29, .4);
+}
+.footer-nav-item.active {
+	color: rgb(34, 32, 29, .4);
+}
+.footer-nav-item.current {
+	color: rgb(34, 32, 29, .4);
+}
+.footer-nav-item::after {
+  opacity: 0;
+  position: absolute;
+  content: '🔲';
+  color: rgb(34, 32, 29, .4);
+	transition: all .15s ease-out;
+}
+.footer-nav-item.current::after {
+  opacity: 1;
+}
+.sidekick {
+	width: 250px;
+}
+#about-me {
+	opacity: 0;
+	font-family: "Roboto", sans-serif;
+	text-transform: uppercase;
+	text-align: right;
+  padding-right: 100px;
+	margin-bottom: 10px;
+	cursor: pointer;
+	transition: all .2s ease-in-out;
+}
+#about-me.appears {
+	opacity: .7;
+}
+#about-me img {
+	margin-left: 10px;
+	transition: all .2s ease-in-out;
+}
+#about-me:hover {
+	opacity: 1;
+}
+#about-me:hover img {
+  transform: translate(0, 8px);
+}
+/* Slider bg */
+#colored-bg {
+	position: absolute;
+	z-index: 0;
+	top: 0;
+	right: -100vw;
+	transition: all 1s ease-in-out .2s;
+}
+#colored-bg.slide-left {
+	right: 0;
+}
+/* Project's details page */
+#project-details-menu {
+  width: 90vw;
+	display: flex;
+	height: 7vh;
+	transition: all 1s ease-in-out .5s;
+}
+.bottom-menu {
+	display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+	text-transform: uppercase;
+}
+.bottom-menu p, a {
+	font-family: "Roboto", sans-serif;
+	font-size: 1.15rem;
+}
+.bottom-menu p {
+	margin: 0 20px 0 0;
+}
+#tech figure {
+	margin-bottom: -10px;
+}
+#tech figure img {
+	margin: 0 5px;
+	text-align: center;
+	transition: all .2s ease-in-out;
+}
+#tech figure img:hover {
+	margin-bottom: 10px;
+}
+#tech figure:hover figcaption {
+  opacity: 1;
+}
+#tech figcaption {
+	background-color: rgb(34, 32, 29, .4);
+	font-size: .65rem;
+	text-transform: uppercase;
+	text-align: center;
+  opacity: 0;
+	transition: all .2s ease-in-out;
+}
+/* Check box completed */
+.check-box {
+  position: relative;
+  height: 30px;
+  width: 30px;
+  border: 2px solid white;
+  border-radius: 4px;
+}
+.check-box.true::after {
+  position: absolute;
+  content: 'L';
+  transform: rotateZ(45deg) rotateY(180deg);
+  font-size: 4rem;
+  color: #00ff70;
+  right: -10px;
+  bottom: -20px;
+  transition: all .2s ease-out;
+}
+.check-box:hover::after {
+  transform: rotateZ(45deg) rotateY(180deg) rotateX(30deg) scale(1.2);
+}
+#projects-github {
+	width: 40%;
+	margin: 0;
+}
+#projects-github a {
+	color: white;
+	transition: all .2s ease-in-out;
+}
+#projects-github a:hover {
+	color: #f05133;
+	text-decoration: none;
+}
+#projects-github img {
+	margin: 0 5px;
+	transition: all .5s ease-in-out .1s;
+}
+#projects-github:hover img {
+	transform: rotateZ(360deg);
+}

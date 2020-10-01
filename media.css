@@ -1,0 +1,522 @@
+/* 8. MEDIA QUERIES
+______________________________________________________ */
+/* DESKTOP _
+OVER 2200 PX WIDE */
+@media only screen and (min-width: 2200px) {
+  #header {
+    width: 57vw;
+  }
+  #presentation {
+    width: 56vw;
+  }
+  #central-nav {
+    width: 54vw;
+    height: 35vh;
+  }
+  .miniature {
+    width: 7.5vw!important;
+  }
+  .border-line {
+    width: 25vw;
+  }
+  #footer {
+    width: 57vw;
+    height: 20vh;
+  }
+  #right {
+    right: 17vw;
+  }
+  #right:hover {
+    right: 16.5vw;
+  }
+  #left {
+    left: 17vw;
+  }
+  #left:hover {
+    left: 16.5vw;
+  }
+  #project-details-menu {
+    width: 57vw;
+  }
+  /* About me page */
+  .sidekick {
+    width: 200px;
+  }
+  #about-me {
+    padding-right: 50px;
+  }
+  #about-me-details {
+    padding-left: 20vw;
+    padding-right: 20vw;
+  }
+  #back-up {
+    right: 25vw;
+  }
+}
+/* DESKTOP _
+FROM 1850 to 2199 - PX WIDE */
+@media only screen and (min-width: 1850px) and (max-width: 2199px) {
+  #header {
+    width: 67vw;
+  }
+  #presentation {
+    width: 65vw;
+  }
+  #central-nav {
+    width: 64vw;
+    height: 40vh;
+  }
+  .miniature {
+    width: 9vw!important;
+  }
+  .border-line {
+    width: 27vw;
+  }
+  #footer {
+    width: 67vw;
+    height: 14vh;
+  }
+  #right {
+    right: 12vw;
+  }
+  #right:hover {
+    right: 11.5vw;
+  }
+  #left {
+    left: 12vw;
+  }
+  #left:hover {
+    left: 11.5vw;
+  }
+  #project-details-menu {
+    width: 67vw;
+  }
+  /* About me page */
+  .sidekick {
+    width: 200px;
+  }
+  #about-me {
+    padding-right: 50px;
+  }
+  #about-me-details {
+    padding-left: 20vw;
+    padding-right: 20vw;
+  }
+  #back-up {
+    right: 20vw;
+  }
+}
+/* DESKTOP _
+FROM 1600 to 1849 - PX WIDE */
+@media only screen and (min-width: 1600px) and (max-width: 1849px) {
+  #header {
+    width: 75vw;
+  }
+  #presentation {
+    width: 71vw;
+  }
+  #central-nav {
+    width: 74vw;
+    height: 45vh;
+  }
+  .miniature {
+    width: 10vw!important;
+  }
+  .border-line {
+    width: 29vw;
+  }
+  #footer {
+    width: 74vw;
+  }
+  #right {
+    right: 8vw;
+  }
+  #right:hover {
+    right: 7.5vw;
+  }
+  #left {
+    left: 8vw;
+  }
+  #left:hover {
+    left: 7.5vw;
+  }
+  #project-details-menu {
+    width: 74vw;
+  }
+  /* About me page */
+  .sidekick {
+    width: 200px;
+  }
+  #about-me {
+    padding-right: 50px;
+  }
+  #about-me-details {
+    padding-left: 15vw;
+    padding-right: 15vw;
+  }
+  #back-up {
+    right: 16vw;
+  }
+}
+/* DESKTOP _
+FROM 1210 to 1310 - PX WIDE */
+@media only screen and (min-width: 1210px) and (max-width: 1310px) {
+  .content-font {
+    font-size: 1rem;
+  }
+  #project-title {
+    font-size: 3rem;
+  }
+  #skills-title img {
+    width: 60%;
+    height: auto;
+  }
+  .bottom-menu p, a {
+    font-size: 1rem;
+  }
+  #snapshots {
+    width: 50vw;
+  }
+  #mobile img {
+    height: 131px;
+    width: 70px;
+  }
+  #mobile .block-mirror {
+    max-width: 70px;
+  }
+  #desktop img {
+    height: 212px;
+    width: 400px;
+  }
+  #desktop .block-mirror {
+    max-width: 400px;
+  }
+  #tablet img {
+    height: 239px;
+    width: 180px;
+  }
+  #tablet .block-mirror {
+    max-width: 180px;
+  }
+  /* Footer */
+  #project-details-menu {
+    height: 6vh;
+  }
+  #footer-nav {
+    height: 8vh;
+  }
+  /* About me button & page */
+  #bio {
+    font-size: 1.1rem;
+  }
+}
+/* DESKTOP _
+FROM 1110 to 1209 - PX WIDE */
+@media only screen and (min-width: 1110px) and (max-width: 1209px) {
+  .content-font {
+    font-size: .9rem;
+  }
+  #project-title {
+    font-size: 3rem;
+  }
+  #skills-title img {
+    width: 50%;
+    height: auto;
+  }
+  .bottom-menu p, a {
+    font-size: .9rem;
+  }
+  #mobile img {
+    height: 120px;
+    width: 64px;
+  }
+  #mobile .block-mirror {
+    max-width: 64px;
+  }
+  #desktop img {
+    height: 200px;
+    width: 378px;
+  }
+  #desktop .block-mirror {
+    max-width: 378px;
+  }
+  #tablet img {
+    height: 220px;
+    width: 166px;
+  }
+  #tablet .block-mirror {
+    max-width: 166px;
+  }
+  #skills ul {
+    font-size: .9rem;
+  }
+  /* About me button & page */
+  #bio {
+    font-size: 1.05rem;
+  }
+}
+/* DESKTOP _
+FROM 990 to 1109 - PX WIDE */
+@media only screen and (min-width: 990px) and (max-width: 1109px) {
+  #mobile img {
+    height: 109px;
+    width: 58px;
+  }
+  #mobile .block-mirror {
+    max-width: 58px;
+  }
+  #desktop img {
+    height: 180px;
+    width: 340px;
+  }
+  #desktop .block-mirror {
+    max-width: 340px;
+  }
+  #tablet img {
+    height: 200px;
+    width: 150px;
+  }
+  #tablet .block-mirror {
+    max-width: 150px;
+  }
+  .content-font {
+    font-size: .9rem;
+  }
+  #project-title {
+    font-size: 3rem;
+  }
+  #skills-title img {
+    width: 50%;
+    height: auto;
+  }
+  .bottom-menu p, a {
+    font-size: .9rem;
+  }
+  #skills ul {
+    font-size: .9rem;
+  }
+  /* About me button & page */
+  #bio {
+    font-size: 1rem;
+  }
+}
+/* TABLET _
+FROM 768 to 1024 - PX WIDE */
+@media only screen and (max-width: 1024px) and (orientation: portrait) {
+  /* Home screen */
+  .title h1 {
+    font-size: 8rem;
+  }
+  /* Main page */
+  #home {
+    justify-content: center;
+  }
+  #header {
+    position: absolute;
+    top: 5vh;
+    height: auto;
+  }
+  #presentation {
+    height: auto;
+    flex-wrap: wrap;
+    position: absolute;
+    top: 15vh;
+  }
+  .border-line {
+    width: 100%;
+  }
+  .content-font {
+    font-size: 1.5rem;
+  }
+  #spacer {
+    height: 5vh;
+  }
+  #central-nav {
+    flex-wrap: wrap;
+    height: auto;
+    justify-content: center;
+    position: absolute;
+    top: 31vh;
+  }
+  .miniature {
+    width: 44vw;
+    height: 14.5vh;
+    margin: 1px;
+  }
+  /* Details page */
+  #project-title {
+    text-align: center;
+    width: 100%;
+    justify-content: center;
+    margin-top: 4vh;
+  }
+  #skills {
+    width: 100%;
+    padding: 0;
+  }
+  #skills ul {
+    font-size: 1.4rem;
+  }
+  #snapshots {
+  	height: auto;
+  	width: auto;
+  	transform: scale(1.2);
+    margin-top: 5vh;
+  }
+  .block {
+    margin: 0 1px;
+  }
+  #footer {
+    position: absolute;
+    top: 86vh;
+  }
+  #project-details-menu {
+    width: 98vw;
+    flex-wrap: nowrap;
+    align-content: center;
+  }
+  #project-details-menu p, a {
+    font-size: 1.2rem;
+    margin: 0 5px 0 0;
+  }
+  #project-details-menu img {
+    height: 40px;
+    width: auto;
+  }
+  .check-box, check-box::after {
+    height: 25px;
+    width: 25px;
+    margin-left: 10px;
+  }
+  .check-box.true::after {
+    font-size: 2.5rem;
+    right: -5px;
+    bottom: -12px;
+  }
+  #projects-github {
+    width: 50%;
+  }
+  #colored-bg {
+  	position: absolute;
+  	z-index: 0;
+  	top: 0;
+    right: 0!important;
+  	transition: all .8s ease-in-out .1s;
+  }
+}
+/* TABLET _
+FROM 540 to 768 - PX WIDE */
+@media only screen and (max-width: 768px) and (orientation: portrait) {
+  /* Home screen */
+  .title h1 {
+    font-size: 8rem;
+  }
+  /* Main page */
+  #home {
+    justify-content: center;
+  }
+  #header {
+    position: absolute;
+    top: 3vh;
+    height: auto;
+  }
+  #presentation {
+    height: auto;
+    flex-wrap: wrap;
+    position: absolute;
+    top: 11vh;
+  }
+  .border-line {
+    width: 100%;
+  }
+  .content-font {
+    font-size: 1.2rem;
+  }
+  #spacer {
+    height: 5vh;
+  }
+  #central-nav {
+    flex-wrap: wrap;
+    height: auto;
+    justify-content: center;
+    position: absolute;
+    top: 31vh;
+  }
+  .miniature {
+    width: 44vw;
+    height: 14.5vh;
+    margin: 1px;
+  }
+  /* Details page */
+  #project-title {
+    text-align: center;
+    width: 100%;
+    justify-content: center;
+  }
+  #skills {
+    width: 100%;
+    padding: 0;
+    margin-bottom: -5vh;
+  }
+  #snapshots {
+  	height: auto;
+  	width: auto;
+  	transform: scale(.8);
+    margin-top: -3vh;
+  }
+  .block {
+    margin: 0 1px;
+  }
+  #footer {
+    position: absolute;
+    top: 86vh;
+  }
+  #project-details-menu {
+    flex-wrap: wrap;
+    align-content: center;
+  }
+  #project-details-menu p, a {
+    font-size: .8rem;
+    margin: 0 5px 0 0;
+  }
+  #project-details-menu img {
+    height: 40px;
+    width: auto;
+  }
+  .check-box, check-box::after {
+    height: 25px;
+    width: 25px;
+    margin-left: 10px;
+  }
+  .check-box.true::after {
+    font-size: 2.5rem;
+    right: -5px;
+    bottom: -12px;
+  }
+  .bottom-menu {
+    width: 50%;
+  }
+  #projects-github {
+    width: 50%;
+  }
+  #colored-bg {
+  	position: absolute;
+  	z-index: 0;
+  	top: 0;
+    right: 0!important;
+  	transition: all .8s ease-in-out .1s;
+  }
+}
+/* MOBILE _
+FROM 300 to 540 - PX WIDE */
+@media only screen and (max-width: 540px) and (orientation: portrait) {
+  html, body {
+    background-image: url('../Graphics/BeanResponsive.jpg')!important;
+    background-repeat: no-repeat!important;
+    background-size: cover!important;
+    background-position: center!important;
+  }
+  #home-screen, #home, #slider {
+    display: none!important;
+  }
+}
