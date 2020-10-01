@@ -234,7 +234,8 @@ class Model {
   transition(origin, type) {
     switch(type) {
       case 'to-main-page':
-        this.view.updateClass('#slider', 'add', 'slide-down')
+        this.view.updateClass('#slider', 'add', 'slider-down')
+        pageStatus = 'main-page'
         break
       case 'to-project-details':
         this.view.toProjectDetails(origin)
@@ -251,6 +252,10 @@ class Model {
       case 'back-up':
         this.view.backFromAboutMe()
         pageStatus = 'main-page'
+        break
+      case 'back-to-title':
+        this.view.backToTitle()
+        pageStatus = 'home-logo'
         break
     }
   }

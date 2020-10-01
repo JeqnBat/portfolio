@@ -241,7 +241,6 @@ class View {
     this.print('remove', '#project-details-menu')
     this.print('remove', '#left')
     this.print('remove', '#right')
-    this.updateClass('#colored-bg', 'edit', 'background-color', '')
     this.updateClass('#colored-bg', 'remove', 'slide-left')
     this.updateClass('#about-me', 'edit', 'visibility', 'visible')
     this.projectDescription()
@@ -250,8 +249,9 @@ class View {
     let langSwitch = $('#header span')
     this.print('remove', langSwitch)
     this.print('div', '#about-me-title', langSwitch)
-    this.updateClass('#slider', 'add', 'slide-down-2')
+    this.updateClass('#slider', 'add', 'slider-down-2')
     this.updateClass('#about-me-details', 'add', 'appears')
+    this.updateClass('#colored-bg', 'remove', 'slide-left')
     this.print('div', '#about-me-details', bioTemplate)
     this.print('text', '#bio', `${lang == 'fr' ? bio.FR : bio.EN}`)
     this.print('div', '#about-me-details', contactMeTemplate)
@@ -260,10 +260,14 @@ class View {
   backFromAboutMe() {
     let langSwitch2 = $('#about-me-title span')
     this.print('remove', langSwitch2)
-    this.updateClass('#slider', 'remove', 'slide-down-2')
+    this.updateClass('#slider', 'remove', 'slider-down-2')
     this.updateClass('#about-me-details', 'remove', 'appears')
     this.print('remove', '#bio')
     this.print('remove', '#contact-me')
     this.print('div', '.w-75', langSwitch2)
+  }
+  backToTitle() {
+    this.updateClass('#slider', 'remove', 'slider-down')
+    this.updateClass('#colored-bg', 'remove', 'slide-left')
   }
 }

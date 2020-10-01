@@ -19,7 +19,6 @@ class Controller {
   * @param {object} project the project's instance
   */
   titleClick(project) {
-    pageStatus = 'main-page'
     this.model.transition(project, 'to-main-page')
   }
 // #PORTFOLIO TOP LEFT LOGO CLICK _________________________ */
@@ -113,13 +112,41 @@ class Controller {
   * Toggles the 'More about me' page
   *
   * @method
-  * @param {object} project
+  * @param {object} project the project w/ all its properties
   */
   aboutMeClick(project) {
     this.model.transition(project, 'to-about-me')
   }
   backUpClick(project) {
     this.model.transition(project, 'back-up')
+  }
+// MOUSE WHEEL OVER DOCUMENT ______________________________ */
+ /**
+  * <b>DESCR:</b><br>
+  * Scrolls up & down the page using the mouse wheel
+  *
+  * @method
+  * @param {object} project the project w/ all its properties
+  */
+  mouseWheelUp(project) {
+    if (pageStatus == 'home-logo') {
+      return
+    } else if (pageStatus == 'main-page') {
+      this.model.transition(project, 'back-to-title')
+    } else if (pageStatus == 'about-me') {
+      this.model.transition(project, 'back-up')
+    } else {
+      return
+    }
+  }
+  mouseWheelDown(project) {
+    if (pageStatus == 'home-logo') {
+      this.model.transition(project, 'to-main-page')
+    } else if (pageStatus == 'main-page') {
+      this.model.transition(project, 'to-about-me')
+    } else {
+      return
+    }
   }
 // GLOBAL EVENT DELEGATOR _________________________________ */
  /**
@@ -204,7 +231,7 @@ class Controller {
       }
     }, false)
 // MOUSE OVER EVENTS
-      document.addEventListener('mouseenter', () => {
+      document.body.addEventListener('mouseenter', () => {
       // MOUSE OVER LINKEDIN
         if (event.target.matches('#linkedin img')) {
           that.socialIconsFocus('linkedin')
@@ -228,7 +255,7 @@ class Controller {
         }
       }, true)
 // MOUSE OUT EVENTS
-      document.addEventListener('mouseleave', () => {
+      document.body.addEventListener('mouseleave', () => {
       // MOUSE OUT LINKEDIN
         if (event.target.matches('#linkedin img')) {
           that.socialIconsUnfocus()
@@ -251,6 +278,21 @@ class Controller {
           return
         }
       }, true)
+// MOUSE WHEEL EVENTS
+      document.addEventListener('wheel', () => {
+      // MOUSE WHEEL UP
+        if (event.deltaY < 0) {
+          that.mouseWheelUp(projects)
+          resolve('mouse wheel up')
+      // MOUSE WHEEL DOWN
+        } else if (event.deltaY > 0) {
+          that.mouseWheelDown(projects)
+          resolve('mouse wheel down')
+        } else {
+          return
+        }
+      })
+
     })
   }
 }
