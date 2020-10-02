@@ -78,11 +78,8 @@ ______________________________________________________ */
 	position: absolute;
 	z-index: 0;
 	top: 0;
-	right: -100vw;
-	transition: all 1s ease-in-out .2s;
-}
-#colored-bg.slide-left {
 	right: 0;
+	transition: all 1s ease-in-out .2s;
 }
 /* Project's details page */
 #project-details-menu {

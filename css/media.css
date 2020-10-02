@@ -214,7 +214,7 @@ FROM 1210 to 1310 - PX WIDE */
 FROM 1110 to 1209 - PX WIDE */
 @media only screen and (min-width: 1110px) and (max-width: 1209px) {
   .content-font {
-    font-size: .9rem;
+    font-size: .9rem!important;
   }
   #project-title {
     font-size: 3rem;
@@ -258,6 +258,9 @@ FROM 1110 to 1209 - PX WIDE */
 /* DESKTOP _
 FROM 990 to 1109 - PX WIDE */
 @media only screen and (min-width: 990px) and (max-width: 1109px) {
+  .content-font {
+    font-size: .9rem!important;
+  }
   #mobile img {
     height: 109px;
     width: 58px;
