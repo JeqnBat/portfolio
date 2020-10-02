@@ -122,12 +122,10 @@ class View {
    }
    OverScreenDown(origin) {
      this.updateClass('#colored-bg', 'edit', 'background-color', `${origin.color}`)
-     this.updateClass('#colored-bg', 'add', 'slide-left')
      this.updateClass(`#footerNav${origin.id}`, 'add', 'active')
    }
    OverScreenUp(origin) {
      this.updateClass('#colored-bg', 'edit', 'background-color', '')
-     this.updateClass('#colored-bg', 'remove', 'slide-left')
      this.updateClass(`#footerNav${origin.id}`, 'remove', 'active')
    }
 // DISPLAY PROJECT'S DETAILS PAGE _________________________ */
@@ -241,7 +239,7 @@ class View {
     this.print('remove', '#project-details-menu')
     this.print('remove', '#left')
     this.print('remove', '#right')
-    this.updateClass('#colored-bg', 'remove', 'slide-left')
+    this.updateClass('#colored-bg', 'edit', 'background-color', '')
     this.updateClass('#about-me', 'edit', 'visibility', 'visible')
     this.projectDescription()
   }
@@ -250,8 +248,9 @@ class View {
     this.print('remove', langSwitch)
     this.print('div', '#about-me-title', langSwitch)
     this.updateClass('#slider', 'add', 'slider-down-2')
+    this.updateClass('#colored-bg', 'edit', 'background-color', '')
+    this.updateClass('.active', 'remove', 'active')
     this.updateClass('#about-me-details', 'add', 'appears')
-    this.updateClass('#colored-bg', 'remove', 'slide-left')
     this.print('div', '#about-me-details', bioTemplate)
     this.print('text', '#bio', `${lang == 'fr' ? bio.FR : bio.EN}`)
     this.print('div', '#about-me-details', contactMeTemplate)
@@ -262,12 +261,16 @@ class View {
     this.print('remove', langSwitch2)
     this.updateClass('#slider', 'remove', 'slider-down-2')
     this.updateClass('#about-me-details', 'remove', 'appears')
-    this.print('remove', '#bio')
-    this.print('remove', '#contact-me')
     this.print('div', '.w-75', langSwitch2)
+    setTimeout(() => {
+      this.print('remove', '#bio')
+      this.print('remove', '#contact-me')
+    }, 800)
   }
   backToTitle() {
     this.updateClass('#slider', 'remove', 'slider-down')
-    this.updateClass('#colored-bg', 'remove', 'slide-left')
+    this.updateClass('#colored-bg', 'edit', 'background-color', '')
+    this.print('remove', '#bio')
+    this.print('remove', '#contact-me')
   }
 }

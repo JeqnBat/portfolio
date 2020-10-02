@@ -140,13 +140,14 @@ class Controller {
     }
   }
   mouseWheelDown(project) {
-    if (pageStatus == 'home-logo') {
-      this.model.transition(project, 'to-main-page')
-    } else if (pageStatus == 'main-page') {
-      this.model.transition(project, 'to-about-me')
-    } else {
-      return
-    }
+      if (pageStatus == 'home-logo') {
+        this.model.transition(project, 'to-main-page')
+      } else if (pageStatus == 'main-page' && loading == 'completed') {
+        this.model.transition(project, 'to-about-me')
+      } else {
+        return
+      }
+
   }
 // GLOBAL EVENT DELEGATOR _________________________________ */
  /**

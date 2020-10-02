@@ -7,6 +7,7 @@
 let layout = innerWidth > 1024 ? 'desktop' : 'mobile'
 let lang = $('html').attr('lang')
 let pageStatus = 'home-logo' // RESET 'main-page'
+let loading = 'pending' // used to prevent fast scroll down event to stop main page from printing
 // BILINGUAL SECTIONS _____________________________________ */
 let descr = {
   'FR': `Ces 7 projets ont été réalisés dans le cadre de ma formation Développeur Front-End auprès d’OpenClassRooms.
