@@ -36,7 +36,7 @@ class Page {
    * <b>DESCR:</b><br>
    * Use ASYNC to define a loading sequence as the program
    * is executed for the 1st time.
-   * First get browser's language, then return it, then print
+   * First get browser's language, then return it, then printer
    * page's content.
    *
    * @method
@@ -53,7 +53,7 @@ class Page {
     this.model.updateLang(this.projects)
     // MAKES MAIN PAGE CLICKABLE
     setTimeout(() => {
-      that.model.view.print('remove', '#blocker')
+      that.model.view.printer('remove', '#blocker')
     }, 1300)
   }
 

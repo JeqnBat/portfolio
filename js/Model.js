@@ -65,22 +65,28 @@ class Model {
    * Repaints them all w/ the language defined by 'controller.langClick()'
    *
    * @method
-   * @param {object} origin the project w/ all its properties
+   * @param {array} origin the 'projects instances' array
    */
   updateLang(origin) {
     let selector
 
-    if (pageStatus == 'main-page') {
+    if (pageStatus == 'main-page' || pageStatus == 'about-me') {
       selector = $(document).find(`[item=lang]`)
       for (let i = 0; i < selector.length; i++) {
-       switch (selector[i].id) {
-        case 'descr':
-          this.view.projectDescription(origin)
+        switch (selector[i].id) {
+         case 'descr':
+          this.view.projectDescription()
           break
-        case `val${i}`:
+         case `val${i}`:
           this.view.validationDate(origin)
           break
-       }
+         case 'bio':
+          this.view.printer('text', '#bio', `${lang == 'fr' ? bio.FR : bio.EN}`)
+          break
+         case 'contact-me':
+          this.view.printer('text', '#contact-me a', `${lang == 'fr' ? contactMe.FR : contactMe.EN}`)
+          break
+        }
      }
    } else if (pageStatus == `project-details${this.identify('langDetails', pageStatus)}`) {
      let index = parseInt(this.identify('langDetails', pageStatus), 10) - 2
@@ -88,34 +94,22 @@ class Model {
      for (let i = 0; i < selector.length; i++) {
        switch (selector[i].id) {
          case 'descr':
-           this.view.print('text', '#descr', lang == 'fr' ? origin[index].descr.FR : origin[index].descr.EN)
+           this.view.printer('text', '#descr', lang == 'fr' ? origin[index].descr.FR : origin[index].descr.EN)
            break
          case 'skills-list':
-           this.view.print('text', '#skills-list', ' ')
+           this.view.printer('text', '#skills-list', ' ')
            for (let i = 0; i < origin[index].skills.FR.length; i++) {
-             this.view.print('div', '#skills-list', `<li>${lang == 'fr' ? origin[index].skills.FR[i] : origin[index].skills.EN[i]}</li>`)
+             this.view.printer('div', '#skills-list', `<li>${lang == 'fr' ? origin[index].skills.FR[i] : origin[index].skills.EN[i]}</li>`)
            }
            break
          case 'page-details-date':
-           this.view.print('text', '#page-details-date', `<p>${lang == 'fr' ? validation.FR : validation.EN}</p><p>${lang == 'fr' ? origin[index].date.FR : origin[index].date.EN}</p>`)
+           this.view.printer('text', '#page-details-date', `<p>${lang == 'fr' ? validation.FR : validation.EN}</p><p>${lang == 'fr' ? origin[index].date.FR : origin[index].date.EN}</p>`)
            break
          case 'skills-title':
-           this.view.print('text', '#skills-title', lang == 'fr' ? skills.FR : skills.EN)
+           this.view.printer('text', '#skills-title', lang == 'fr' ? skills.FR : skills.EN)
            break
        }
      }
-   } else if (pageStatus == 'about-me') {
-     selector = $(document).find(`[item=lang]`)
-     for (let i = 0; i < selector.length; i++) {
-      switch (selector[i].id) {
-       case 'bio':
-        this.view.print('text', '#bio', `${lang == 'fr' ? bio.FR : bio.EN}`)
-        break
-       case 'contact-me':
-        this.view.print('text', '#contact-me a', `${lang == 'fr' ? contactMe.FR : contactMe.EN}`)
-        break
-      }
-    }
    }
    // NAV BUTTONS
    switch (lang) {
@@ -128,17 +122,17 @@ class Model {
    }
    this.view.fadeIn(selector)
   }
-// PRINTER ________________________________________________ */
+// printerER ________________________________________________ */
   /**
    * <b>DESCR:</b><br>
    * Scans 'pageStatus' to determine which part of the DOM
    * should be displayed.
    *
    * Uses the marker to ID the blank templates
-   * Prints it w/ view.print().
+   * printers it w/ view.printer().
    *
    * @method
-   * @param {object} origin the object whose properties will be printed as markers
+   * @param {object} origin the object whose properties will be printered as markers
    */
   async press(origin) {
     let that = this
@@ -160,9 +154,9 @@ class Model {
            pageStatus = `project-details${origin.id}`
            break
        }
-       // HOME PAGE MINIATURE PRINT DELAY IN ms
+       // HOME PAGE MINIATURE printer DELAY IN ms
        setTimeout(function () {
-         resolve('page printed')
+         resolve('page printered')
        }, 130)
      })
    }
@@ -211,7 +205,7 @@ class Model {
 // SHOW PROJECT'S DETAILS _________________________________ */
  /**
   * <b>DESCR:</b><br>
-  * Prints one project details on the full page.
+  * printers one project details on the full page.
   *
   * @method
   * @param {object} origin the project's class w/ all its properties
@@ -225,7 +219,7 @@ class Model {
   /**
    * <b>DESCR:</b><br>
    * Smoothly handles the DOM in transition between 2 PAGES
-   * print.
+   * printer.
    *
    * @method
    * @param {object} origin the project's class, necessary to update BG

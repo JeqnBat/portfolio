@@ -55,10 +55,10 @@ class Controller {
    * @param {string} icon the ID of the hovered social nav icon
    */
   socialIconsFocus(icon) {
-    this.model.view.print('text', '.subtitle', icon)
+    this.model.view.printer('text', '.subtitle', icon)
   }
   socialIconsUnfocus() {
-    this.model.view.print('text', '.subtitle', '')
+    this.model.view.printer('text', '.subtitle', '')
   }
 // MINIATURE & BOTTOM NAV ITEM'S MOUSEOVER ________________ */
  /**
@@ -140,14 +140,13 @@ class Controller {
     }
   }
   mouseWheelDown(project) {
-      if (pageStatus == 'home-logo') {
-        this.model.transition(project, 'to-main-page')
-      } else if (pageStatus == 'main-page' && loading == 'completed') {
-        this.model.transition(project, 'to-about-me')
-      } else {
-        return
-      }
-
+    if (pageStatus == 'home-logo') {
+      this.model.transition(project, 'to-main-page')
+    } else if (pageStatus == 'main-page' && loading == 'completed') {
+      this.model.transition(project, 'to-about-me')
+    } else {
+      return
+    }
   }
 // GLOBAL EVENT DELEGATOR _________________________________ */
  /**
@@ -173,7 +172,6 @@ class Controller {
     // LANG CLICK
       } else if (event.target.matches('.fr-engl h3')) {
           lang = $(event.target.parentElement).attr('id')
-          let singleProject = projects[that.model.identify('langDetails', pageStatus)]
           that.langClick(projects)
           resolve('language clicked')
     // LOGO CLICK
@@ -202,22 +200,12 @@ class Controller {
     // RIGHT ARROW CLICK
       } else if (event.target.matches('#right')) {
           let targetNumber = parseInt(that.model.identify('langDetails', pageStatus), 10) - 1
-          if (targetNumber >= projects.length) {
-            that.model.view.print('remove', '#right')
-            return
-          } else {
-            that.rightArrowClick(projects[targetNumber])
-          }
+          that.rightArrowClick(projects[targetNumber])
           resolve('right arrow clicked')
     // LEFT ARROW CLICK
       } else if (event.target.matches('#left')) {
           let targetNumber = parseInt(that.model.identify('langDetails', pageStatus), 10) - 3
-          if (targetNumber <= -1) {
-            that.model.view.print('remove', '#left')
-            return
-          } else {
-            that.leftArrowClick(projects[targetNumber])
-          }
+          that.leftArrowClick(projects[targetNumber])
           resolve('left arrow clicked')
     // MORE ABOUT ME CLICK
       } else if (event.target.matches('#about-me')) {
