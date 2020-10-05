@@ -1,0 +1,74 @@
+/* 7. ABOUT ME
+______________________________________________________ */
+#about-me-details {
+  opacity: 0;
+  height: 100vh;
+  width: 100vw;
+  padding: 6vw;
+  background-image: url('../Graphics/aboutme/aboutme.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  transition: opacity .5s ease-in-out .8s;
+}
+#about-me-details.appears {
+  opacity: 1;
+}
+#about-me-title {
+  width: 80%;
+  padding-bottom: 25px;
+  float: left;
+}
+#bio {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.2rem;
+  text-align: justify;
+  text-shadow: 0px 0px 1px rgb(81,81,81, .3);
+  padding-left: 25px;
+  width: 500px;
+}
+#back-up {
+  opacity: .7;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  transition: all .2s ease-in-out;
+  float: right;
+  padding-right: 90px;
+}
+#back-up img {
+  transform: rotate(180deg);
+  margin-left: 10px;
+  transition: all .2s ease-in-out;
+}
+#back-up:hover {
+  opacity: 1;
+}
+#back-up:hover img {
+  transform: rotate(180deg) translate(0, 10px);
+}
+#contact-me {
+  text-align: center;
+  padding-left: 25px;
+  padding-top: 25px;
+  width: 500px;
+}
+#contact-me a {
+  text-decoration: none;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  margin-left: -8px;
+  border-bottom: 1px solid transparent;
+  border-right: 1px solid transparent;
+  border-top: 1px solid transparent;
+  border-left: 1px solid transparent;
+  transition: background-color .2s ease-in-out .3s, border-bottom .1s ease-in, border-right .1s linear .1s, border-top .1s linear .2s, border-left .1s ease-out .3s;
+}
+#contact-me a:hover {
+  border-bottom: 1px solid rgb(255, 0, 29);
+  border-right: 1px solid rgb(255, 0, 29);
+  border-top: 1px solid rgb(255, 0, 29);
+  border-left: 1px solid rgb(255, 0, 29);
+  background-color: rgb(255, 0, 29, .3);
+}
