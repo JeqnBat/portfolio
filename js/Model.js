@@ -2,8 +2,7 @@
  * <b>DESCR:</b><br>
  * The 'Model' class regroups all the actions
  * a user can have on the program.
- * It takes a controller as an exiting point & a view as
- * an entring point.
+ * It takes a 'view' as an entring point & a 'controller' as an exiting.
  *
  * @constructor
  * @param {view} object renders the visuals of the actions taken by Model
@@ -46,7 +45,7 @@ class Model {
    *
    * @method
    * @param {string} template the template inside which is located the target
-   * @param {array} target the pair [oldCharacters, newCharacters]
+   * @param {array} target array containing the pairs [oldCharacters, newCharacters]
    */
   mark(template, ...target) {
      let y = template
@@ -122,17 +121,17 @@ class Model {
    }
    this.view.fadeIn(selector)
   }
-// printerER ________________________________________________ */
+// PRINTER ________________________________________________ */
   /**
    * <b>DESCR:</b><br>
    * Scans 'pageStatus' to determine which part of the DOM
    * should be displayed.
    *
    * Uses the marker to ID the blank templates
-   * printers it w/ view.printer().
+   * Printers it w/ view.printer().
    *
    * @method
-   * @param {object} origin the object whose properties will be printered as markers
+   * @param {object} origin the object whose properties will be printed as markers
    */
   async press(origin) {
     let that = this
@@ -156,7 +155,7 @@ class Model {
        }
        // HOME PAGE MINIATURE printer DELAY IN ms
        setTimeout(function () {
-         resolve('page printered')
+         resolve('page printed')
        }, 130)
      })
    }
