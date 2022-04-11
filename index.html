@@ -4,16 +4,14 @@
     <title>My own private Portfolio - welcome !</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
-    <link rel="stylesheet" href="css/dependencies/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
   </head>
   <body>
     <!-- VERTICAL SLIDER -->
-    <div id="slider" class="h-100 w-100">
+    <div id="slider">
       <!-- HOME SCREEN SECTION -->
-      <section id="home-screen" class="d-flex justify-content-center align-items-center">
-        <header class="title d-flex">
+      <section id="home-screen">
+        <header class="title">
           <h1 class="up">p</h1>
           <h1 class="down">o</h1>
           <h1 class="up">r</h1>
@@ -23,73 +21,69 @@
           <h1 class="up">l</h1>
           <h1 class="down">i</h1>
           <h1 class="up">o</h1>
+          <hr>
+          <div style="opacity: 0;">ENTER</div>
         </header>
       </section>
       <!-- PREVENTS HOVER EFFECT DURING ENTRANCE'S ANIMATIONS, IS REMOVED LATED ON -->
       <div id="blocker"></div>
       <!-- MAIN PAGE CONTAINER -->
-      <section id="home" class="d-flex flex-nowrap flex-column align-items-center z-index">
+      <section id="home">
         <!-- HEADER -->
-        <section id="header" class="d-flex justify-content-center align-items-center">
-          <header class="w-75">
-            <h2 class="logo cursor" style="display: inline;">#portfolio</h2>
+        <section id="header">
+          <header>
+            <h2 id="portfolio-button" class="logo cursor" style="display: inline;">#portfolio</h2>
             <!-- LANGUAGE BUTTONS -->
-            <span id="fr" class="pl-5 fr-engl"><h3>FR</h3></span>
-            <span style="color: rgb(34, 32, 29, .2); font-size: 1.2rem;">|</span>
+            <span id="fr" class="fr-engl"><h3>FR</h3></span>
+            <span style="color: rgb(34, 32, 29, .7); font-size: 1rem;">|</span>
             <span id="en" class="fr-engl"><h3>EN</h3></span>
           </header>
           <!-- SOCIAL ICONS -->
-          <nav class="w-25 social-icons">
-            <div class="subtitle"></div>
-            <div id="linkedin">
+          <nav class="social-icons">
+            <figure id="linkedin">
               <a title="linkedin.com/in/jeanbaptistepellier" href="https://www.linkedin.com/in/jeanbaptistepellier" target="blank">
                 <img src="Graphics/menuIcons/NAVlinkedin.svg" alt="linkedin-icon" height="50px" width="50px">
               </a>
-            </div>
-            <div id="github">
+            </figure>
+            <figure id="github">
               <a title="github.com/JeqnBat" href="https://github.com/JeqnBat" target="blank">
                 <img src="Graphics/menuIcons/NAVgithub.svg" alt="github-icon" height="50px" width="50px">
               </a>
-            </div>
+            </figure>
           </nav>
         </section>
         <!-- PORTFOLIO'S PRESENTATION -->
-        <section id="presentation" class="d-flex">
-          <div class="border-line d-flex align-items-center">
-            <span id="descr" item="lang" class="content-font">
-            </span>
+        <section id="presentation">
+          <div>
+            <p id="descr" item="lang" class="content-font">
+            </p>
+          </div>
+          <div>
+            <span>aaa</span>
           </div>
         </section>
-        <!-- VERTICAL SPACER -->
-        <div id="spacer"></div>
         <!-- MAIN SECTION -->
-        <main id="central-nav" class="d-flex"></main>
+        <main id="central-nav"></main>
         <!-- FOOTER -->
         <footer id="footer">
-          <div class="sidekick"></div>
+          <div style="width: 180px;"></div>
           <nav id="footer-nav"></nav>
-          <div id="about-me" class="sidekick">more about me<img src="graphics/aboutme/arrowdown.png" height="42px" width="12px"></div>
+          <div id="about-me" class="sidekick">more about me</div>
         </footer>
       </section>
       <section id="about-me-details">
-        <header id="about-me-title" class="logo">
-          <h2 style="display: inline;">#ABOUTME</h2>
-        </header>
-        <div id="back-up" class="cursor">back up<img src="graphics/aboutme/arrowdown.png" height="42px" width="12px"></div>
+        <section id="about-me-title" class="logo">
+          <header>
+            <h2 id="about-me-button" style="display: inline;">#ABOUTME</h2>
+          </header>
+          <div id="back-up" class="cursor">back up</div>
+        </section>
+        <section id="about-main"></section>
       </section>
     <!-- SLIDER END -->
     </div>
-    <!-- sliding colored BG -->
-    <div id="colored-bg" class="h-100 w-100"></div>
   </body>
-  <script src="js/dependencies/jquery-3.4.1.min.js"></script>
-  <script src="js/dependencies/bootstrap.min.js"></script>
   <script src="js/data.js"></script>
   <script src="js/templates.js"></script>
-  <script src="js/Project.js"></script>
-  <script src="js/View.js"></script>
-  <script src="js/Model.js"></script>
-  <script src="js/Controller.js"></script>
-  <script src="js/Page.js"></script>
-  <script src="js/functions.js"></script>
+  <script src="js/functions.js" type="module"></script>
 </html>
