@@ -10,8 +10,7 @@
 
 **Tools :**
 - JS - ES6
-- jQuery
-- CSS3 - Boostrap
+- CSS 3
 - HTML5
 - Photoshop
 - Git
@@ -27,8 +26,7 @@
 
 **Outils :**
 - JS - ES6
-- jQuery
-- CSS3 - Boostrap
+- CSS3
 - HTML5
 - Photoshop
 - Git
