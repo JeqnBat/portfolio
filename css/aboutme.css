@@ -1,0 +1,96 @@
+/* 7. ABOUT ME
+______________________________________________________ */
+#about-me-details {
+  height: 100vh;
+  width: 1100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  /* background-image: url('../Graphics/aboutme/aboutme.jpg'); */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: right bottom;
+}
+#about-me-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 150px;
+}
+#about-me-title h2 {
+  margin-right: 20px;
+}
+/* BACK UP BUTTON */
+#back-up {
+	position: relative;
+	font-family: sans-serif;
+	font-size: .9rem;
+	text-transform: uppercase;
+	text-align: right;
+	cursor: pointer;
+	opacity: 0.75;
+	transition: all .2s ease-in-out;
+}
+#back-up::after {
+	content: ' ↑';
+	font-size: 1.5rem;
+	opacity: 0;
+	transition: all .1s ease-in-out;
+}
+#back-up::before {
+	content: '↑ ';
+	font-size: 1.5rem;
+	opacity: 0;
+	transition: all .1s ease-in-out;
+}
+#back-up:hover {
+	opacity: 1;
+}
+#back-up:hover::after, #back-up:hover::before {
+	opacity: 1;
+}
+/* MAIN SECTION */
+#about-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+#bio {
+	font-family: sans-serif;
+	line-height: 1.5rem;
+	text-align: justify;
+	border-radius: 4px;
+	padding: 25px;
+	background: rgb(44 4 23 / 0.05);
+	width: 50%;
+}
+#contact-me {
+  font-size: 1rem;
+  text-align: center;
+  line-height: 70px;
+  height: 70px;
+  width: 550px;
+  background: rgb(255, 255 ,255 ,.6);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+#contact-me a {
+  text-decoration: none;
+  color: rgb(34, 32, 29, .7);
+  padding: 10px;
+  border-radius: 5px;
+  border-bottom: 1px solid transparent;
+  border-right: 1px solid transparent;
+  border-top: 1px solid transparent;
+  border-left: 1px solid transparent;
+  transition: color .2s ease-in-out .3s, background-color .2s ease-in-out .3s, border-bottom .1s ease-in, border-right .1s linear .1s, border-top .1s linear .2s, border-left .1s ease-out .3s;
+}
+#contact-me a:hover {
+  border-bottom: 1px solid rgb(255, 0, 29);
+  border-right: 1px solid rgb(255, 0, 29);
+  border-top: 1px solid rgb(255, 0, 29);
+  border-left: 1px solid rgb(255, 0, 29);
+  color: white;
+  background-color: rgb(255, 0, 29, .5);
+}
