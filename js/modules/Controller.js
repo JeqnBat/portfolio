@@ -61,14 +61,22 @@ export default class Controller {
     this.model.looseFocus(project)
   }
   footerNavMouseOver(project) {
-    let el = document.querySelector(`[item="OCP#${project.id}"]`)
-    this.model.view.updateClass(el.firstChild, 'add', 'slide-down')
-    this.model.focusMiniature(project)
+    if (pageStatus === 'main-page') {
+      let el = document.querySelector(`[item="OCP#${project.id}"]`)
+      this.model.view.updateClass(el.firstChild, 'add', 'slide-down')
+      this.model.focusMiniature(project)
+    } else {
+      return
+    }
   }
   footerNavMouseOut(project) {
-    let el = document.querySelector(`[item="OCP#${project.id}"]`)
-    this.model.view.updateClass(el.firstChild, 'remove', 'slide-down')
-    this.model.looseFocus(project)
+    if (pageStatus === 'main-page') {
+      let el = document.querySelector(`[item="OCP#${project.id}"]`)
+      this.model.view.updateClass(el.firstChild, 'remove', 'slide-down')
+      this.model.looseFocus(project)
+    } else {
+      return
+    }
   }
   // MINIATURE & BOTTOM NAV & ARROWS CLICK () _______________ */
   /** <b>DESCR:</b><br>
@@ -82,16 +90,24 @@ export default class Controller {
    * @param {object} project the project w/ all its properties
    */
   miniatureClick(project) {
-    this.model.showProjectDetails(project)
+    if (pageStatus === 'main-page') {
+      this.model.transition(project, 'to-project-details')
+    } else {
+      this.model.transition(project, 'project-to-project')
+    }
   }
   bottomNavClick(project) {
-    this.model.showProjectDetails(project)
+    if (pageStatus === 'main-page') {
+      this.model.transition(project, 'to-project-details')
+    } else {
+      this.model.transition(project, 'project-to-project')
+    }
   }
   rightArrowClick(project) {
-    this.model.showProjectDetails(project)
+    this.model.transition(project, 'project-to-project')
   }
   leftArrowClick(project) {
-    this.model.showProjectDetails(project)
+    this.model.transition(project, 'project-to-project')
   }
   // MORE ABOUT ME CLICK () _________________________________ */
   /**
@@ -122,7 +138,6 @@ export default class Controller {
     return new Promise((resolve, reject) => {
       // CLICK EVENTS
       document.addEventListener('click', (event) => {
-        console.log(event.target);
         // TITLE CLICK
         if (event.target.matches('.title h1') || event.target.matches('.title div')) {
           that.titleClick(projects)
@@ -143,7 +158,7 @@ export default class Controller {
             for (let i = 0; i < projects.length; i++) {
               that.model.press(projects[i])
             }
-            that.model.updateLang(projects)
+            // that.model.updateLang(projects)
             resolve('#PORTFOLIO clicked from details')
           }
           // MINIATURE CLICK
@@ -170,7 +185,6 @@ export default class Controller {
           // MORE ABOUT ME CLICK
         } else if (event.target.matches('#about-me')) {
           that.aboutMeClick(projects)
-          console.log('about me ?');
           resolve('more about me clicked')
           // BACK UP CLICK
         } else if (event.target.matches('#back-up')) {

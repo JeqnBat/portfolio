@@ -85,7 +85,7 @@ export default class View {
     this.updateClass(id, 'add', 'fade-in')
     setTimeout(function () {
       that.updateClass(id, 'remove', 'fade-in')
-    }, 600)
+    }, 200)
   }
   // LANG BUTTONS () ________________________________________ */
   /**
@@ -118,7 +118,12 @@ export default class View {
   }
   // PORTFOLIO'S DESCRIPTION () _____________________________ */
   portfolioDescription() {
+    console.log('portfolio description');
     this.printer('text', '#descr', lang == 'fr' ? descr.FR : descr.EN)
+    console.log(!document.querySelector('#past-and-present'));
+    if (pageStatus === 'main-page' && !document.querySelector('#past-and-present')) {
+      this.printer('div', '#presentation', lang == 'fr' ? pastAndPresent.FR : pastAndPresent.EN)
+    }
   }
   // VALIDATION DATE () _____________________________________ */
   validationDate(origin) {
@@ -192,6 +197,7 @@ export default class View {
       this.printer('remove', '#project-title')
       this.printer('remove', '#project-details-menu')
     }
+
     this.printer('text', '#central-nav', ' ')
     this.printer('text', '#descr', lang == 'fr' ? origin.descr.FR : origin.descr.EN)
 
@@ -266,7 +272,6 @@ export default class View {
   }
   // TO ABOUT ME () _________________________________________ */
   toAboutMe() {
-    console.log('??');
     pageStatus = 'about-me'
     let langSwitch = document.querySelectorAll('#header span')
     langSwitch.forEach(span => {

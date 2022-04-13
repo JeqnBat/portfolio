@@ -62,6 +62,6 @@ export default class Page {
     // MAKES MAIN PAGE CLICKABLE
     setTimeout(() => {
       that.model.view.printer('remove', '#blocker')
-    }, 600)
+    }, 500)
   }
 }

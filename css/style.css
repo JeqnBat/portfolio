@@ -34,6 +34,7 @@ html, body {
 	color: white;
 	margin: 0;
 	padding: 0;
+	font-family: sans-serif;
 }
 /* FONTS */
 /* Home screen big title */
@@ -58,19 +59,16 @@ h3 {
 }
 /* Miniature's overscreen infos */
 h4 {
-	font-family: sans-serif;
 	font-size: .9rem;
 }
 /* overscreen font */
 h5 {
-	font-family: sans-serif;
 	font-size: 1rem;
 	font-weight: 300;
 	margin: 15px 0;
 }
 /* Bottom nav categories */
 h6 {
-	font-family: sans-serif;
 	font-size: 1.15rem;
 }
 .z-index {

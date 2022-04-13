@@ -2,87 +2,97 @@
 ______________________________________________________ */
 /* Home screen container */
 #home-screen {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 100vh;
-	width: 100vw;
-	z-index: 10;
-	margin-top: 0;
-	-webkit-transition: transform .9s ease-in-out .1s;
-			transition: transform .9s ease-in-out .1s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  z-index: 10;
+  margin-top: 0;
+  -webkit-transition: transform .9s ease-in-out .1s;
+  transition: transform .9s ease-in-out .1s;
 }
+
 /* Big centered title */
 .title {
-	position: relative;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	align-items: center;
-	text-transform: uppercase;
-	/* offset-x | offset-y | blur-radius | color | opacity */
-	text-shadow: 0px 0px 10px rgba(22, 21, 21, 0.40);
-	cursor: pointer;
-	transition: all .4s ease-in-out;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  /* offset-x | offset-y | blur-radius | color | opacity */
+  text-shadow: 0px 0px 10px rgba(22, 21, 21, 0.40);
+  cursor: pointer;
+  transition: all .4s ease-in-out;
 }
+
 .title:hover {
-	text-shadow: 0px 0px 10px rgba(22, 21, 21, 0.10);
+  text-shadow: 0px 0px 10px rgba(22, 21, 21, 0.10);
 }
+
 .title h1:first-of-type {
-	margin-left: 10px;
+  margin-left: 10px;
 }
+
 .title h1:last-of-type {
-	margin-right: 10px;
+  margin-right: 10px;
 }
+
 /* Hover effect */
 .title::before {
-	position: absolute;
-	z-index: -1;
-	content: ' ';
-	width: 0;
-	/* initiate left to right movement */
-	left: 0;
-	height: 100%;
-	border-bottom: 3px solid transparent;
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
-	transition: all .4s ease-in-out;
+  position: absolute;
+  z-index: -1;
+  content: ' ';
+  width: 0;
+  /* initiate left to right movement */
+  left: 0;
+  height: 100%;
+  border-bottom: 3px solid transparent;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  transition: all .4s ease-in-out;
 }
+
 .title:hover::before {
-	background:  rgb(34, 32, 29, .1);
-	width: 101%;
-	border-bottom: 3px solid cornsilk;
+  background: rgb(34, 32, 29, .1);
+  width: 101%;
+  border-bottom: 3px solid cornsilk;
 }
+
 /* FlexBox line-break using HR */
 .title hr {
-	flex-basis: 101%;
-	height: 0;
-	margin: 0;
-	border: 0;
+  flex-basis: 101%;
+  height: 0;
+  margin: 0;
+  border: 0;
 }
+
 /* Subtitle 'ENTER' */
 .title div {
-	position: absolute;
-	font-family: "Roboto", sans-serif;
-	font-size: 1.4rem;
-	font-weight: 300;
-	color: rgb(34, 32, 29, .4);
-	width: 0;
-	/* initiate left to right movement */
-	left: 38%;
-	height: 25%;
-	bottom: -43px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background: cornsilk;
-	transition: all .3s ease-in-out .2s;
+  position: absolute;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 300;
+  color: rgb(34, 32, 29, .4);
+  width: 0;
+  /* initiate left to right movement */
+  left: 38%;
+  height: 25%;
+  bottom: -43px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: cornsilk;
+  transition: all .3s ease-in-out .2s;
 }
+
 .title:hover div {
-	width: 25%;
-	opacity: 1!important;
+  width: 25%;
+  opacity: 1 !important;
 }
+
 /* Active effect */
 .title:active::before {
-	background: rgb(34, 32, 29, .8);
+  background: rgb(34, 32, 29, .8);
 }

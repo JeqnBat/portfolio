@@ -4,19 +4,22 @@
  * Call these variables w/ the 'view' class to display them.
  */
 // MAIN PAGE TEMPLATES ____________________________________ */
-let miniatureTemplate = `<div class="miniature" item="OCP#xxxid"><div class="over-screen xxxid">
+const miniatureTemplate = `<div class="miniature" item="OCP#xxxid"><div class="over-screen xxxid">
                             <p>xxxid</p>
                             <h5>“xxxtitle”</h5>
                             <h5><div id="valxxxid" item="lang"></div></h5>
                             <h5><div id="datexxxid" item="lang"></div></h5>
                           </div>
                          </div>`
-
-let footerNavTemplate = '<div id="footerNavxxxid" class="footer-nav-item">□</div>'
+const pastAndPresent = {
+  'FR': '<div id="past-and-present">Anciens(7) | Nouveaux(2)</div>',
+  'EN': '<div id="past-and-present">Old(7) | Current(2)</div>'
+}
+const footerNavTemplate = '<div id="footerNavxxxid" class="footer-nav-item">□</div>'
 // PROJECT DETAILS TEMPLATES ______________________________ */
-let projectTitleTemplate = '<title id="project-title"></title>'
+const projectTitleTemplate = '<title id="project-title"></title>'
 
-let skillsTemplate = `<div id="skills">
+const skillsTemplate = `<div id="skills">
                         <div id="skills-title" item="lang"></div>
                         <img src="Graphics/techIcons/gear.svg" class="three-sixty" alt="gears" height="100px" width="100px">
                         <img src="Graphics/techIcons/gear.svg" class="minus-three-sixty" alt="gears" height="160px" width="160px">
@@ -24,7 +27,7 @@ let skillsTemplate = `<div id="skills">
                         </ul>
                        </div>`
 
-let screenShotTemplate = `<section id="layout" class="block">
+const screenShotTemplate = `<section id="layout" class="block">
                             <a href="xxxurl" target="blank">
                               <img src="imgFile" alt="layout screenshot" width="xxx" height="yyy">
                             </a>
@@ -35,27 +38,28 @@ let screenShotTemplate = `<section id="layout" class="block">
                             </div>
                           </section>`
 
-let mobileWidthTemplate   = '<p align="center">- 425px -</p>'
-let tabletWidthTemplate   = '<p align="center">- 750px -</p>'
-let desktopWidthTemplate  = '<p align="center">- 1400px -</p>'
+const mobileWidthTemplate = '<p align="center">- 425px -</p>'
+const tabletWidthTemplate = '<p align="center">- 750px -</p>'
+const desktopWidthTemplate = '<p align="center">- 1400px -</p>'
 
-let detailsMenuTemplate = `<nav id="project-details-menu">
+const detailsMenuTemplate = `<nav id="project-details-menu">
                             <div id="tech" class="bottom-menu"><p>technologies</p></div>
                             <div id="responsive" class="bottom-menu"><p>full responsive</p></div>
                             <div id="page-details-date" class="bottom-menu" item="lang"></div>
                             <div id="projects-github" class="bottom-menu"><img src="Graphics/techIcons/git.svg" width="50px" height="50px"></div>
                            </nav>`
 
-let checkBox = { 'true' : '<div class="check-box true"></div>',
-                 'false' : '<div class="check-box"></div>'
-               }
+const checkBox = {
+  'true': '<div class="check-box true"></div>',
+  'false': '<div class="check-box"></div>'
+}
 
-let techIconTemplate = `<figure>
+const techIconTemplate = `<figure>
                            <img src="xxxURL" alt="xxx-icon" height="50px" width="50px">
                            <figcaption>xxx</figcaption>
                         </figure>`
 
-let leftArrow = '<div id="left" class="arrow"></div>'
-let rightArrow = '<div id="right" class="arrow"></div>'
+const leftArrow = '<div id="left" class="arrow"></div>'
+const rightArrow = '<div id="right" class="arrow"></div>'
 // ABOUT ME TEMPLATES _____________________________________ */
-let bioTemplate = `<article id="bio" item="lang"></article>`
+const bioTemplate = `<article id="bio" item="lang"></article>`

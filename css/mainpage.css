@@ -112,6 +112,9 @@ ______________________________________________________ */
 	background: rgb(44 4 23 / 0.05);
 	width: 50%;
 }
+#descr p {
+	margin:0!important;
+}
 /* Main section w/ miniatures navigation */
 #central-nav {
 	display: flex;
@@ -141,7 +144,6 @@ ______________________________________________________ */
 /* Miniature over screen */
 .over-screen {
 	transform: translateY(-300px);
-	font-family: "Courier New bolder", Courier, monospace;
 	font-size: 6rem;
 	text-align: center;
 	opacity: .8;
@@ -153,9 +155,10 @@ ______________________________________________________ */
 	justify-content: center;
 	align-items: center;
 	-webkit-transition: transform .2s ease-in-out;
-					transition: transform .2s ease-in-out;
+			transition: transform .2s ease-in-out;
 }
 .over-screen p {
+	font-family: "Courier New bolder", Courier, monospace;
 	margin: 0;
 }
 /* CSS hover */

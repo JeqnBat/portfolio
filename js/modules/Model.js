@@ -225,6 +225,13 @@ export default class Model {
         pageStatus = 'main-page'
         break
       case 'to-project-details':
+        console.log('main to details');
+        this.view.printer('remove', '#past-and-present')
+        this.showProjectDetails(origin)
+        break
+      case 'project-to-project':
+        console.log('details to details');
+        this.showProjectDetails(origin)
         break
       case 'back-to-main-page':
         this.view.backToMainPage(origin)
