@@ -5,19 +5,16 @@ ______________________________________________________ */
 	content: "“";
 }
 #project-title {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-  font-size: 3rem;
-  width: 80%;
-  margin-top: 20px;
+	display: block;
+  font-size: 2.8rem;
+	text-align: center;
 }
 #project-title::after {
 	content: "”";
 }
 #skills {
+	margin-top: 50px;
   position: relative;
-  margin-top: 60px;
 	width: 370px;
 }
 #skills img {

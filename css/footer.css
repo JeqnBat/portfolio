@@ -67,10 +67,10 @@ ______________________________________________________ */
   justify-content: space-between;
   align-items: center;
   text-align: center;
-	height: 40px;
+	height: 50px;
 }
 #project-details-menu figure {
-  margin: 5px;
+  margin: 3px;
 }
 #project-details-menu figure:first-child {
   margin-left: 30px;
@@ -84,7 +84,8 @@ ______________________________________________________ */
 }
 #project-details-menu figcaption {
 	background-color: rgb(34, 32, 29, .4);
-	font-size: .65rem;
+	font-size: .55rem;
+	padding: 1px;
 	text-transform: uppercase;
 	text-align: center;
   opacity: 0;

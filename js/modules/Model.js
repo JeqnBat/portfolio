@@ -1,18 +1,15 @@
 import View from './View.js'
 /**
  * <b>DESCR:</b><br>
- * The 'Model' class regroups all the actions
- * a user can have on the program.
+ * The 'Model' class regroups all the logic of the program.
  * It takes a 'view' as an entry point & a 'controller' as an output.
  *
  * @constructor
- * @param {view} object renders the visuals of the actions taken by Model
  */
 export default class Model {
-  constructor(view) {
+  constructor() {
     this.view = new View()
   }
-
 // IDENTIFY () ____________________________________________ */
   /**
    * <b>DESCR:</b><br>
@@ -36,7 +33,7 @@ export default class Model {
         return projectNumber
     }
   }
-  // TEMPLATE MARKER () _____________________________________ */
+// TEMPLATE MARKER () _____________________________________ */
   /**
    * <b>DESCR:</b><br>
    * Marks a given template w/ a specific chain of charaters
@@ -47,15 +44,15 @@ export default class Model {
    * @param {array} target array containing the pairs [oldCharacters, newCharacters]
    */
   mark(template, ...target) {
-    let y = template
+    let blankTemplate = template
     for (let i = 0; i < target.length; i++) {
-      let x = new RegExp(target[i][0], 'g')
-      let z = y.replace(x, target[i][1])
-      y = z
+      let marker = new RegExp(target[i][0], 'g')
+      let markedTemplate = blankTemplate.replace(marker, target[i][1])
+      blankTemplate = markedTemplate
     }
-    return y
+    return blankTemplate
   }
-  // LANGUAGE SWITCH () _____________________________________ */
+// LANGUAGE SWITCH () _____________________________________ */
   /**
    * <b>DESCR:</b><br>
    * Selects all the DOM elements containing a "lang" item
@@ -67,10 +64,10 @@ export default class Model {
    */
   updateLang(origin) {
     let selector
-    console.log(typeof pageStatus);
     if (pageStatus == 'main-page' || typeof pageStatus === 'object') {
       selector = document.querySelectorAll(`[item=lang]`)
-      for (let i = 0; i < selector.length; i++) {
+      selector.forEach((el, i) => {
+        console.log(el);
         switch (selector[i].id) {
           case 'descr':
             this.view.portfolioDescription()
@@ -82,7 +79,7 @@ export default class Model {
             this.view.printer('text', '#bio', `${lang == 'fr' ? bio.FR : bio.EN}`)
             break
         }
-      }
+      })
     } else if (pageStatus == `project-details${this.identify('langDetails', pageStatus)}`) {
       let index = parseInt(this.identify('langDetails', pageStatus), 10) - 2
       selector = document.querySelectorAll(`[item=lang]`)
@@ -162,17 +159,14 @@ export default class Model {
    * @param {object} origin the project w/ all its properties
    */
   focusMiniature(origin) {
-    switch (pageStatus) {
-      case 'main-page':
-        this.view.navButtonConnects(origin)
-        break
-      case `page-details${this.identify('langDetails', pageStatus)}`:
-        break
+    if (pageStatus === 'main-page') {
+      this.view.miniatureActive(origin)
     }
+    return
   }
   // LOOSE FOCUS () _________________________________________ */
   looseFocus(origin) {
-    this.view.navButtonDisconnects(origin)
+    this.view.miniatureInactive(origin)
   }
   // ACTIVE BOTTOM NAV () ___________________________________ */
   /**
@@ -217,40 +211,57 @@ export default class Model {
   transition(origin, type) {
     switch (type) {
       case 'to-main-page':
-        this.view.updateClass('#slider', 'add', 'slider-down')
-        setTimeout(() => {
-          this.view.animate(presentation, '800', '0.1s', 'fade-in')
-        }, 300)
-        pageStatus = 'main-page'
+        if (firstClick) {
+          pageStatus = 'main-page'
+          this.view.updateClass('#slider', 'add', 'slider-down')
+          setTimeout(() => {
+            this.view.animate(presentation, '800', '.1s', 'fade-in')
+            this.view.animate(centralNav, '800', '', 'fade-in')
+          }, 300)
+          firstClick = false
+        } else {
+          pageStatus = 'main-page'
+          this.view.updateClass('#slider', 'add', 'slider-down')
+        }
         break
       case 'to-project-details':
         this.view.printer('remove', '#past-and-present')
+        centralNav.style.animation = ''
+        centralNav.style.removeProperty('opacity')
         this.showProjectDetails(origin)
         this.view.animate(presentation, '800', '0.1s', 'fade-in')
+        this.view.animate(projectDetails, '800', '0.2s', 'fade-in')
         break
       case 'project-to-project':
-        this.view.animate(presentation, '800', '0.4s', 'fade-in')
+        this.view.printer('remove', '#project-title')
+        this.view.animate(presentation, '700', '0.3s', 'fade-in')
         if (right) {
-          this.view.animate(centralNav, '700', '', 'slide-left')
+          this.view.animate(centralNav, '600', '', 'slide-left')
         } else {
-          this.view.animate(centralNav, '700', '', 'slide-right')
+          this.view.animate(centralNav, '600', '', 'slide-right')
         }
+        this.view.printer('text', projectDetails, '')
+        this.view.animate(projectDetails, '600', '0.2s', 'fade-in')
+        // HIDE CONTENT SWAP
         setTimeout(() => {
           this.showProjectDetails(origin)
-        }, 350)
+        }, 300)
         break
       case 'back-to-main-page':
+        centralNav.style.opacity = '0'
         this.view.animate(presentation, '800', '0.1s', 'fade-in')
+        this.view.animate(centralNav, '800', '', 'fade-in')
+        this.view.printer('text', projectDetails, '')
         this.view.backToMainPage(origin)
         break
       case 'to-about-me':
         this.view.toAboutMe()
         break
       case 'back-up':
+        this.view.backFromAboutMe()
         setTimeout(() => {
           this.view.animate(presentation, '800', '0.1s', 'fade-in')
         }, 200)
-        this.view.backFromAboutMe()
         break
       case 'back-to-title':
         this.view.backToTitle()

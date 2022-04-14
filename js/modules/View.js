@@ -114,9 +114,9 @@ export default class View {
    * necessary nodes & classes to build the main-page.
    *
    * @method
-   * @param {string} markedMiniature HTML template marked by model & rdy to printer
-   * @param {object} origin the project w/ properties to printer on the page
-   * @param {string} markedfooterNav HTML template marked by model & rdy to printer
+   * @param {string} markedMiniature HTML template marked by model & rdy to print
+   * @param {object} origin the project w/ properties to print on the page
+   * @param {string} markedfooterNav HTML template marked by model & rdy to print
    */
   projects(markedMiniature, origin, markedfooterNav) {
     this.printer('div', '#central-nav', markedMiniature)
@@ -126,9 +126,7 @@ export default class View {
   // PORTFOLIO'S DESCRIPTION () _____________________________ */
   portfolioDescription() {
     this.printer('text', '#descr', lang === 'fr' ? descr.FR : descr.EN)
-    if (pageStatus === 'main-page' && !document.querySelector('#past-and-present')) {
-      this.printer('div', '#presentation', pastAndPresent)
-    }
+    this.printer('div', '#right-descr', pastAndPresent)
     this.printer('text', '#past-and-present', lang === 'fr' ? pastAndPresentDescr.FR : pastAndPresentDescr.EN)
   }
   // VALIDATION DATE () _____________________________________ */
@@ -148,18 +146,18 @@ export default class View {
     this.updateClass(`#en`, 'add', 'lang-button-active')
     this.updateClass('#fr', 'remove', 'lang-button-active')
   }
-  // OVER SCREEN DOWN () ____________________________________ */
-  navButtonConnects(origin) {
+  // NAV SQUARE ACTIVE () ___________________________________ */
+  miniatureActive(origin) {
     this.updateClass(`#footerNav${origin.id}`, 'add', 'active')
   }
-  // OVER SCREEN UP () ______________________________________ */
-  navButtonDisconnects(origin) {
+  // NAV SQUARE INACTIVE () _________________________________ */
+  miniatureInactive(origin) {
     this.updateClass(`#footerNav${origin.id}`, 'remove', 'active')
   }
   // SHOW ARROWS () _________________________________________ */
   /**
    * <b>DESCR:</b><br>
-   * Displays arrows on the screen sides in order to navigate
+   * Displays arrows on the viewport sides in order to navigate
    * through next / previous project details.
    *
    * @method
@@ -189,22 +187,11 @@ export default class View {
    * @param {string} tabletDiv HTML template marked by model & rdy to printer
    */
   projectDetails(origin, mobileDiv, desktopDiv, tabletDiv) {
-    const firstPrint = () => {
-      let lmdmf = {
-        firstDiv: document.querySelector('#project-title'),
-        secondDiv: document.querySelector('#project-details-menu')
-      }
-      return Object.values(lmdmf).every(Boolean)
-    }
-    if (firstPrint()) {
-      this.printer('remove', '#project-title')
-      this.printer('remove', '#project-details-menu')
-    }
-
+    
     this.printer('text', '#central-nav', ' ')
     this.printer('text', '#descr', lang === 'fr' ? origin.descr.FR : origin.descr.EN)
 
-    this.printer('div', '#presentation', projectTitleTemplate)
+    this.printer('div', '#right-descr', projectTitleTemplate)
     this.printer('text', '#project-title', origin.title)
 
     this.printer('text', '#central-nav', skillsTemplate)
@@ -225,7 +212,7 @@ export default class View {
     this.printer('div', '#snapshots', tabletDiv)
     this.printer('div-before', `#tablet`, tabletWidthTemplate)
     // bottom "details" nav
-    this.printer('div-before-begin', '#footer', detailsMenuTemplate)
+    this.printer('div-before', '#project-details-menu', detailsMenuTemplate)
     this.printer('div', '#responsive', `${origin.resp === true ? checkBox.true : checkBox.false}`)
     this.printer('text', '#page-details-date', `<p>${lang === 'fr' ? validation.FR : validation.EN}</p><p>${lang === 'fr' ? origin.date.FR : origin.date.EN}</p>`)
     this.printer('div', '#projects-github', `<a href="${origin.git}" target="blank">GITHUB</h6>`)
@@ -260,18 +247,16 @@ export default class View {
   // BACK TO MAIN PAGE () ___________________________________ */
   backToMainPage() {
     pageStatus = 'main-page'
-    this.printer('text', '#descr', ' ')
-    this.printer('text', '#central-nav', ' ')
-    this.printer('text', '#footer-nav', ' ')
+    this.printer('text', '#descr', '')
+    this.printer('text', '#central-nav', '')
+    this.printer('text', '#footer-nav', '')
     this.printer('remove', '#project-title')
-    this.printer('remove', '#project-details-menu')
     if(document.querySelector('#left')) {
       this.printer('remove', '#left')
     }
     if (document.querySelector('#right')) {
       this.printer('remove', '#right')
     }
-    this.portfolioDescription()
   }
   // TO ABOUT ME () _________________________________________ */
   toAboutMe() {
@@ -306,10 +291,7 @@ export default class View {
   }
   // BACK TO TITLE () _______________________________________ */
   backToTitle() {
-    this.updateClass('#slider', 'remove', 'slider-down')
     pageStatus = 'home-logo'
-    setTimeout(() => {
-      presentation.style.animation = ''
-    }, 300)
+    this.updateClass('#slider', 'remove', 'slider-down')
   }
 }

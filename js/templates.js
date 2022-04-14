@@ -39,11 +39,11 @@ const mobileWidthTemplate = '<p align="center">- 425px -</p>'
 const tabletWidthTemplate = '<p align="center">- 750px -</p>'
 const desktopWidthTemplate = '<p align="center">- 1400px -</p>'
 
-const detailsMenuTemplate = `<nav id="project-details-menu" style="animation: 800s ease-in-out fade-in;"><div class="bottom-menu">technologies</div>
+const detailsMenuTemplate = `<div class="bottom-menu">technologies</div>
                             <div id="responsive" class="bottom-menu"><p>full responsive</p></div>
                             <div id="page-details-date" class="bottom-menu" item="lang"></div>
                             <div id="projects-github" class="bottom-menu"><img src="Graphics/techIcons/git.svg" width="50px" height="50px"></div>
-                           </nav>`
+                            `
 
 const checkBox = {
   'true': '<div class="check-box true"></div>',

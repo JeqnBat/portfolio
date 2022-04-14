@@ -25,6 +25,9 @@ ______________________________________________________ */
 	margin-right: 20px;
 }
 /* Language switch */
+header span {
+	margin: 0 1px;
+}
 .fr-engl {
 	opacity: 0;
 	color: rgb(34, 32, 29, .4);
@@ -101,6 +104,7 @@ ______________________________________________________ */
 	align-items: flex-start;
 	justify-content: space-between;
   min-height: 160px;
+  max-height: 160px;
 	width: 100%;
 }
 #descr {
@@ -112,12 +116,13 @@ ______________________________________________________ */
 	background: rgb(44 4 23 / 0.05);
 	width: 100%;
 }
-#past-and-present {
+#right-descr {
   display: flex;
   justify-content: center;
-  align-items: center;
+	align-items: flex-start;
   width: 100%;
   height: 100%;
+	margin-top: 30px;
 }
 /* Main section w/ miniatures navigation */
 #central-nav {
@@ -127,7 +132,6 @@ ______________________________________________________ */
 	height: 300px;
 	width: 100%;
 	margin-top: 30px;
-	opacity: 1;
 }
 .miniature {
 	overflow: hidden;

@@ -10,7 +10,7 @@ export default class Controller {
   constructor(model) {
     this.model = model
   }
-  // TITLE CLICK () _________________________________________ */
+// TITLE CLICK () _________________________________________ */
   /**
    * <b>DESCR:</b><br>
    * Slides up the home screen outside the viewport
@@ -21,19 +21,23 @@ export default class Controller {
   titleClick(project) {
     this.model.transition(project, 'to-main-page')
   }
-  // #PORTFOLIO CLICK () ____________________________________ */
+// PORTFOLIO CLICK () _____________________________________ */
   /**
    * <b>DESCR:</b><br>
    * Resets DOM to 'main-page' configuration.
    * "HOME" button.
    *
    * @method
-   * @param {object} project the project's instance
+   * @param {object} projects all the projects
    */
-  portfolioClick(project) {
-    this.model.transition(project, 'back-to-main-page')
+  homeClick(projects) {
+    this.model.transition(projects, 'back-to-main-page')
+    for (let i = 0; i < projects.length; i++) {
+      this.model.press(projects[i])
+    }
+    this.model.updateLang(projects)
   }
-  // LANG CLICK () __________________________________________ */
+// LANG CLICK () __________________________________________ */
   /**
    * <b>DESCR:</b><br>
    * Switches language on nav language click.
@@ -45,7 +49,7 @@ export default class Controller {
   langClick(project) {
     this.model.updateLang(project)
   }
-  // MINIATURE & BOTTOM NAV ITEM'S MOUSEOVER () _____________ */
+// MINIATURE & BOTTOM NAV ITEM'S MOUSEOVER () _____________ */
   /**
    * <b>DESCR:</b><br>
    * Calls model & view to update the viewport as content is
@@ -61,24 +65,16 @@ export default class Controller {
     this.model.looseFocus(project)
   }
   footerNavMouseHover(project) {
-    if (pageStatus === 'main-page') {
-      let el = document.querySelector(`[item="OCP#${project.id}"]`)
-      this.model.view.updateClass(el.firstChild, 'add', 'slide-down')
-      this.model.focusMiniature(project)
-    } else {
-      return
-    }
+    const element = document.querySelector(`[item="OCP#${project.id}"]`)
+    this.model.view.updateClass(element.firstChild, 'add', 'slide-down')
+    this.model.focusMiniature(project)
   }
   footerNavMouseOut(project) {
-    if (pageStatus === 'main-page') {
-      let el = document.querySelector(`[item="OCP#${project.id}"]`)
-      this.model.view.updateClass(el.firstChild, 'remove', 'slide-down')
-      this.model.looseFocus(project)
-    } else {
-      return
-    }
+    const element = document.querySelector(`[item="OCP#${project.id}"]`)
+    this.model.view.updateClass(element.firstChild, 'remove', 'slide-down')
+    this.model.looseFocus(project)
   }
-  // MINIATURE & BOTTOM NAV & ARROWS CLICK () _______________ */
+// MINIATURE & BOTTOM NAV & ARROWS CLICK () _______________ */
   /** <b>DESCR:</b><br>
    * Transitions from 'main-page' to 'project-details'
    * Appends new layout for #central-nav
@@ -90,12 +86,8 @@ export default class Controller {
    * @param {object} project the project w/ all its properties
    */
   miniatureClick(project) {
-    if (pageStatus === 'main-page') {
-      this.model.transition(project, 'to-project-details')
-      this.model.looseFocus(project)
-    } else {
-      this.model.transition(project, 'project-to-project')
-    }
+    this.model.transition(project, 'to-project-details')
+    this.model.looseFocus(project)
   }
   bottomNavClick(project) {
     if (pageStatus === 'main-page') {
@@ -105,13 +97,15 @@ export default class Controller {
       this.model.transition(project, 'project-to-project')
     }
   }
-  rightArrowClick(project) {
+  next(project) {
+    right = true
     this.model.transition(project, 'project-to-project')
   }
-  leftArrowClick(project) {
+  previous(project) {
+    right = false
     this.model.transition(project, 'project-to-project')
   }
-  // MORE ABOUT ME CLICK () _________________________________ */
+// MORE ABOUT ME CLICK () _________________________________ */
   /**
    * <b>DESCR:</b><br>
    * Toggles the 'More about me' page
@@ -125,7 +119,7 @@ export default class Controller {
   backUpClick(project) {
     this.model.transition(project, 'back-up')
   }
-  // DELEGATE () ____________________________________________ */
+// DELEGATE () ____________________________________________ */
   /**
    * <b>DESCR:</b><br>
    * Stores all the program's events inside the same method.
@@ -152,38 +146,32 @@ export default class Controller {
         // LOGO CLICK
         } else if (event.target.matches('#portfolio-button')) {
           if (pageStatus === 'main-page') {
-            this.model.transition(projects, 'back-to-title')
+            that.model.transition(projects, 'back-to-title')
             resolve('#PORTFOLIO clicked from main page')
-            return
           } else {
-            that.portfolioClick(projects)
-            for (let i = 0; i < projects.length; i++) {
-              that.model.press(projects[i])
-            }
+            that.homeClick(projects)
             resolve('#PORTFOLIO clicked from details')
           }
           // MINIATURE CLICK
-        } else if (event.target.closest('.miniature')) {
-          let miniature = event.target.closest('.miniature')
-          let item = miniature.getAttribute('item')
-          that.miniatureClick(projects[that.model.identify('miniature', item)])
+        } else if (event.target.closest('.miniature') && pageStatus === 'main-page') {
+          const miniature = event.target.closest('.miniature')
+          const projectName = miniature.getAttribute('item')
+          that.miniatureClick(projects[that.model.identify('miniature', projectName)])
           resolve('miniature clicked')
           // FOOTER NAVIGATION CLICK
         } else if (event.target.matches('.footer-nav-item')) {
-          let item = event.target.getAttribute('id')
-          that.bottomNavClick(projects[that.model.identify('bottomNav', item)])
+          const projectId = event.target.getAttribute('id')
+          that.bottomNavClick(projects[that.model.identify('bottomNav', projectId)])
           resolve('bottomNav clicked')
           // RIGHT ARROW CLICK
         } else if (event.target.matches('#right')) {
-          right = true
-          let targetNumber = parseInt(that.model.identify('langDetails', pageStatus), 10) - 1
-          that.rightArrowClick(projects[targetNumber])
+          const targetNumber = parseInt(that.model.identify('langDetails', pageStatus), 10) - 1
+          that.next(projects[targetNumber])
           resolve('right arrow clicked')
           // LEFT ARROW CLICK
         } else if (event.target.matches('#left')) {
-          right = false
-          let targetNumber = parseInt(that.model.identify('langDetails', pageStatus), 10) - 3
-          that.leftArrowClick(projects[targetNumber])
+          const targetNumber = parseInt(that.model.identify('langDetails', pageStatus), 10) - 3
+          that.previous(projects[targetNumber])
           resolve('left arrow clicked')
           // MORE ABOUT ME CLICK
         } else if (event.target.matches('#about-me')) {
@@ -197,17 +185,17 @@ export default class Controller {
           return
         }
       }, false)
-      // MOUSE OVER EVENTS
+      // MOUSE HOVER EVENTS
       document.body.addEventListener('mouseenter', (event) => {
-        // MOUSE OVER MINIATURE
+        // MOUSE HOVER MINIATURE
         if (event.target.matches('.miniature')) {
-          let item = event.target.getAttribute('item')
-          that.miniatureMouseOver(projects[that.model.identify('miniature', item)])
+          const projectName = event.target.getAttribute('item')
+          that.miniatureMouseOver(projects[that.model.identify('miniature', projectName)])
           resolve('miniature hovered')
-        // MOUSE OVER FOOTER NAVIGATION
-        } else if (event.target.matches('.footer-nav-item')) {
-          let item = event.target.getAttribute('id')
-          that.footerNavMouseHover(projects[that.model.identify('bottomNav', item)])
+        // MOUSE HOVER FOOTER NAV
+        } else if (event.target.matches('.footer-nav-item') && pageStatus === 'main-page') {
+          const projectId = event.target.getAttribute('id')
+          that.footerNavMouseHover(projects[that.model.identify('bottomNav', projectId)])
           resolve('bottom nav hovered')
         } else {
           return
@@ -217,13 +205,13 @@ export default class Controller {
       document.body.addEventListener('mouseleave', (event) => {
         // MOUSE OUT MINIATURE
         if (event.target.matches('.miniature')) {
-          let item = event.target.getAttribute('item')
-          that.miniatureMouseOut(projects[that.model.identify('miniature', item)])
+          const projectName = event.target.getAttribute('item')
+          that.miniatureMouseOut(projects[that.model.identify('miniature', projectName)])
           resolve('miniature mouseout')
         // MOUSE OUT FOOTER NAVIGATION
-        } else if (event.target.matches('.footer-nav-item')) {
-          let item = event.target.getAttribute('id')
-          that.footerNavMouseOut(projects[that.model.identify('bottomNav', item)])
+        } else if (event.target.matches('.footer-nav-item') && pageStatus === 'main-page') {
+          const projectId = event.target.getAttribute('id')
+          that.footerNavMouseOut(projects[that.model.identify('bottomNav', projectId)])
           resolve('bottom nav mouseout')
         } else {
           return

@@ -8,10 +8,12 @@ let html = document.querySelector('html')
 let lang = html.getAttribute('lang')
 let pageStatus = 'home-logo' // RESET 'main-page'
 let loading = 'pending' // used to prevent fast scroll down event to stop main page from printing
-let right = true
+let right = true // ARROW's direction
+let firstClick = true // Record First logo click to manage transition later on
 
 const centralNav = document.querySelector('#central-nav')
 const presentation = document.querySelector('#presentation')
+const projectDetails = document.querySelector('#project-details-menu')
 const siteColor = '#c89580'
 const layout = innerWidth > 1024 ? 'desktop' : 'mobile'
 // BILINGUAL SECTIONS _____________________________________ */
