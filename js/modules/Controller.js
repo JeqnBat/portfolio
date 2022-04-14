@@ -60,7 +60,7 @@ export default class Controller {
   miniatureMouseOut(project) {
     this.model.looseFocus(project)
   }
-  footerNavMouseOver(project) {
+  footerNavMouseHover(project) {
     if (pageStatus === 'main-page') {
       let el = document.querySelector(`[item="OCP#${project.id}"]`)
       this.model.view.updateClass(el.firstChild, 'add', 'slide-down')
@@ -92,6 +92,7 @@ export default class Controller {
   miniatureClick(project) {
     if (pageStatus === 'main-page') {
       this.model.transition(project, 'to-project-details')
+      this.model.looseFocus(project)
     } else {
       this.model.transition(project, 'project-to-project')
     }
@@ -99,6 +100,7 @@ export default class Controller {
   bottomNavClick(project) {
     if (pageStatus === 'main-page') {
       this.model.transition(project, 'to-project-details')
+      this.model.looseFocus(project)
     } else {
       this.model.transition(project, 'project-to-project')
     }
@@ -150,7 +152,7 @@ export default class Controller {
         // LOGO CLICK
         } else if (event.target.matches('#portfolio-button')) {
           if (pageStatus === 'main-page') {
-            this.model.view.updateClass('#slider', 'remove', 'slider-down')
+            this.model.transition(projects, 'back-to-title')
             resolve('#PORTFOLIO clicked from main page')
             return
           } else {
@@ -158,7 +160,6 @@ export default class Controller {
             for (let i = 0; i < projects.length; i++) {
               that.model.press(projects[i])
             }
-            // that.model.updateLang(projects)
             resolve('#PORTFOLIO clicked from details')
           }
           // MINIATURE CLICK
@@ -174,11 +175,13 @@ export default class Controller {
           resolve('bottomNav clicked')
           // RIGHT ARROW CLICK
         } else if (event.target.matches('#right')) {
+          right = true
           let targetNumber = parseInt(that.model.identify('langDetails', pageStatus), 10) - 1
           that.rightArrowClick(projects[targetNumber])
           resolve('right arrow clicked')
           // LEFT ARROW CLICK
         } else if (event.target.matches('#left')) {
+          right = false
           let targetNumber = parseInt(that.model.identify('langDetails', pageStatus), 10) - 3
           that.leftArrowClick(projects[targetNumber])
           resolve('left arrow clicked')
@@ -204,7 +207,7 @@ export default class Controller {
         // MOUSE OVER FOOTER NAVIGATION
         } else if (event.target.matches('.footer-nav-item')) {
           let item = event.target.getAttribute('id')
-          that.footerNavMouseOver(projects[that.model.identify('bottomNav', item)])
+          that.footerNavMouseHover(projects[that.model.identify('bottomNav', item)])
           resolve('bottom nav hovered')
         } else {
           return

@@ -51,7 +51,7 @@ ______________________________________________________ */
   border-bottom: 3px solid transparent;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  transition: all .4s ease-in-out;
+  transition: all .2s ease-in-out;
 }
 
 .title:hover::before {
@@ -84,7 +84,7 @@ ______________________________________________________ */
   align-items: center;
   justify-content: center;
   background: cornsilk;
-  transition: all .3s ease-in-out .2s;
+  transition: all .2s ease-in-out .1s;
 }
 
 .title:hover div {

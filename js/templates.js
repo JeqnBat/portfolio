@@ -11,18 +11,15 @@ const miniatureTemplate = `<div class="miniature" item="OCP#xxxid"><div class="o
                             <h5><div id="datexxxid" item="lang"></div></h5>
                           </div>
                          </div>`
-const pastAndPresent = {
-  'FR': '<div id="past-and-present">Anciens(7) | Nouveaux(2)</div>',
-  'EN': '<div id="past-and-present">Old(7) | Current(2)</div>'
-}
+const pastAndPresent = `<div id="past-and-present" item="lang"></div>`
 const footerNavTemplate = '<div id="footerNavxxxid" class="footer-nav-item">□</div>'
 // PROJECT DETAILS TEMPLATES ______________________________ */
 const projectTitleTemplate = '<title id="project-title"></title>'
 
 const skillsTemplate = `<div id="skills">
-                        <div id="skills-title" item="lang"></div>
                         <img src="Graphics/techIcons/gear.svg" class="three-sixty" alt="gears" height="100px" width="100px">
                         <img src="Graphics/techIcons/gear.svg" class="minus-three-sixty" alt="gears" height="160px" width="160px">
+                        <div id="skills-title" item="lang"></div>
                         <ul id="skills-list" item="lang">
                         </ul>
                        </div>`
@@ -42,8 +39,7 @@ const mobileWidthTemplate = '<p align="center">- 425px -</p>'
 const tabletWidthTemplate = '<p align="center">- 750px -</p>'
 const desktopWidthTemplate = '<p align="center">- 1400px -</p>'
 
-const detailsMenuTemplate = `<nav id="project-details-menu">
-                            <div id="tech" class="bottom-menu"><p>technologies</p></div>
+const detailsMenuTemplate = `<nav id="project-details-menu" style="animation: 800s ease-in-out fade-in;"><div class="bottom-menu">technologies</div>
                             <div id="responsive" class="bottom-menu"><p>full responsive</p></div>
                             <div id="page-details-date" class="bottom-menu" item="lang"></div>
                             <div id="projects-github" class="bottom-menu"><img src="Graphics/techIcons/git.svg" width="50px" height="50px"></div>
@@ -55,7 +51,7 @@ const checkBox = {
 }
 
 const techIconTemplate = `<figure>
-                           <img src="xxxURL" alt="xxx-icon" height="50px" width="50px">
+                           <img src="xxxURL" alt="xxx-icon" height="40px" width="40px">
                            <figcaption>xxx</figcaption>
                         </figure>`
 

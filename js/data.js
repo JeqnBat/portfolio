@@ -3,11 +3,16 @@
  * Stores all the datas, page status & language.
  * Call these objects & their properties w/ the 'Model' class.
  */
-// PAGE LAYOUT, LANGUAGE & STATUS _________________________ */
+// PAGE LAYOUT, LANGUAGE, STATUS & COLOR __________________ */
 let html = document.querySelector('html')
 let lang = html.getAttribute('lang')
 let pageStatus = 'home-logo' // RESET 'main-page'
 let loading = 'pending' // used to prevent fast scroll down event to stop main page from printing
+let right = true
+
+const centralNav = document.querySelector('#central-nav')
+const presentation = document.querySelector('#presentation')
+const siteColor = '#c89580'
 const layout = innerWidth > 1024 ? 'desktop' : 'mobile'
 // BILINGUAL SECTIONS _____________________________________ */
 const descr = {
@@ -17,6 +22,10 @@ const descr = {
   'EN': `These 7 projects have been made throughout my training year to become a Front-End Developper w/
          OpenClassRooms. Hover one of these miniatures to display title & number of the corresponding project,
          click on it to see all the details.`
+}
+const pastAndPresentDescr = {
+  'FR' : 'Achevés(7) | En cours de développement(2)',
+  'EN' : 'Done(7) | Currently working on(2)'
 }
 const skills = {
     'FR': `Compétences`,

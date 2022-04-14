@@ -101,7 +101,7 @@ h6 {
 	width: 100vw;
 	height: 100vh;
 }
-/* 2. ANIMATIONS
+/* 2. ANIMATIONS & TRANSITIONS
 ______________________________________________________ */
 .down {
 	-webkit-animation: down 1s ease-in-out;
@@ -110,21 +110,6 @@ ______________________________________________________ */
 .up {
 	-webkit-animation: up 1s ease-in-out;
 					animation: up 1s ease-in-out;
-}
-.invisible {
-	opacity: 0;
-}
-.fade-in {
-	-webkit-animation: fade-in .3s ease-in-out;
-					animation: fade-in .3s ease-in-out;
-}
-.fade-in-slow {
-	-webkit-animation: fade-in 1s ease-in-out;
-					animation: fade-in 1s ease-in-out;
-}
-.fade-out-in {
-	-webkit-animation: fade-out-in .6s ease-in-out;
-					animation: fade-out-in .6s ease-in-out;
 }
 .three-sixty {
 	-webkit-animation: three-sixty 8s linear infinite;
@@ -186,25 +171,40 @@ ______________________________________________________ */
 }
 /* Fade-in */
 @-webkit-keyframes fade-in {
-  0% { opacity: 0%; }
-  100% { opacity: 100%; }
+  0% { opacity: 0; }
+  .05% { opacity: 1; }
+  100% { opacity: 1; }
 }
 @keyframes fade-in {
-	0% { opacity: 0%; }
-  100% { opacity: 100%; }
+  0% { opacity: 0; }
+  .05% { opacity: 1; }
+  100% { opacity: 1; }
 }
-/* Fade-out-in */
-@-webkit-keyframes fade-out-in {
-  0% { opacity: 100%; }
-	25% { opacity: 0%; }
-	60% { opacity: 0%; }
-  100% { opacity: 100%; }
+/* horizontal-slide left */
+@-webkit-keyframes slide-left {
+  0% { transform: translateX(0); }
+  .05% { transform: translateX(-45vw); opacity: 0; }
+  .051% { transform: translateX(45vw); opacity: 0; }
+	.10% { transform: translateX(0); opacity: 1; }
 }
-@keyframes fade-out-in {
-	0% { opacity: 100%; }
-	25% { opacity: 0%; }
-	60% { opacity: 0%; }
-  100% { opacity: 100%; }
+@keyframes slide-left {
+  0% { transform: translateX(0); }
+  .05% { transform: translateX(-45vw); opacity: 0; }
+  .051% { transform: translateX(45vw); opacity: 0; }
+	.10% { transform: translateX(0); opacity: 1; }
+}
+/* horizontal-slide right */
+@-webkit-keyframes slide-right {
+  0% { transform: translateX(0); }
+  .05% { transform: translateX(45vw); opacity: 0; }
+  .051% { transform: translateX(-45vw); opacity: 0; }
+	.10% { transform: translateX(0); opacity: 1; }
+}
+@keyframes slide-right {
+  0% { transform: translateX(0); }
+  .05% { transform: translateX(45vw); opacity: 0; }
+  .051% { transform: translateX(-45vw); opacity: 0; }
+	.10% { transform: translateX(0); opacity: 1; }
 }
 /* Rotate 360° */
 @-webkit-keyframes three-sixty {

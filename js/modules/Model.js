@@ -67,7 +67,8 @@ export default class Model {
    */
   updateLang(origin) {
     let selector
-    if (pageStatus == 'main-page' || pageStatus == 'about-me') {
+    console.log(typeof pageStatus);
+    if (pageStatus == 'main-page' || typeof pageStatus === 'object') {
       selector = document.querySelectorAll(`[item=lang]`)
       for (let i = 0; i < selector.length; i++) {
         switch (selector[i].id) {
@@ -114,8 +115,9 @@ export default class Model {
         this.view.activeEN()
         break
     }
-    selector.forEach((element) => {
-      this.view.fadeIn('#' + element.getAttribute('id'))
+    // FADE-IN
+    selector.forEach((e) => {
+      this.view.animate(e, '600', '', 'fade-in')
     })
   }
   // PRINTER () _____________________________________________ */
@@ -140,9 +142,9 @@ export default class Model {
           resolve('page printed')
           break
         case 'project-details':
-          let mobileDiv = this.mark(screenShotTemplate, ['xxxurl', `${origin.url}`], ['layout', 'mobile'], ['imgFile', `${origin.img.mobile}`], ['color', `${origin.color}`], ['xxx', '108'], ['yyy', '202'])
-          let desktopDiv = this.mark(screenShotTemplate, ['xxxurl', `${origin.url}`], ['layout', 'desktop'], ['imgFile', `${origin.img.desktop}`], ['color', `${origin.color}`], ['xxx', '512'], ['yyy', '271'])
-          let tabletDiv = this.mark(screenShotTemplate, ['xxxurl', `${origin.url}`], ['layout', 'tablet'], ['imgFile', `${origin.img.tablet}`], ['color', `${origin.color}`], ['xxx', '234'], ['yyy', '311'])
+          let mobileDiv = this.mark(screenShotTemplate, ['xxxurl', `${origin.url}`], ['layout', 'mobile'], ['imgFile', `${origin.img.mobile}`], ['color', `${siteColor}`], ['xxx', '70'], ['yyy', '131'])
+          let desktopDiv = this.mark(screenShotTemplate, ['xxxurl', `${origin.url}`], ['layout', 'desktop'], ['imgFile', `${origin.img.desktop}`], ['color', `${siteColor}`], ['xxx', '332'], ['yyy', '175'])
+          let tabletDiv = this.mark(screenShotTemplate, ['xxxurl', `${origin.url}`], ['layout', 'tablet'], ['imgFile', `${origin.img.tablet}`], ['color', `${siteColor}`], ['xxx', '152'], ['yyy', '202'])
           pageStatus = `project-details${origin.id}`
           this.view.projectDetails(origin, mobileDiv, desktopDiv, tabletDiv)
           resolve('page printed')
@@ -162,7 +164,7 @@ export default class Model {
   focusMiniature(origin) {
     switch (pageStatus) {
       case 'main-page':
-        this.view.OverScreenDown(origin)
+        this.view.navButtonConnects(origin)
         break
       case `page-details${this.identify('langDetails', pageStatus)}`:
         break
@@ -170,13 +172,7 @@ export default class Model {
   }
   // LOOSE FOCUS () _________________________________________ */
   looseFocus(origin) {
-    switch (pageStatus) {
-      case 'main-page':
-        this.view.OverScreenUp(origin)
-        break
-      case `page-details${this.identify('langDetails', pageStatus)}`:
-        break
-    }
+    this.view.navButtonDisconnects(origin)
   }
   // ACTIVE BOTTOM NAV () ___________________________________ */
   /**
@@ -222,24 +218,38 @@ export default class Model {
     switch (type) {
       case 'to-main-page':
         this.view.updateClass('#slider', 'add', 'slider-down')
+        setTimeout(() => {
+          this.view.animate(presentation, '800', '0.1s', 'fade-in')
+        }, 300)
         pageStatus = 'main-page'
         break
       case 'to-project-details':
-        console.log('main to details');
         this.view.printer('remove', '#past-and-present')
         this.showProjectDetails(origin)
+        this.view.animate(presentation, '800', '0.1s', 'fade-in')
         break
       case 'project-to-project':
-        console.log('details to details');
-        this.showProjectDetails(origin)
+        this.view.animate(presentation, '800', '0.4s', 'fade-in')
+        if (right) {
+          this.view.animate(centralNav, '700', '', 'slide-left')
+        } else {
+          this.view.animate(centralNav, '700', '', 'slide-right')
+        }
+        setTimeout(() => {
+          this.showProjectDetails(origin)
+        }, 350)
         break
       case 'back-to-main-page':
+        this.view.animate(presentation, '800', '0.1s', 'fade-in')
         this.view.backToMainPage(origin)
         break
       case 'to-about-me':
         this.view.toAboutMe()
         break
       case 'back-up':
+        setTimeout(() => {
+          this.view.animate(presentation, '800', '0.1s', 'fade-in')
+        }, 200)
         this.view.backFromAboutMe()
         break
       case 'back-to-title':
