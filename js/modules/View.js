@@ -7,78 +7,17 @@
  */
 export default class View {
   constructor() {
-  }
-// UPDATE CLASS () ________________________________________ */
-/**
-  * <b>DESCR:</b><br>
-  * Edits, Adds & Removes any given CSS class in the DOM
-  * Takes 3 entry points:
-  *
-  * @method
-  * @param {string} nodeTarget the targeted DOM element
-  * @param {string} action the action to perform
-  * @param {string} cssProp the targeted CSS property
-  * @param {string} value the value to update
-  */
-  updateClass(nodeTarget, action, cssProp, value) {
-    let element
-    if (typeof nodeTarget === 'string') {
-      element = document.querySelector(nodeTarget)
-    } else {
-      element = nodeTarget 
+    this.$ = (id) => {
+      return document.querySelector(id)
     }
-    switch (action) {
-      case 'add':
-        element.classList.add(cssProp)
-        break
-      case 'remove':
-        element.classList.remove(cssProp)
-        break
-      case 'background-image':
-        element.style.backgroundImage = value
-        break
+    this.$All = (id) => {
+      return document.querySelectorAll(id)
+    }
+    this.write = (id, text) => {
+      this.$(id).innerHTML = text
     }
   }
-  // PRINTER () _____________________________________________ */
-  /**
-   * <b>DESCR:</b><br>
-   * Use printer to create HTML nodes & content & display them
-   * inside the DOM. The printerer has 3 entry points :
-   *
-   * @method
-   * @param {string} type the content's type
-   * @param {string} target the DOM node where to printer content
-   * @param {string} content the actual content
-   */
-  printer(type, target, content) {
-    let element
-    if (typeof target === 'string') {
-      element = document.querySelector(target)
-    } else {
-      element = target 
-    }
-    switch (type) {
-      case 'text':
-        element.innerHTML = content
-        break
-      case 'div':
-        element.insertAdjacentHTML('beforeend', content)
-        break
-      case 'div-before':
-        element.insertAdjacentHTML('afterbegin', content)
-        break
-      case 'div-before-begin':
-        element.insertAdjacentHTML('beforebegin', content)
-        break
-      case 'div-after-end':
-        element.insertAdjacentHTML('afterend', content)
-        break
-      case 'remove':
-        element.remove()
-        break
-    }
-  }
-  // ANIMATE () _____________________________________________ */
+// ANIMATE () _____________________________________________ */
   /**
    * <b>DESCR:</b><br>
    * Adds a CSS class to a DOM element to make it fade in
@@ -94,7 +33,7 @@ export default class View {
       element.setAttribute('style', `animation: ${ms}s ease-in-out ${delay} ${animation}`)
     }, 10)
   }
-  // LANG BUTTONS () ________________________________________ */
+// LANG BUTTONS () ________________________________________ */
   /**
    * <b>DESCR:</b><br>
    * Manages lang buttons behaviour
@@ -102,12 +41,12 @@ export default class View {
    * @method
    */
   langButtons() {
-    let langButtons = document.querySelectorAll('.fr-engl')
-    langButtons.forEach((element) => {
-      this.updateClass(element, 'add', 'enters')
+    const langButtons = this.$All('.fr-engl')
+    langButtons.forEach((el) => {
+      el.classList.add('enters')
     })
   }
-  // PROJECTS () ____________________________________________ */
+// PROJECT () _____________________________________________ */
   /**
    * <b>DESCR:</b><br>
    * Gets empty DOM from 'logoclick' & fills it in w/ all the
@@ -116,45 +55,44 @@ export default class View {
    * @method
    * @param {string} markedMiniature HTML template marked by model & rdy to print
    * @param {object} origin the project w/ properties to print on the page
-   * @param {string} markedfooterNav HTML template marked by model & rdy to print
+   * @param {string} markedFooterNav HTML template marked by model & rdy to print
    */
-  projects(markedMiniature, origin, markedfooterNav) {
-    this.printer('div', '#central-nav', markedMiniature)
-    this.updateClass(`[item="OCP#${origin.id}"]`, 'background-image', 'n00b', layout === 'mobile' ? `url("${origin.img.resp}")` : `url("${origin.img.mini}")`)
-    this.printer('div', '#footer-nav', markedfooterNav)
+  project(markedMiniature, origin, markedFooterNav) {
+    this.$('#central-nav').insertAdjacentHTML('beforeend', markedMiniature)
+    this.$('#central-nav').lastChild.style.backgroundImage = layout === 'mobile' ? `url("${origin.img.resp}")` : `url("${origin.img.mini}")`
+    this.$('#footer-nav').insertAdjacentHTML('beforeend', markedFooterNav)
   }
-  // PORTFOLIO'S DESCRIPTION () _____________________________ */
+// PORTFOLIO'S DESCRIPTION () _____________________________ */
   portfolioDescription() {
-    this.printer('text', '#descr', lang === 'fr' ? descr.FR : descr.EN)
-    this.printer('div', '#right-descr', pastAndPresent)
-    this.printer('text', '#past-and-present', lang === 'fr' ? pastAndPresentDescr.FR : pastAndPresentDescr.EN)
+    this.write('#descr', lang === 'fr' ? descr.FR : descr.EN)
+    this.write('#right-descr', lang === 'fr' ? pastAndPresentDescr.FR : pastAndPresentDescr.EN)
   }
-  // VALIDATION DATE () _____________________________________ */
+// VALIDATION DATE () _____________________________________ */
   validationDate(origin) {
-    for (let j = 0; j < origin.length; j++) {
-      this.printer('text', `#val${origin[j].id}`, lang === 'fr' ? validation.FR : validation.EN)
-      this.printer('text', `#date${origin[j].id}`, lang === 'fr' ? origin[j].date.FR : origin[j].date.EN)
-    }
+    origin.forEach((el, i) => {
+      this.write(`#val${origin[i].id}`, `#val${origin[i].id}`, lang === 'fr' ? validation.FR : validation.EN)
+      this.write(`#date${origin[i].id}`, `#date${origin[i].id}`, lang === 'fr' ? origin[i].date.FR : origin[i].date.EN)
+    })
   }
-  // ACTIVE FR () ___________________________________________ */
+// ACTIVE FR () ___________________________________________ */
   activeFR() {
-    this.updateClass(`#fr`, 'add', 'lang-button-active')
-    this.updateClass('#en', 'remove', 'lang-button-active')
+    this.$('#fr').classList.add('lang-button-active')
+    this.$('#en').classList.remove('lang-button-active')
   }
-  // ACTIVE EN () ___________________________________________ */
+// ACTIVE EN () ___________________________________________ */
   activeEN() {
-    this.updateClass(`#en`, 'add', 'lang-button-active')
-    this.updateClass('#fr', 'remove', 'lang-button-active')
+    this.$('#en').classList.add('lang-button-active')
+    this.$('#fr').classList.remove('lang-button-active')
   }
-  // NAV SQUARE ACTIVE () ___________________________________ */
+// NAV SQUARE ACTIVE () ___________________________________ */
   miniatureActive(origin) {
-    this.updateClass(`#footerNav${origin.id}`, 'add', 'active')
+    this.$(`#footerNav${origin.id}`).classList.add('active')
   }
-  // NAV SQUARE INACTIVE () _________________________________ */
+// NAV SQUARE INACTIVE () _________________________________ */
   miniatureInactive(origin) {
-    this.updateClass(`#footerNav${origin.id}`, 'remove', 'active')
+    this.$(`#footerNav${origin.id}`).classList.remove('active')
   }
-  // SHOW ARROWS () _________________________________________ */
+// SHOW ARROWS () _________________________________________ */
   /**
    * <b>DESCR:</b><br>
    * Displays arrows on the viewport sides in order to navigate
@@ -163,64 +101,63 @@ export default class View {
    * @method
    */
   showArrows() {
-    this.printer('div-before', '#central-nav', leftArrow)
-    this.printer('div', '#central-nav', rightArrow)
+    this.$('#central-nav').insertAdjacentHTML('afterbegin', leftArrow)
+    this.$('#central-nav').insertAdjacentHTML('beforeend', rightArrow)
  
     if (pageStatus.includes('8')) {
-      this.printer('remove', '#right')
-      this.updateClass('#snapshots', 'add', 'right')
+      this.$('#right').remove()
+      this.$('#snapshots').classList.add('right')
     } else if (pageStatus.includes('2')) {
-      this.printer('remove', '#left')
-      this.updateClass('#skills', 'add', 'left')
+      this.$('#left').remove()
+      this.$('#skills').classList.add('left')
     }
   }
-  // PROJECT DETAILS () _____________________________________ */
+// PROJECT DETAILS () _____________________________________ */
   /**
    * <b>DESCR:</b><br>
-   * Cleans the DOM from central nav then printers new nodes w/
-   * content coming from the projects objects.
+   * Cleans the DOM from central nav then prints new nodes w/
+   * content coming from the projects object.
    *
    * @method
-   * @param {object} origin the project w/ properties to printer on the page
-   * @param {string} mobileDiv HTML template marked by model & rdy to printer
-   * @param {string} desktopDiv HTML template marked by model & rdy to printer
-   * @param {string} tabletDiv HTML template marked by model & rdy to printer
+   * @param {object} origin the project w/ properties to print on the page
+   * @param {string} mobileDiv HTML template marked by model & rdy to print
+   * @param {string} desktopDiv HTML template marked by model & rdy to print
+   * @param {string} tabletDiv HTML template marked by model & rdy to print
    */
   projectDetails(origin, mobileDiv, desktopDiv, tabletDiv) {
-    
-    this.printer('text', '#central-nav', ' ')
-    this.printer('text', '#descr', lang === 'fr' ? origin.descr.FR : origin.descr.EN)
-
-    this.printer('div', '#right-descr', projectTitleTemplate)
-    this.printer('text', '#project-title', origin.title)
-
-    this.printer('text', '#central-nav', skillsTemplate)
-    // printers project's goals
-    for (let i = 0; i < origin.skills.FR.length; i++) {
-      this.printer('div', '#skills-list', `<li>${lang === 'fr' ? origin.skills.FR[i] : origin.skills.EN[i]}</li>`)
-    }
-    this.printer('div', '#skills-title', lang === 'fr' ? skills.FR : skills.EN)
-    // screenshots DIV container
-    this.printer('div', '#central-nav', '<div id="snapshots"></div>')
-    // mobile
-    this.printer('div', '#snapshots', mobileDiv)
-    this.printer('div-before', `#mobile`, mobileWidthTemplate)
-    // desktop
-    this.printer('div', '#snapshots', desktopDiv)
-    this.printer('div-before', `#desktop`, desktopWidthTemplate)
-    // tablet
-    this.printer('div', '#snapshots', tabletDiv)
-    this.printer('div-before', `#tablet`, tabletWidthTemplate)
-    // bottom "details" nav
-    this.printer('div-before', '#project-details-menu', detailsMenuTemplate)
-    this.printer('div', '#responsive', `${origin.resp === true ? checkBox.true : checkBox.false}`)
-    this.printer('text', '#page-details-date', `<p>${lang === 'fr' ? validation.FR : validation.EN}</p><p>${lang === 'fr' ? origin.date.FR : origin.date.EN}</p>`)
-    this.printer('div', '#projects-github', `<a href="${origin.git}" target="blank">GITHUB</h6>`)
+    // 1. Project's description 
+    this.write('#descr', lang === 'fr' ? origin.descr.FR : origin.descr.EN)
+    this.$('#right-descr').insertAdjacentHTML('beforeend', projectTitleTemplate)
+    this.write('#project-title', origin.title)
+    // 2. Central nav DIV */
+    this.write('#central-nav', skillsTemplate)
+    // 3. Project's skills
+    this.$('#skills-title').insertAdjacentHTML('beforeend', lang === 'fr' ? skills.FR : skills.EN)
+    origin.skills.FR.forEach((el, i) => {
+      let skills = this.$('#skills-list')
+      skills.insertAdjacentHTML('beforeend', `<li>${lang === 'fr' ? origin.skills.FR[i] : origin.skills.EN[i]}</li>`)
+    })
+    // 4. Project's screen shots
+    this.$('#central-nav').insertAdjacentHTML('beforeend', snapshots)
+    // Mobile
+    this.$('#snapshots').insertAdjacentHTML('beforeend', mobileDiv)
+    this.$('#mobile').insertAdjacentHTML('afterbegin', mobileWidthTemplate)
+    // Desktop
+    this.$('#snapshots').insertAdjacentHTML('beforeend', desktopDiv)
+    this.$('#desktop').insertAdjacentHTML('afterbegin', desktopWidthTemplate)
+    // Tablet
+    this.$('#snapshots').insertAdjacentHTML('beforeend', tabletDiv)
+    this.$('#tablet').insertAdjacentHTML('afterbegin', tabletWidthTemplate)
+    // 5. Footer w/ project details
+    this.$('#project-details-menu').insertAdjacentHTML('afterbegin', detailsMenuTemplate)
+    this.$('#responsive').insertAdjacentHTML('beforeend', `${origin.resp === true ? checkBox.true : checkBox.false}`)
+    this.write('#page-details-date', `<p>${lang === 'fr' ? validation.FR : validation.EN}</p><p>${lang === 'fr' ? origin.date.FR : origin.date.EN}</p>`)
+    this.$('#projects-github').insertAdjacentHTML('beforeend', `<a href="${origin.git}" target="blank">GITHUB</h6>`)
 
     this.findIcon(origin)
     this.showArrows()
   }
-  // FIND ICON () ___________________________________________ */
+// FIND ICON () ___________________________________________ */
   /**
    * <b>DESCR:</b><br>
    * Compares the 'techIcons' object keys w/ the project's 'tech'
@@ -231,67 +168,96 @@ export default class View {
    * @param {origin} object the project's object w/ all its properties
    */
   findIcon(origin) {
-    let techIconsNames = Object.keys(techIcons)
-
+    const techIconsNames = Object.keys(techIcons)
     for (let i = 0; i < origin.tech.length; i++) {
-      techIconsNames.forEach(element => {
-        if (origin.tech[i] == element) {
+      techIconsNames.forEach(el => {
+        if (origin.tech[i] == el) {
           let markedTemplate = techIconTemplate
-            .replace(/xxxURL/g, `${techIcons[element]}`)
+            .replace(/xxxURL/g, `${techIcons[el]}`)
             .replace(/xxx/g, `${origin.tech[i]}`)
-          this.printer('div', '.bottom-menu', markedTemplate)
+          this.$('.bottom-menu').insertAdjacentHTML('beforeend', markedTemplate)
         }
       })
     }
   }
-  // BACK TO MAIN PAGE () ___________________________________ */
-  backToMainPage() {
-    pageStatus = 'main-page'
-    this.printer('text', '#descr', '')
-    this.printer('text', '#central-nav', '')
-    this.printer('text', '#footer-nav', '')
-    this.printer('remove', '#project-title')
-    if(document.querySelector('#left')) {
-      this.printer('remove', '#left')
-    }
-    if (document.querySelector('#right')) {
-      this.printer('remove', '#right')
-    }
-  }
-  // TO ABOUT ME () _________________________________________ */
-  toAboutMe() {
-    pageStatus = [pageStatus, 'about-me']
-    let langSwitch = document.querySelectorAll('#header span')
-    langSwitch.forEach(span => {
-      this.printer('remove', span)
-      this.printer('div', '#about-me-title header', span.outerHTML)
-    })
-    this.updateClass('#slider', 'add', 'slider-down-2')
-    this.updateClass('#about-me-details', 'add', 'appears')
-    this.printer('div', '#about-me-details', bioTemplate)
-    this.printer('text', '#bio', `${lang === 'fr' ? bio.FR : bio.EN}`)
-  }
-  // BACK FROM ABOUT ME () __________________________________ */  
-  backFromAboutMe() {
-    let langSwitch = document.querySelectorAll('#about-me-title span')
-    langSwitch.forEach(span => {
-      this.printer('remove', span)
-      this.printer('div', '#header header', span.outerHTML)
-    })
-    this.updateClass('#slider', 'remove', 'slider-down-2')
-    this.updateClass('#about-me-details', 'remove', 'appears')
-    setTimeout(() => {
-      this.printer('remove', '#bio')
-    }, 500)
-    if (document.querySelector('#snapshots')) {
-      pageStatus = pageStatus[0]
+// TO MAIN PAGE () ________________________________________ */
+  toMainPage() {
+    if (firstClick) {
+      this.$('#slider').classList.add('slider-down')
+      setTimeout(() => {
+        this.animate(this.$('#presentation'), '800', '.1s', 'fade-in')
+        this.animate(this.$('#central-nav'), '800', '', 'fade-in')
+      }, 300)
+      firstClick = false
     } else {
-      pageStatus = 'main-page'
+      this.$('#slider').classList.add('slider-down')
     }
   }
-  // BACK TO TITLE () _______________________________________ */
+// TO PROJECT DETAILS () __________________________________ */
+  toProjectDetails() {
+    this.write('#right-descr', '')
+    this.$('#central-nav').style.animation = ''
+    this.$('#central-nav').style.removeProperty('opacity')
+    this.animate(this.$('#presentation'), '800', '0.1s', 'fade-in')
+    this.animate(this.$('#project-details-menu'), '800', '0.2s', 'fade-in')
+  }
+// PROJECT TO PROJECT () __________________________________ */
+  fromProjectToProject() {
+    this.write('#right-descr', '')
+    this.write('#project-details-menu', '')
+    this.animate(this.$('#presentation'), '700', '0.3s', 'fade-in')
+    if (right) {
+      this.animate(this.$('#central-nav'), '600', '', 'slide-left')
+    } else {
+      this.animate(this.$('#central-nav'), '600', '', 'slide-right')
+    }
+    this.animate(this.$('#project-details-menu'), '600', '0.2s', 'fade-in')
+  }
+// BACK TO MAIN PAGE () ___________________________________ */
+  backToMainPage() {
+    this.write('#descr','')
+    this.write('#central-nav','')
+    this.write('#footer-nav','')
+    this.write('#project-details-menu', '')
+    this.$('#project-title').remove()
+    if(this.$('#left')) {
+      this.$('#left').remove()
+    }
+    if (this.$('#right')) {
+      this.$('#right').remove()
+    }
+    this.$('#central-nav').style.opacity = '0'
+    this.animate(this.$('#presentation'), '800', '0.1s', 'fade-in')
+    this.animate(this.$('#central-nav'), '800', '', 'fade-in')
+  }
+// TO ABOUT ME () _________________________________________ */
+  toAboutMe() {
+    let langSwitch = this.$All('#header span')
+    langSwitch.forEach(span => {
+      span.remove()
+      this.$('#about-me-title header').insertAdjacentHTML('beforeend', span.outerHTML)
+    })
+    this.$('#slider').classList.add('slider-down-2')
+    this.$('#about-me-details').classList.add('appears')
+    this.$('#about-me-details').insertAdjacentHTML('beforeend', bioTemplate)
+    this.write('#bio', `${lang === 'fr' ? bio.FR : bio.EN}`)
+  }
+// BACK FROM ABOUT ME () __________________________________ */  
+  backFromAboutMe() {
+    setTimeout(() => {
+      this.animate(this.$('#presentation'), '800', '0.1s', 'fade-in')
+      this.$('#bio').remove()
+    }, 200)
+    let langSwitch = this.$All('#about-me-title span')
+    langSwitch.forEach(span => {
+      span.remove()
+      this.$('#header header').insertAdjacentHTML('beforeend', span.outerHTML)
+    })
+    this.$('#slider').classList.remove('slider-down-2')
+    this.$('#about-me-details').classList.remove('appears')
+  }
+// BACK TO TITLE () _______________________________________ */
   backToTitle() {
-    pageStatus = 'home-logo'
-    this.updateClass('#slider', 'remove', 'slider-down')
+    this.$('#slider').classList.remove('slider-down')
   }
 }

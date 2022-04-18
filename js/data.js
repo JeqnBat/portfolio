@@ -3,19 +3,14 @@
  * Stores all the datas, page status & language.
  * Call these objects & their properties w/ the 'Model' class.
  */
-// PAGE LAYOUT, LANGUAGE, STATUS & COLOR __________________ */
-let html = document.querySelector('html')
-let lang = html.getAttribute('lang')
-let pageStatus = 'home-logo' // RESET 'main-page'
-let loading = 'pending' // used to prevent fast scroll down event to stop main page from printing
+// PAGE LANGUAGE, STATUS & COLOR __________________________ */
+const siteColor = '#c89580'
+const layout = innerWidth > 600 ? 'desktop' : 'mobile'
+
+let lang = document.querySelector('html').getAttribute('lang')
+let pageStatus = 'home-logo'
 let right = true // ARROW's direction
 let firstClick = true // Record First logo click to manage transition later on
-
-const centralNav = document.querySelector('#central-nav')
-const presentation = document.querySelector('#presentation')
-const projectDetails = document.querySelector('#project-details-menu')
-const siteColor = '#c89580'
-const layout = innerWidth > 1024 ? 'desktop' : 'mobile'
 // BILINGUAL SECTIONS _____________________________________ */
 const descr = {
   'FR': `Ces 7 projets ont été réalisés dans le cadre de ma formation Développeur Front-End auprès d’OpenClassRooms.

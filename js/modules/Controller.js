@@ -32,9 +32,9 @@ export default class Controller {
    */
   homeClick(projects) {
     this.model.transition(projects, 'back-to-main-page')
-    for (let i = 0; i < projects.length; i++) {
+    projects.forEach((el, i) => {
       this.model.press(projects[i])
-    }
+    })
     this.model.updateLang(projects)
   }
 // LANG CLICK () __________________________________________ */
@@ -65,13 +65,11 @@ export default class Controller {
     this.model.looseFocus(project)
   }
   footerNavMouseHover(project) {
-    const element = document.querySelector(`[item="OCP#${project.id}"]`)
-    this.model.view.updateClass(element.firstChild, 'add', 'slide-down')
+    this.model.view.$(`[item="OCP#${project.id}"]`).firstChild.classList.add('slide-down')
     this.model.focusMiniature(project)
   }
   footerNavMouseOut(project) {
-    const element = document.querySelector(`[item="OCP#${project.id}"]`)
-    this.model.view.updateClass(element.firstChild, 'remove', 'slide-down')
+    this.model.view.$(`[item="OCP#${project.id}"]`).firstChild.classList.remove('slide-down')
     this.model.looseFocus(project)
   }
 // MINIATURE & BOTTOM NAV & ARROWS CLICK () _______________ */

@@ -1,4 +1,3 @@
-import View from './View.js'
 /**
  * <b>DESCR:</b><br>
  * The 'Model' class regroups all the logic of the program.
@@ -7,8 +6,8 @@ import View from './View.js'
  * @constructor
  */
 export default class Model {
-  constructor() {
-    this.view = new View()
+  constructor(view) {
+    this.view = view
   }
 // IDENTIFY () ____________________________________________ */
   /**
@@ -65,9 +64,8 @@ export default class Model {
   updateLang(origin) {
     let selector
     if (pageStatus == 'main-page' || typeof pageStatus === 'object') {
-      selector = document.querySelectorAll(`[item=lang]`)
+      selector = this.view.$All(`[item=lang]`)
       selector.forEach((el, i) => {
-        console.log(el);
         switch (selector[i].id) {
           case 'descr':
             this.view.portfolioDescription()
@@ -76,32 +74,32 @@ export default class Model {
             this.view.validationDate(origin)
             break
           case 'bio':
-            this.view.printer('text', '#bio', `${lang == 'fr' ? bio.FR : bio.EN}`)
+            this.view.write('#bio', `${lang == 'fr' ? bio.FR : bio.EN}`)
             break
         }
       })
     } else if (pageStatus == `project-details${this.identify('langDetails', pageStatus)}`) {
       let index = parseInt(this.identify('langDetails', pageStatus), 10) - 2
-      selector = document.querySelectorAll(`[item=lang]`)
-      for (let i = 0; i < selector.length; i++) {
+      selector = this.view.$All(`[item=lang]`)
+      selector.forEach((el, i) => {
         switch (selector[i].id) {
           case 'descr':
-            this.view.printer('text', '#descr', lang == 'fr' ? origin[index].descr.FR : origin[index].descr.EN)
+            this.view.write('#descr', lang == 'fr' ? origin[index].descr.FR : origin[index].descr.EN)
             break
           case 'skills-list':
-            this.view.printer('text', '#skills-list', ' ')
+            this.view.write('#skills-list', '')
             for (let i = 0; i < origin[index].skills.FR.length; i++) {
-              this.view.printer('div', '#skills-list', `<li>${lang == 'fr' ? origin[index].skills.FR[i] : origin[index].skills.EN[i]}</li>`)
+              this.view.$('#skills-list').insertAdjacentHTML('beforeend', `<li>${lang == 'fr' ? origin[index].skills.FR[i] : origin[index].skills.EN[i]}</li>`)
             }
             break
           case 'page-details-date':
-            this.view.printer('text', '#page-details-date', `<p>${lang == 'fr' ? validation.FR : validation.EN}</p><p>${lang == 'fr' ? origin[index].date.FR : origin[index].date.EN}</p>`)
+            this.view.write('#page-details-date', `<p>${lang == 'fr' ? validation.FR : validation.EN}</p><p>${lang == 'fr' ? origin[index].date.FR : origin[index].date.EN}</p>`)
             break
           case 'skills-title':
-            this.view.printer('text', '#skills-title', lang == 'fr' ? skills.FR : skills.EN)
+            this.view.write('#skills-title', lang == 'fr' ? skills.FR : skills.EN)
             break
         }
-      }
+      })
     }
     // NAV BUTTONS
     switch (lang) {
@@ -113,18 +111,18 @@ export default class Model {
         break
     }
     // FADE-IN
-    selector.forEach((e) => {
-      this.view.animate(e, '600', '', 'fade-in')
+    selector.forEach((el) => {
+      this.view.animate(el, '600', '', 'fade-in')
     })
   }
-  // PRINTER () _____________________________________________ */
+  // PRESS () _______________________________________________ */
   /**
    * <b>DESCR:</b><br>
    * Scans 'pageStatus' to determine which part of the DOM
    * should be displayed.
    *
    * Uses the marker to ID the blank templates
-   * Prints it w/ view.printer().
+   * Prints it w/ view.
    *
    * @method
    * @param {object} origin the object whose properties will be printed as markers
@@ -133,23 +131,23 @@ export default class Model {
     return new Promise((resolve, reject) => {
       switch (pageStatus) {
         case 'main-page':
-          let markedMiniature = this.mark(miniatureTemplate, ['xxxid', `${origin.id}`], ['xxxtitle', `${origin.title}`])
-          let markedfooterNav = this.mark(footerNavTemplate, ['xxxid', `${origin.id}`])
-          this.view.projects(markedMiniature, origin, markedfooterNav)
+          const markedMiniature = this.mark(miniatureTemplate, ['xxxid', `${origin.id}`], ['xxxtitle', `${origin.title}`])
+          const markedfooterNav = this.mark(footerNavTemplate, ['xxxid', `${origin.id}`])
+          this.view.project(markedMiniature, origin, markedfooterNav)
           resolve('page printed')
           break
         case 'project-details':
-          let mobileDiv = this.mark(screenShotTemplate, ['xxxurl', `${origin.url}`], ['layout', 'mobile'], ['imgFile', `${origin.img.mobile}`], ['color', `${siteColor}`], ['xxx', '70'], ['yyy', '131'])
-          let desktopDiv = this.mark(screenShotTemplate, ['xxxurl', `${origin.url}`], ['layout', 'desktop'], ['imgFile', `${origin.img.desktop}`], ['color', `${siteColor}`], ['xxx', '332'], ['yyy', '175'])
-          let tabletDiv = this.mark(screenShotTemplate, ['xxxurl', `${origin.url}`], ['layout', 'tablet'], ['imgFile', `${origin.img.tablet}`], ['color', `${siteColor}`], ['xxx', '152'], ['yyy', '202'])
           pageStatus = `project-details${origin.id}`
+          const mobileDiv = this.mark(screenShotTemplate, ['xxxurl', `${origin.url}`], ['layout', 'mobile'], ['imgFile', `${origin.img.mobile}`], ['color', `${siteColor}`], ['xxx', '70'], ['yyy', '131'])
+          const desktopDiv = this.mark(screenShotTemplate, ['xxxurl', `${origin.url}`], ['layout', 'desktop'], ['imgFile', `${origin.img.desktop}`], ['color', `${siteColor}`], ['xxx', '332'], ['yyy', '175'])
+          const tabletDiv = this.mark(screenShotTemplate, ['xxxurl', `${origin.url}`], ['layout', 'tablet'], ['imgFile', `${origin.img.tablet}`], ['color', `${siteColor}`], ['xxx', '152'], ['yyy', '202'])
           this.view.projectDetails(origin, mobileDiv, desktopDiv, tabletDiv)
           resolve('page printed')
           break
       }
     })
   }
-  // FOCUS MINIATURE () _____________________________________ */
+// FOCUS MINIATURE () _____________________________________ */
   /**
    * <b>DESCR:</b><br>
    * Display miniature's details.
@@ -164,11 +162,11 @@ export default class Model {
     }
     return
   }
-  // LOOSE FOCUS () _________________________________________ */
+// LOOSE FOCUS () _________________________________________ */
   looseFocus(origin) {
     this.view.miniatureInactive(origin)
   }
-  // ACTIVE BOTTOM NAV () ___________________________________ */
+// ACTIVE BOTTOM NAV () ___________________________________ */
   /**
    * <b>DESCR:</b><br>
    * Checks if one bottom nav is ACTIVE & removes its current class
@@ -177,15 +175,15 @@ export default class Model {
    * @method
    */
   activeBottomNav() {
-    let currentNav = document.querySelector('#footer-nav .current')
+    const currentNav = this.view.$('#footer-nav .current')
     if (currentNav) {
       let id = `#${currentNav.getAttribute('id')}`
-      this.view.updateClass(id, 'remove', 'current')
+      this.view.$(id).classList.remove('current')
     }
-    let projectIndex = parseInt(this.identify('langDetails', pageStatus), 10)
-    this.view.updateClass(`#footerNav${projectIndex}`, 'add', 'current')
+    const projectIndex = parseInt(this.identify('langDetails', pageStatus), 10)
+    this.view.$(`#footerNav${projectIndex}`).classList.add('current')
   }
-  // SHOW PROJECT'S DETAILS () ______________________________ */
+// SHOW PROJECT'S DETAILS () ______________________________ */
   /**
    * <b>DESCR:</b><br>
    * prints one project details on the full page.
@@ -193,16 +191,14 @@ export default class Model {
    * @method
    * @param {object} origin the project's class w/ all its properties
    */
-  async showProjectDetails(origin) {
-    pageStatus = 'project-details'
-    await this.press(origin)
+  prepareProjectDetails(origin) {
+    this.press(origin)
     this.activeBottomNav()
   }
-  // TRANSITION () __________________________________________ */
+// TRANSITION () __________________________________________ */
   /**
    * <b>DESCR:</b><br>
    * Smoothly handles the DOM in transition between 2 PAGES
-   * printer.
    *
    * @method
    * @param {object} origin the project's class, necessary to update BG
@@ -211,59 +207,40 @@ export default class Model {
   transition(origin, type) {
     switch (type) {
       case 'to-main-page':
-        if (firstClick) {
-          pageStatus = 'main-page'
-          this.view.updateClass('#slider', 'add', 'slider-down')
-          setTimeout(() => {
-            this.view.animate(presentation, '800', '.1s', 'fade-in')
-            this.view.animate(centralNav, '800', '', 'fade-in')
-          }, 300)
-          firstClick = false
-        } else {
-          pageStatus = 'main-page'
-          this.view.updateClass('#slider', 'add', 'slider-down')
-        }
+        pageStatus = 'main-page'
+        this.view.toMainPage()
         break
       case 'to-project-details':
-        this.view.printer('remove', '#past-and-present')
-        centralNav.style.animation = ''
-        centralNav.style.removeProperty('opacity')
-        this.showProjectDetails(origin)
-        this.view.animate(presentation, '800', '0.1s', 'fade-in')
-        this.view.animate(projectDetails, '800', '0.2s', 'fade-in')
+        pageStatus = 'project-details'
+        this.view.toProjectDetails()
+        this.prepareProjectDetails(origin)
         break
       case 'project-to-project':
-        this.view.printer('remove', '#project-title')
-        this.view.animate(presentation, '700', '0.3s', 'fade-in')
-        if (right) {
-          this.view.animate(centralNav, '600', '', 'slide-left')
-        } else {
-          this.view.animate(centralNav, '600', '', 'slide-right')
-        }
-        this.view.printer('text', projectDetails, '')
-        this.view.animate(projectDetails, '600', '0.2s', 'fade-in')
+        pageStatus = 'project-details'
+        this.view.fromProjectToProject()
         // HIDE CONTENT SWAP
         setTimeout(() => {
-          this.showProjectDetails(origin)
+          this.prepareProjectDetails(origin)
         }, 300)
         break
       case 'back-to-main-page':
-        centralNav.style.opacity = '0'
-        this.view.animate(presentation, '800', '0.1s', 'fade-in')
-        this.view.animate(centralNav, '800', '', 'fade-in')
-        this.view.printer('text', projectDetails, '')
-        this.view.backToMainPage(origin)
+        pageStatus = 'main-page'
+        this.view.backToMainPage()
         break
       case 'to-about-me':
+        pageStatus = [pageStatus, 'about-me']
         this.view.toAboutMe()
         break
       case 'back-up':
+        if (this.view.$('#snapshots')) {
+          pageStatus = pageStatus[0]
+        } else {
+          pageStatus = 'main-page'
+        }
         this.view.backFromAboutMe()
-        setTimeout(() => {
-          this.view.animate(presentation, '800', '0.1s', 'fade-in')
-        }, 200)
         break
       case 'back-to-title':
+        pageStatus = 'home-logo'
         this.view.backToTitle()
         break
     }
