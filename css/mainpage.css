@@ -29,13 +29,10 @@ header span {
 	margin: 0 1px;
 }
 .fr-engl {
-	opacity: 0;
+	opacity: 1;
 	color: rgb(34, 32, 29, .4);
 	text-shadow: none;
 	transition: all .15s ease-out;
-}
-.fr-engl.enters {
-	opacity: 1;
 }
 .fr-engl:hover {
 	opacity: .5;

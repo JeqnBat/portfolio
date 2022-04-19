@@ -17,35 +17,34 @@ export default class View {
       this.$(id).innerHTML = text
     }
   }
-// ANIMATE () _____________________________________________ */
-  /**
-   * <b>DESCR:</b><br>
-   * Adds a CSS class to a DOM element to make it fade in
-   *
-   * @method
-   * @param {string} element DOM element to perform fade-in on
-   * @param {string} ms animation speed in MS
-   * @param {string} delay animation delay in MS
-   */
-  animate(element, ms, delay, animation) {
-    element.style.animation = ''
-    setTimeout(() => {
-      element.setAttribute('style', `animation: ${ms}s ease-in-out ${delay} ${animation}`)
-    }, 10)
-  }
-// LANG BUTTONS () ________________________________________ */
-  /**
-   * <b>DESCR:</b><br>
-   * Manages lang buttons behaviour
-   * 
-   * @method
-   */
-  langButtons() {
-    const langButtons = this.$All('.fr-engl')
-    langButtons.forEach((el) => {
-      el.classList.add('enters')
-    })
-  }
+// PORTFOLIO'S DESCRIPTION () _____________________________ */
+portfolioDescription() {
+  this.write('#descr', pageLang === 'fr' ? textFeed.descr.FR : textFeed.descr.EN)
+  this.write('#right-descr', pageLang === 'fr' ? textFeed['right-descr'].FR : textFeed['right-descr'].EN)
+}
+// VALIDATION DATE () _____________________________________ */
+validationDate(origin) {
+  this.write(`#validation-${origin.id}`, pageLang === 'fr' ? textFeed.validation.FR : textFeed.validation.EN)
+  this.write(`#date-${origin.id}`, pageLang === 'fr' ? origin.date.FR : origin.date.EN)
+}
+// ACTIVE FR () ___________________________________________ */
+activeFR() {
+  this.$('#fr').classList.add('lang-button-active')
+  this.$('#en').classList.remove('lang-button-active')
+}
+// ACTIVE EN () ___________________________________________ */
+activeEN() {
+  this.$('#en').classList.add('lang-button-active')
+  this.$('#fr').classList.remove('lang-button-active')
+}
+// NAV SQUARE ACTIVE () ___________________________________ */
+miniatureActive(origin) {
+  this.$(`#footerNav${origin.nb}`).classList.add('active')
+}
+// NAV SQUARE INACTIVE () _________________________________ */
+miniatureInactive(origin) {
+  this.$(`#footerNav${origin.nb}`).classList.remove('active')
+}
 // PROJECT () _____________________________________________ */
   /**
    * <b>DESCR:</b><br>
@@ -61,36 +60,44 @@ export default class View {
     this.$('#central-nav').insertAdjacentHTML('beforeend', markedMiniature)
     this.$('#central-nav').lastChild.style.backgroundImage = layout === 'mobile' ? `url("${origin.img.resp}")` : `url("${origin.img.mini}")`
     this.$('#footer-nav').insertAdjacentHTML('beforeend', markedFooterNav)
+
+    this.portfolioDescription()
+    this.validationDate(origin)
   }
-// PORTFOLIO'S DESCRIPTION () _____________________________ */
-  portfolioDescription() {
-    this.write('#descr', lang === 'fr' ? descr.FR : descr.EN)
-    this.write('#right-descr', lang === 'fr' ? pastAndPresentDescr.FR : pastAndPresentDescr.EN)
-  }
-// VALIDATION DATE () _____________________________________ */
-  validationDate(origin) {
-    origin.forEach((el, i) => {
-      this.write(`#val${origin[i].id}`, `#val${origin[i].id}`, lang === 'fr' ? validation.FR : validation.EN)
-      this.write(`#date${origin[i].id}`, `#date${origin[i].id}`, lang === 'fr' ? origin[i].date.FR : origin[i].date.EN)
+// PROJECT DESCRIPTION () _________________________________ */
+  projectDescr(origin) {
+    if (this.$('#skills-list')) {
+      this.write('#skills-list', '')
+    }
+    this.write(`#descr`, pageLang === 'fr' ? origin.descr.FR : origin.descr.EN)
+    this.write('#skills-title', pageLang === 'fr' ? textFeed["skills-title"].FR : textFeed["skills-title"].EN)
+    origin.skills.FR.forEach((el, i) => {
+      this.$('#skills-list').insertAdjacentHTML('beforeend', `<li>${pageLang === 'fr' ? origin.skills.FR[i] : origin.skills.EN[i]}</li>`)
     })
+    this.write('#page-details-date', `<p>${pageLang === 'fr' ? origin.date.FR : origin.date.EN}</p>`)
   }
-// ACTIVE FR () ___________________________________________ */
-  activeFR() {
-    this.$('#fr').classList.add('lang-button-active')
-    this.$('#en').classList.remove('lang-button-active')
-  }
-// ACTIVE EN () ___________________________________________ */
-  activeEN() {
-    this.$('#en').classList.add('lang-button-active')
-    this.$('#fr').classList.remove('lang-button-active')
-  }
-// NAV SQUARE ACTIVE () ___________________________________ */
-  miniatureActive(origin) {
-    this.$(`#footerNav${origin.id}`).classList.add('active')
-  }
-// NAV SQUARE INACTIVE () _________________________________ */
-  miniatureInactive(origin) {
-    this.$(`#footerNav${origin.id}`).classList.remove('active')
+// FIND ICON () ___________________________________________ */
+  /**
+   * <b>DESCR:</b><br>
+   * Compares the 'techIcons' object keys w/ the project's 'tech'
+   * array values.
+   * printers one icon if a match is found.
+   *
+   * @method
+   * @param {origin} object the project's object w/ all its properties
+   */
+   findIcon(origin) {
+    const techIconsNames = Object.keys(techIcons)
+    for (let i = 0; i < origin.tech.length; i++) {
+      techIconsNames.forEach(el => {
+        if (origin.tech[i] == el) {
+          let markedTemplate = techIconTemplate
+            .replace(/xxxURL/g, `${techIcons[el]}`)
+            .replace(/xxx/g, `${origin.tech[i]}`)
+          this.$('.bottom-menu').insertAdjacentHTML('beforeend', markedTemplate)
+        }
+      })
+    }
   }
 // SHOW ARROWS () _________________________________________ */
   /**
@@ -100,7 +107,7 @@ export default class View {
    *
    * @method
    */
-  showArrows() {
+   showArrows() {
     this.$('#central-nav').insertAdjacentHTML('afterbegin', leftArrow)
     this.$('#central-nav').insertAdjacentHTML('beforeend', rightArrow)
  
@@ -125,62 +132,36 @@ export default class View {
    * @param {string} tabletDiv HTML template marked by model & rdy to print
    */
   projectDetails(origin, mobileDiv, desktopDiv, tabletDiv) {
-    // 1. Project's description 
-    this.write('#descr', lang === 'fr' ? origin.descr.FR : origin.descr.EN)
-    this.$('#right-descr').insertAdjacentHTML('beforeend', projectTitleTemplate)
+    this.write('#right-descr', projectTitleTemplate)
     this.write('#project-title', origin.title)
-    // 2. Central nav DIV */
+
     this.write('#central-nav', skillsTemplate)
-    // 3. Project's skills
-    this.$('#skills-title').insertAdjacentHTML('beforeend', lang === 'fr' ? skills.FR : skills.EN)
-    origin.skills.FR.forEach((el, i) => {
-      let skills = this.$('#skills-list')
-      skills.insertAdjacentHTML('beforeend', `<li>${lang === 'fr' ? origin.skills.FR[i] : origin.skills.EN[i]}</li>`)
-    })
-    // 4. Project's screen shots
     this.$('#central-nav').insertAdjacentHTML('beforeend', snapshots)
-    // Mobile
+    
     this.$('#snapshots').insertAdjacentHTML('beforeend', mobileDiv)
     this.$('#mobile').insertAdjacentHTML('afterbegin', mobileWidthTemplate)
-    // Desktop
+    
     this.$('#snapshots').insertAdjacentHTML('beforeend', desktopDiv)
     this.$('#desktop').insertAdjacentHTML('afterbegin', desktopWidthTemplate)
-    // Tablet
+    
     this.$('#snapshots').insertAdjacentHTML('beforeend', tabletDiv)
     this.$('#tablet').insertAdjacentHTML('afterbegin', tabletWidthTemplate)
-    // 5. Footer w/ project details
+    
     this.$('#project-details-menu').insertAdjacentHTML('afterbegin', detailsMenuTemplate)
     this.$('#responsive').insertAdjacentHTML('beforeend', `${origin.resp === true ? checkBox.true : checkBox.false}`)
-    this.write('#page-details-date', `<p>${lang === 'fr' ? validation.FR : validation.EN}</p><p>${lang === 'fr' ? origin.date.FR : origin.date.EN}</p>`)
     this.$('#projects-github').insertAdjacentHTML('beforeend', `<a href="${origin.git}" target="blank">GITHUB</h6>`)
-
+    
+    this.projectDescr(origin)
     this.findIcon(origin)
     this.showArrows()
   }
-// FIND ICON () ___________________________________________ */
-  /**
-   * <b>DESCR:</b><br>
-   * Compares the 'techIcons' object keys w/ the project's 'tech'
-   * array values.
-   * printers one icon if a match is found.
-   *
-   * @method
-   * @param {origin} object the project's object w/ all its properties
-   */
-  findIcon(origin) {
-    const techIconsNames = Object.keys(techIcons)
-    for (let i = 0; i < origin.tech.length; i++) {
-      techIconsNames.forEach(el => {
-        if (origin.tech[i] == el) {
-          let markedTemplate = techIconTemplate
-            .replace(/xxxURL/g, `${techIcons[el]}`)
-            .replace(/xxx/g, `${origin.tech[i]}`)
-          this.$('.bottom-menu').insertAdjacentHTML('beforeend', markedTemplate)
-        }
-      })
-    }
-  }
-// TO MAIN PAGE () ________________________________________ */
+// BIO CONTACT () _________________________________________ */
+bioContact() {
+  this.write('#bio', `${pageLang === 'fr' ? textFeed.bio.FR : textFeed.bio.EN}`)
+  this.write('#contact-me', `${pageLang === 'fr' ? textFeed['contact-me'].FR : textFeed['contact-me'].EN}`)
+}
+// TRANSITIONS ____________________________________________ */
+// Home Screen > Main Page
   toMainPage() {
     if (firstClick) {
       this.$('#slider').classList.add('slider-down')
@@ -193,7 +174,7 @@ export default class View {
       this.$('#slider').classList.add('slider-down')
     }
   }
-// TO PROJECT DETAILS () __________________________________ */
+// Main Page > Project Details
   toProjectDetails() {
     this.write('#right-descr', '')
     this.$('#central-nav').style.animation = ''
@@ -201,7 +182,7 @@ export default class View {
     this.animate(this.$('#presentation'), '800', '0.1s', 'fade-in')
     this.animate(this.$('#project-details-menu'), '800', '0.2s', 'fade-in')
   }
-// PROJECT TO PROJECT () __________________________________ */
+// Project Details > Project Details
   fromProjectToProject() {
     this.write('#right-descr', '')
     this.write('#project-details-menu', '')
@@ -213,7 +194,7 @@ export default class View {
     }
     this.animate(this.$('#project-details-menu'), '600', '0.2s', 'fade-in')
   }
-// BACK TO MAIN PAGE () ___________________________________ */
+// Project Details > Main Page
   backToMainPage() {
     this.write('#descr','')
     this.write('#central-nav','')
@@ -230,34 +211,55 @@ export default class View {
     this.animate(this.$('#presentation'), '800', '0.1s', 'fade-in')
     this.animate(this.$('#central-nav'), '800', '', 'fade-in')
   }
-// TO ABOUT ME () _________________________________________ */
+// Main Page || Project Details > About Me
   toAboutMe() {
-    let langSwitch = this.$All('#header span')
+    if (this.$('#bio-container')) {
+      this.$('#bio-container').remove()
+    }
+    const langSwitch = this.$All('#header span')
     langSwitch.forEach(span => {
       span.remove()
       this.$('#about-me-title header').insertAdjacentHTML('beforeend', span.outerHTML)
     })
     this.$('#slider').classList.add('slider-down-2')
-    this.$('#about-me-details').classList.add('appears')
     this.$('#about-me-details').insertAdjacentHTML('beforeend', bioTemplate)
-    this.write('#bio', `${lang === 'fr' ? bio.FR : bio.EN}`)
+    this.$('#bio-container').insertAdjacentHTML('beforeend', contactButton)
+    this.$('.portrait').classList.add('show')
+    this.bioContact()
   }
-// BACK FROM ABOUT ME () __________________________________ */  
+// About Me > Main Page || Project Details 
   backFromAboutMe() {
-    setTimeout(() => {
-      this.animate(this.$('#presentation'), '800', '0.1s', 'fade-in')
-      this.$('#bio').remove()
-    }, 200)
-    let langSwitch = this.$All('#about-me-title span')
+    const langSwitch = this.$All('#about-me-title span')
     langSwitch.forEach(span => {
       span.remove()
       this.$('#header header').insertAdjacentHTML('beforeend', span.outerHTML)
     })
+    this.$('.portrait').classList.remove('show')
     this.$('#slider').classList.remove('slider-down-2')
-    this.$('#about-me-details').classList.remove('appears')
+    setTimeout(() => {
+      this.animate(this.$('#presentation'), '800', '0.1s', 'fade-in')
+      this.$('#bio').remove()
+    }, 200)
   }
-// BACK TO TITLE () _______________________________________ */
+// Main Page > Home Screen
   backToTitle() {
     this.$('#slider').classList.remove('slider-down')
+  }
+// ANIMATE () _____________________________________________ */
+  /**
+   * <b>DESCR:</b><br>
+   * Adds a CSS class to a DOM element to make it fade in
+   *
+   * @method
+   * @param {string} element DOM element to perform fade-in on
+   * @param {string} ms animation speed in MS
+   * @param {string} delay animation delay in MS
+   * @param {string} animation name of the animation
+   */
+   animate(element, ms, delay, animation) {
+    element.style.animation = ''
+    setTimeout(() => {
+      element.setAttribute('style', `animation: ${ms}s ease-in-out ${delay} ${animation}`)
+    }, 10)
   }
 }

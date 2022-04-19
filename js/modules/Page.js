@@ -32,7 +32,7 @@ export default class Page {
     return new Promise((resolve, reject) => {
       let htmlTag = document.querySelector('html')
       let x = navigator.language
-      lang = x.substring(0, 2)
+      pageLang = x.substring(0, 2)
       htmlTag.setAttribute('lang', x)
       resolve('language set')
     })
@@ -48,15 +48,14 @@ export default class Page {
    * @method
    */
   async init() {
-    let that = this
     await this.setLanguage()
     await this.controller.delegate(this.projects)
-    this.view.langButtons()
     pageStatus = 'main-page'
-    for (let i = 0; i < data.length; i++) {
-      this.projects[i] = new Project(data[i].title, i + 2, data[i].descr, data[i].skills, data[i].img, data[i].tech, data[i].date, data[i].color, data[i].resp, data[i].github, data[i].url)
-      await this.model.press(this.projects[i])
-    }
-    this.model.updateLang(this.projects)
+
+    projectsDB.forEach((el, i) => {
+      this.projects[i] = new Project(el.title, el.id, i + 2, el.descr, el.skills, el.img, el.tech, el.date, el.resp, el.github, el.url)
+      this.model.press(this.projects[i])
+    })
+    this.model.activeLangButton()
   }
 }

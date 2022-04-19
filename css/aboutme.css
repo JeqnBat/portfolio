@@ -1,15 +1,12 @@
 /* 7. ABOUT ME
 ______________________________________________________ */
 #about-me-details {
+  position: relative;
   height: 100vh;
   width: 1100px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  /* background-image: url('../Graphics/aboutme/aboutme.jpg'); */
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: right bottom;
 }
 #about-me-title {
   display: flex;
@@ -56,8 +53,11 @@ ______________________________________________________ */
   justify-content: space-between;
   align-items: flex-start;
 }
-#bio {
-	font-family: sans-serif;
+#bio-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 	line-height: 1.5rem;
 	text-align: justify;
 	border-radius: 4px;
@@ -65,32 +65,70 @@ ______________________________________________________ */
 	background: rgb(44 4 23 / 0.05);
 	width: 50%;
 }
-#contact-me {
-  font-size: 1rem;
+#bio-container button {
+  position: relative;
   text-align: center;
-  line-height: 70px;
-  height: 70px;
-  width: 550px;
-  background: rgb(255, 255 ,255 ,.6);
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-}
-#contact-me a {
-  text-decoration: none;
-  color: rgb(34, 32, 29, .7);
-  padding: 10px;
+  border: none;
+  background: transparent;
+  color: antiquewhite;
+  padding: 18px;
+  margin: 40px;
+  cursor: pointer;
   border-radius: 5px;
-  border-bottom: 1px solid transparent;
-  border-right: 1px solid transparent;
-  border-top: 1px solid transparent;
-  border-left: 1px solid transparent;
-  transition: color .2s ease-in-out .3s, background-color .2s ease-in-out .3s, border-bottom .1s ease-in, border-right .1s linear .1s, border-top .1s linear .2s, border-left .1s ease-out .3s;
+  transition: all .2s ease-in-out;
 }
-#contact-me a:hover {
-  border-bottom: 1px solid rgb(255, 0, 29);
-  border-right: 1px solid rgb(255, 0, 29);
-  border-top: 1px solid rgb(255, 0, 29);
-  border-left: 1px solid rgb(255, 0, 29);
-  color: white;
-  background-color: rgb(255, 0, 29, .5);
+#bio-container button:hover {
+  color: maroon;
+}
+#bio-container button::before {
+  position: absolute;
+  content: ' ';
+  left:0;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  border-bottom: 3px solid transparent;
+  border-right: 3px solid transparent;
+  transition: opacity .1s linear, width .1s ease-in-out .1s, border-bottom .1s ease-in-out .1s, height .1s ease-in-out .2s, border-right .1s ease-in-out .2s;
+}
+#bio-container button:hover::before {
+  height: 90%;
+  width: 100%;
+  opacity: 1;
+  border-bottom: 3px solid maroon;
+  border-right:  3px solid maroon;
+}
+#bio-container button::after {
+  position: absolute;
+  content: ' ';
+  right:0;
+  top: 0;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  border-top: 3px solid transparent;
+  border-left: 3px solid transparent;
+  transition: opacity .1s linear, width .1s ease-in-out .3s, border-top .1s ease-in-out .3s, height .1s ease-in-out .4s, border-left .1s ease-in-out .4s;
+}
+#bio-container button:hover::after {
+  height: 90%;
+  width: 100%;
+  opacity: 1;
+  border-top: 3px solid maroon;
+  border-left: 3px solid maroon;
+}
+/* BG PICTURE */
+.portrait {
+  opacity: 0;
+  background-image: url('../Graphics/aboutme/portrait.webp');
+  background-size: 45%;
+  background-blend-mode: luminosity;
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  transition: opacity .2s ease-in-out .4s;
+}
+.show {
+  opacity: 1;
+  background-image: url('../Graphics/aboutme/portrait.webp'), linear-gradient(0deg, sandybrown, royalblue);
 }

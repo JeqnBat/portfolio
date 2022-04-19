@@ -5,14 +5,14 @@
  */
 // MAIN PAGE TEMPLATES ____________________________________ */
 const miniatureTemplate =
-  `<div class="miniature" item="OCP#xxxid"><div class="over-screen xxxid">
-    <p>xxxid</p>
+  `<div class="miniature" item="xxxid"><div class="over-screen xxxid">
+    <p>xxxnb</p>
     <h5>“xxxtitle”</h5>
-    <h5><div id="valxxxid" item="lang"></div></h5>
-    <h5><div id="datexxxid" item="lang"></div></h5>
+    <h5 id="validation-xxxid" item="lang"></h5>
+    <h5 id="date-xxxid" item="lang"></h5>
     </div>
   </div>`
-const footerNavTemplate = '<div id="footerNavxxxid" class="footer-nav-item">□</div>'
+const footerNavTemplate = '<div id="footerNavxxxnb" class="footer-nav-item">□</div>'
 // PROJECT DETAILS TEMPLATES ______________________________ */
 const projectTitleTemplate = '<title id="project-title"></title>'
 const skillsTemplate =
@@ -58,4 +58,5 @@ const techIconTemplate =
 const leftArrow = '<div id="left" class="arrow"></div>'
 const rightArrow = '<div id="right" class="arrow"></div>'
 // ABOUT ME TEMPLATES _____________________________________ */
-const bioTemplate = `<article id="bio" item="lang"></article>`
+const bioTemplate = `<article id="bio-container"><div id="bio" item="lang"></div></article>`
+const contactButton = `<a href="mailto:jbpellier@noos.fr"><button id="contact-me" item="lang"></button></a>`

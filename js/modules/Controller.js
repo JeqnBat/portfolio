@@ -35,7 +35,7 @@ export default class Controller {
     projects.forEach((el, i) => {
       this.model.press(projects[i])
     })
-    this.model.updateLang(projects)
+    this.model.activeLangButton()
   }
 // LANG CLICK () __________________________________________ */
   /**
@@ -47,7 +47,7 @@ export default class Controller {
    * @param {object} project the project's instance
    */
   langClick(project) {
-    this.model.updateLang(project)
+    this.model.refreshLang(project)
   }
 // MINIATURE & BOTTOM NAV ITEM'S MOUSEOVER () _____________ */
   /**
@@ -65,11 +65,11 @@ export default class Controller {
     this.model.looseFocus(project)
   }
   footerNavMouseHover(project) {
-    this.model.view.$(`[item="OCP#${project.id}"]`).firstChild.classList.add('slide-down')
+    this.model.view.$(`[item="OCP${project.nb}"]`).firstChild.classList.add('slide-down')
     this.model.focusMiniature(project)
   }
   footerNavMouseOut(project) {
-    this.model.view.$(`[item="OCP#${project.id}"]`).firstChild.classList.remove('slide-down')
+    this.model.view.$(`[item="OCP${project.nb}"]`).firstChild.classList.remove('slide-down')
     this.model.looseFocus(project)
   }
 // MINIATURE & BOTTOM NAV & ARROWS CLICK () _______________ */
@@ -115,7 +115,7 @@ export default class Controller {
     this.model.transition(project, 'to-about-me')
   }
   backUpClick(project) {
-    this.model.transition(project, 'back-up')
+    this.model.transition(project, 'back-from-about-me')
   }
 // DELEGATE () ____________________________________________ */
   /**
@@ -138,7 +138,7 @@ export default class Controller {
           resolve('logo clicked')
         // LANG CLICK
         } else if (event.target.matches('.fr-engl h3')) {
-          lang = event.target.parentElement.getAttribute('id')
+          pageLang = event.target.parentElement.getAttribute('id')
           that.langClick(projects)
           resolve('language clicked')
         // LOGO CLICK
@@ -153,23 +153,23 @@ export default class Controller {
           // MINIATURE CLICK
         } else if (event.target.closest('.miniature') && pageStatus === 'main-page') {
           const miniature = event.target.closest('.miniature')
-          const projectName = miniature.getAttribute('item')
-          that.miniatureClick(projects[that.model.identify('miniature', projectName)])
+          const id = miniature.getAttribute('item')
+          that.miniatureClick(projects.find(obj => obj.id === id ))
           resolve('miniature clicked')
           // FOOTER NAVIGATION CLICK
         } else if (event.target.matches('.footer-nav-item')) {
-          const projectId = event.target.getAttribute('id')
-          that.bottomNavClick(projects[that.model.identify('bottomNav', projectId)])
+          const nb = event.target.getAttribute('id').slice(-1)
+          that.bottomNavClick(projects.find(obj => obj.nb === parseInt(nb) ))
           resolve('bottomNav clicked')
           // RIGHT ARROW CLICK
         } else if (event.target.matches('#right')) {
-          const targetNumber = parseInt(that.model.identify('langDetails', pageStatus), 10) - 1
-          that.next(projects[targetNumber])
+          const nb = parseInt(pageStatus.slice(-1)) - 1
+          that.next(projects[nb])
           resolve('right arrow clicked')
           // LEFT ARROW CLICK
         } else if (event.target.matches('#left')) {
-          const targetNumber = parseInt(that.model.identify('langDetails', pageStatus), 10) - 3
-          that.previous(projects[targetNumber])
+          const nb = parseInt(pageStatus.slice(-1)) - 3
+          that.previous(projects[nb])
           resolve('left arrow clicked')
           // MORE ABOUT ME CLICK
         } else if (event.target.matches('#about-me')) {
@@ -187,13 +187,13 @@ export default class Controller {
       document.body.addEventListener('mouseenter', (event) => {
         // MOUSE HOVER MINIATURE
         if (event.target.matches('.miniature')) {
-          const projectName = event.target.getAttribute('item')
-          that.miniatureMouseOver(projects[that.model.identify('miniature', projectName)])
+          const id = event.target.getAttribute('item')
+          that.miniatureMouseOver(projects.find(obj => obj.id === id ))
           resolve('miniature hovered')
         // MOUSE HOVER FOOTER NAV
         } else if (event.target.matches('.footer-nav-item') && pageStatus === 'main-page') {
-          const projectId = event.target.getAttribute('id')
-          that.footerNavMouseHover(projects[that.model.identify('bottomNav', projectId)])
+          const nb = event.target.getAttribute('id').slice(-1)
+          that.footerNavMouseHover(projects.find(obj => obj.nb === parseInt(nb)))
           resolve('bottom nav hovered')
         } else {
           return
@@ -203,13 +203,13 @@ export default class Controller {
       document.body.addEventListener('mouseleave', (event) => {
         // MOUSE OUT MINIATURE
         if (event.target.matches('.miniature')) {
-          const projectName = event.target.getAttribute('item')
-          that.miniatureMouseOut(projects[that.model.identify('miniature', projectName)])
+          const id = event.target.getAttribute('item')
+          that.miniatureMouseOut(projects.find(obj => obj.id === id ))
           resolve('miniature mouseout')
         // MOUSE OUT FOOTER NAVIGATION
         } else if (event.target.matches('.footer-nav-item') && pageStatus === 'main-page') {
-          const projectId = event.target.getAttribute('id')
-          that.footerNavMouseOut(projects[that.model.identify('bottomNav', projectId)])
+          const nb = event.target.getAttribute('id').slice(-1)
+          that.footerNavMouseOut(projects.find(obj => obj.nb === parseInt(nb)))
           resolve('bottom nav mouseout')
         } else {
           return
