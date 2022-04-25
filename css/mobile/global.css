@@ -2,28 +2,43 @@
 ______________________________________________________ */
 @media only screen and (max-width: 540px) and (orientation: portrait) {
   html, body {
+    color: white;
+    background: rgb(35, 36, 37)!important;
     height: auto;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
   }
+  #slider {
+    width: 99.8%;
+  }
+  /* Layout 1 - Home Screen */
   #home-screen, #home, #about-me-details {
     transition: transform .5s ease-in-out, margin-bottom .5s ease-in-out;
   }
   .slider-down {
     transform: none;
   }
+  #home, #about-me-details {
+    display: none!important;
+  }
+  /* Layout 2 - Main Page */
   .slider-down > #home-screen, .slider-down > #home, .slider-down > #about-me-details {
     transform: translateY(-100vh);
   }
   .slider-down > #home {
+    display: flex!important;
     margin-bottom: -100vh;
+    min-height: 1581px;
   }
+  /* Layout 3 - About Me */
   .slider-down-2 > #home-screen, .slider-down-2 > #home, .slider-down-2 > #about-me-details {
-    transform: translateY(calc(-100vh - 1292px));
+    transform: translateY(calc(-100vh - 1581px));
   }
   .slider-down-2 > #home {
     margin-bottom: 0;
   }
   .slider-down-2 > #about-me-details {
-    margin-bottom: calc(-100vh - 1292px);
+    display: flex!important;
+    margin-bottom: calc(-100vh - 1581px);
   }
 }

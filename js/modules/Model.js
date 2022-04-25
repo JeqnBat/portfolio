@@ -86,10 +86,17 @@ export default class Model {
         break
       case 'project-details':
         pageStatus = `project-details${origin.nb}`
-        const mobileDiv = this.mark(screenShotTemplate, ['xxxurl', `${origin.url}`], ['layout', 'mobile'], ['imgFile', `${origin.img.mobile}`], ['color', `${siteColor}`], ['xxx', '70'], ['yyy', '131'])
-        const desktopDiv = this.mark(screenShotTemplate, ['xxxurl', `${origin.url}`], ['layout', 'desktop'], ['imgFile', `${origin.img.desktop}`], ['color', `${siteColor}`], ['xxx', '332'], ['yyy', '175'])
-        const tabletDiv = this.mark(screenShotTemplate, ['xxxurl', `${origin.url}`], ['layout', 'tablet'], ['imgFile', `${origin.img.tablet}`], ['color', `${siteColor}`], ['xxx', '152'], ['yyy', '202'])
-        this.view.projectDetails(origin, mobileDiv, desktopDiv, tabletDiv)
+        if (layout === 'mobile') {
+          const mobileDiv = this.mark(respScreenShotTemplate, ['xxxurl', `${origin.url}`], ['layout', 'mobile'], ['imgFile', `${origin.img.mobile}`], ['color', `${siteColor}`], ['xxx', '70'], ['yyy', '131'])
+          const desktopDiv = this.mark(respScreenShotTemplate, ['xxxurl', `${origin.url}`], ['layout', 'desktop'], ['imgFile', `${origin.img.desktop}`], ['color', `${siteColor}`], ['xxx', '332'], ['yyy', '175'])
+          const tabletDiv = this.mark(respScreenShotTemplate, ['xxxurl', `${origin.url}`], ['layout', 'tablet'], ['imgFile', `${origin.img.tablet}`], ['color', `${siteColor}`], ['xxx', '152'], ['yyy', '202'])
+          this.view.projectDetails(origin, mobileDiv, desktopDiv, tabletDiv)
+        } else {
+          const mobileDiv = this.mark(screenShotTemplate, ['xxxurl', `${origin.url}`], ['layout', 'mobile'], ['imgFile', `${origin.img.mobile}`], ['color', `${siteColor}`], ['xxx', '70'], ['yyy', '131'])
+          const desktopDiv = this.mark(screenShotTemplate, ['xxxurl', `${origin.url}`], ['layout', 'desktop'], ['imgFile', `${origin.img.desktop}`], ['color', `${siteColor}`], ['xxx', '332'], ['yyy', '175'])
+          const tabletDiv = this.mark(screenShotTemplate, ['xxxurl', `${origin.url}`], ['layout', 'tablet'], ['imgFile', `${origin.img.tablet}`], ['color', `${siteColor}`], ['xxx', '152'], ['yyy', '202'])
+          this.view.projectDetails(origin, mobileDiv, desktopDiv, tabletDiv)
+        }
         break
       }
   }

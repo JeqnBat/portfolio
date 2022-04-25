@@ -96,6 +96,10 @@ ______________________________________________________ */
   text-transform: uppercase;
   align-items: center;
 }
+.bottom-menu span {
+  margin-right: 10px;
+	display: block;
+}
 /* Check box completed */
 .check-box {
   position: relative;

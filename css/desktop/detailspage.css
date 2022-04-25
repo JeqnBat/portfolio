@@ -30,8 +30,6 @@ ______________________________________________________ */
   top: -60px;
   left: 165px;
 }
-#skills ul {
-}
 #skills li {
 	list-style-type: square;
 }
@@ -82,6 +80,7 @@ ______________________________________________________ */
 	transform: scaleY(-1);
 	background-position: bottom;
 	border-radius: 0 0 4px 4px;
+	background-size: cover;
 	border: 2px solid;
 	transition: all .2s ease-in-out;
 }

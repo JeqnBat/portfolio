@@ -21,7 +21,8 @@ ______________________________________________________ */
     font-size: 1rem;
     text-transform: uppercase;
     text-align: center;
-    height: 40px;
+    height: auto;
+    margin: 35px 0 10px 0;
     opacity: 1;
     transition: all .2s ease-in-out;
   }
@@ -48,10 +49,11 @@ ______________________________________________________ */
     width: 100%;
     opacity: 0;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     text-align: center;
-    height: 50px;
+    height: auto;
   }
   #project-details-menu figure {
     margin: 3px;
@@ -77,8 +79,25 @@ ______________________________________________________ */
   }
   .bottom-menu {
     display: flex;
+    flex-wrap: wrap;
     text-transform: uppercase;
     align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  .bottom-menu span {
+    margin: 40px 0 15px 80px;
+    text-align: left;
+    width: inherit;
+    display: block;
+  }
+  #responsive p {
+    width: inherit;
+    margin: 40px 0 15px 80px;
+    text-align: left;
+  }
+  #page-details-date p {
+    display: none;
   }
   /* Check box completed */
   .check-box {
@@ -87,7 +106,7 @@ ______________________________________________________ */
     width: 30px;
     border: 2px solid white;
     border-radius: 4px;
-    margin-left: 20px;
+    margin: 0;
   }
   .check-box.true::after {
     position: absolute;
@@ -105,8 +124,10 @@ ______________________________________________________ */
   #page-details-date p:first-child {
     margin-right: 5px;
   }
-  #projects-github {
-    flex-shrink: 1;
+  #projects-github a {
+    margin: 40px 0 15px 80px;
+    text-align: left;
+    width: inherit;
   }
   #projects-github a {
     color: white;
@@ -118,7 +139,7 @@ ______________________________________________________ */
     text-decoration: none;
   }
   #projects-github img {
-    margin: 0 5px;
+    order: 2;
     transition: all .5s ease-in-out .1s;
   }
   #projects-github:hover img {

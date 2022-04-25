@@ -35,13 +35,23 @@ const screenShotTemplate =
       width: xxxpx;">
     </div>
   </section>`
-
+const respScreenShotTemplate =
+  `<section id="layout" class="block">
+    <a href="xxxurl" target="blank">
+      <img src="imgFile" alt="layout screenshot" width="xxx" height="yyy">
+    </a>
+    <div class="block-mirror" style="
+      background-image: linear-gradient(rgb(35, 36, 37), transparent), url('imgFile');
+      border-image: linear-gradient(0deg, royalblue, rgb(35, 36, 37)) 1;
+      width: xxxpx;">
+    </div>
+  </section>`
 const mobileWidthTemplate = '<p align="center">- 425px -</p>'
 const tabletWidthTemplate = '<p align="center">- 750px -</p>'
 const desktopWidthTemplate = '<p align="center">- 1400px -</p>'
 
 const detailsMenuTemplate =
-  `<div class="bottom-menu">technologies</div>
+  `<div class="bottom-menu"><span>technologies</span></div>
     <div id="responsive" class="bottom-menu"><p>full responsive</p></div>
     <div id="page-details-date" class="bottom-menu" item="lang"></div>
     <div id="projects-github" class="bottom-menu"><img src="Graphics/techIcons/git.svg" width="50px" height="50px">
