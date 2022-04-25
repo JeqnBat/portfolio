@@ -1,0 +1,127 @@
+/* GLOBAL STYLES FOR MOBILE LAYOUT
+______________________________________________________ */
+@media only screen and (max-width: 540px) and (orientation: portrait) {
+  /* Main page */
+  #footer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    width: auto;
+    margin: 0;
+  }
+  #footer-nav {
+    display: none;
+    margin-bottom: 30px;
+  }
+  #about-me {
+    font-family: sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    text-align: center;
+    height: 40px;
+    opacity: 1;
+    transition: all .2s ease-in-out;
+  }
+  #about-me::after {
+    content: ' ↓';
+    font-size: 1.5rem;
+    opacity: .5;
+    transition: all .1s ease-in-out;
+  }
+  #about-me::before {
+    content: '↓ ';
+    font-size: 1.5rem;
+    opacity: .5;
+    transition: all .1s ease-in-out;
+  }
+  #about-me:hover {
+    opacity: 1;
+  }
+  #about-me:hover::after, #about-me:hover::before {
+    opacity: 1;
+  }
+  /* Project's details page */
+  #project-details-menu {
+    width: 100%;
+    opacity: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    height: 50px;
+  }
+  #project-details-menu figure {
+    margin: 3px;
+  }
+  #project-details-menu figure:first-child {
+    margin-left: 30px;
+  }
+  #project-details-menu figure img {
+    text-align: center;
+    transition: all .1s ease-in-out;
+  }
+  #project-details-menu figure:hover figcaption {
+    opacity: 1;
+  }
+  #project-details-menu figcaption {
+    background-color: rgb(34, 32, 29, .4);
+    font-size: .55rem;
+    padding: 1px;
+    text-transform: uppercase;
+    text-align: center;
+    opacity: 0;
+    transition: all .1s ease-in-out;
+  }
+  .bottom-menu {
+    display: flex;
+    text-transform: uppercase;
+    align-items: center;
+  }
+  /* Check box completed */
+  .check-box {
+    position: relative;
+    height: 30px;
+    width: 30px;
+    border: 2px solid white;
+    border-radius: 4px;
+    margin-left: 20px;
+  }
+  .check-box.true::after {
+    position: absolute;
+    content: 'L';
+    transform: rotateZ(45deg) rotateY(180deg);
+    font-size: 4rem;
+    color: #00ff70;
+    left: 0;
+    bottom: -10px;
+    transition: all .2s ease-out;
+  }
+  .check-box:hover::after {
+    transform: rotateZ(45deg) rotateY(180deg) rotateX(30deg) scale(1.2);
+  }
+  #page-details-date p:first-child {
+    margin-right: 5px;
+  }
+  #projects-github {
+    flex-shrink: 1;
+  }
+  #projects-github a {
+    color: white;
+    transition: all .2s ease-in-out;
+    text-decoration: none;
+  }
+  #projects-github a:hover {
+    color: #f05133;
+    text-decoration: none;
+  }
+  #projects-github img {
+    margin: 0 5px;
+    transition: all .5s ease-in-out .1s;
+  }
+  #projects-github:hover img {
+    transform: rotateZ(360deg);
+  }
+}

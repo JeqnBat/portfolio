@@ -1,0 +1,29 @@
+/* GLOBAL STYLES FOR MOBILE LAYOUT
+______________________________________________________ */
+@media only screen and (max-width: 540px) and (orientation: portrait) {
+  html, body {
+    height: auto;
+    overflow: scroll;
+  }
+  #home-screen, #home, #about-me-details {
+    transition: transform .5s ease-in-out, margin-bottom .5s ease-in-out;
+  }
+  .slider-down {
+    transform: none;
+  }
+  .slider-down > #home-screen, .slider-down > #home, .slider-down > #about-me-details {
+    transform: translateY(-100vh);
+  }
+  .slider-down > #home {
+    margin-bottom: -100vh;
+  }
+  .slider-down-2 > #home-screen, .slider-down-2 > #home, .slider-down-2 > #about-me-details {
+    transform: translateY(calc(-100vh - 1292px));
+  }
+  .slider-down-2 > #home {
+    margin-bottom: 0;
+  }
+  .slider-down-2 > #about-me-details {
+    margin-bottom: calc(-100vh - 1292px);
+  }
+}

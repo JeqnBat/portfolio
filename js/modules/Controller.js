@@ -127,94 +127,78 @@ export default class Controller {
    * @method
    * @param {object} projects sends in all the projects so they can be identified
    */
-  async delegate(projects) {
+  delegate(projects) {
     let that = this
-    return new Promise((resolve, reject) => {
-      // CLICK EVENTS
-      document.addEventListener('click', (event) => {
-        // TITLE CLICK
-        if (event.target.matches('.title h1') || event.target.matches('.title div')) {
-          that.titleClick(projects)
-          resolve('logo clicked')
-        // LANG CLICK
-        } else if (event.target.matches('.fr-engl h3')) {
-          pageLang = event.target.parentElement.getAttribute('id')
-          that.langClick(projects)
-          resolve('language clicked')
-        // LOGO CLICK
-        } else if (event.target.matches('#portfolio-button')) {
-          if (pageStatus === 'main-page') {
-            that.model.transition(projects, 'back-to-title')
-            resolve('#PORTFOLIO clicked from main page')
-          } else {
-            that.homeClick(projects)
-            resolve('#PORTFOLIO clicked from details')
-          }
-          // MINIATURE CLICK
-        } else if (event.target.closest('.miniature') && pageStatus === 'main-page') {
-          const miniature = event.target.closest('.miniature')
-          const id = miniature.getAttribute('item')
-          that.miniatureClick(projects.find(obj => obj.id === id ))
-          resolve('miniature clicked')
-          // FOOTER NAVIGATION CLICK
-        } else if (event.target.matches('.footer-nav-item')) {
-          const nb = event.target.getAttribute('id').slice(-1)
-          that.bottomNavClick(projects.find(obj => obj.nb === parseInt(nb) ))
-          resolve('bottomNav clicked')
-          // RIGHT ARROW CLICK
-        } else if (event.target.matches('#right')) {
-          const nb = parseInt(pageStatus.slice(-1)) - 1
-          that.next(projects[nb])
-          resolve('right arrow clicked')
-          // LEFT ARROW CLICK
-        } else if (event.target.matches('#left')) {
-          const nb = parseInt(pageStatus.slice(-1)) - 3
-          that.previous(projects[nb])
-          resolve('left arrow clicked')
-          // MORE ABOUT ME CLICK
-        } else if (event.target.matches('#about-me')) {
-          that.aboutMeClick(projects)
-          resolve('more about me clicked')
-          // BACK UP CLICK
-        } else if (event.target.matches('#back-up')) {
-          that.backUpClick(projects)
-          resolve('more about me clicked')
+    // CLICK EVENTS
+    document.addEventListener('click', (event) => {
+      // TITLE CLICK
+      if (event.target.matches('.title h1') || event.target.matches('.title div')) {
+        that.titleClick(projects)
+      // LANG CLICK
+      } else if (event.target.matches('.fr-engl h3')) {
+        pageLang = event.target.parentElement.getAttribute('id')
+        that.langClick(projects)
+      // LOGO CLICK
+      } else if (event.target.matches('#portfolio-button')) {
+        if (pageStatus === 'main-page') {
+          that.model.transition(projects, 'back-to-title')
         } else {
-          return
+          that.homeClick(projects)
         }
-      }, false)
-      // MOUSE HOVER EVENTS
-      document.body.addEventListener('mouseenter', (event) => {
-        // MOUSE HOVER MINIATURE
-        if (event.target.matches('.miniature')) {
-          const id = event.target.getAttribute('item')
-          that.miniatureMouseOver(projects.find(obj => obj.id === id ))
-          resolve('miniature hovered')
-        // MOUSE HOVER FOOTER NAV
-        } else if (event.target.matches('.footer-nav-item') && pageStatus === 'main-page') {
-          const nb = event.target.getAttribute('id').slice(-1)
-          that.footerNavMouseHover(projects.find(obj => obj.nb === parseInt(nb)))
-          resolve('bottom nav hovered')
-        } else {
-          return
-        }
-      }, true)
-      // MOUSE OUT EVENTS
-      document.body.addEventListener('mouseleave', (event) => {
-        // MOUSE OUT MINIATURE
-        if (event.target.matches('.miniature')) {
-          const id = event.target.getAttribute('item')
-          that.miniatureMouseOut(projects.find(obj => obj.id === id ))
-          resolve('miniature mouseout')
-        // MOUSE OUT FOOTER NAVIGATION
-        } else if (event.target.matches('.footer-nav-item') && pageStatus === 'main-page') {
-          const nb = event.target.getAttribute('id').slice(-1)
-          that.footerNavMouseOut(projects.find(obj => obj.nb === parseInt(nb)))
-          resolve('bottom nav mouseout')
-        } else {
-          return
-        }
-      }, true)
-    })
+        // MINIATURE CLICK
+      } else if (event.target.closest('.miniature') && pageStatus === 'main-page') {
+        const miniature = event.target.closest('.miniature')
+        const id = miniature.getAttribute('item')
+        that.miniatureClick(projects.find(obj => obj.id === id ))
+        // FOOTER NAVIGATION CLICK
+      } else if (event.target.matches('.footer-nav-item')) {
+        const nb = event.target.getAttribute('id').slice(-1)
+        that.bottomNavClick(projects.find(obj => obj.nb === parseInt(nb) ))
+        // RIGHT ARROW CLICK
+      } else if (event.target.matches('#right')) {
+        const nb = parseInt(pageStatus.slice(-1)) - 1
+        that.next(projects[nb])
+        // LEFT ARROW CLICK
+      } else if (event.target.matches('#left')) {
+        const nb = parseInt(pageStatus.slice(-1)) - 3
+        that.previous(projects[nb])
+        // MORE ABOUT ME CLICK
+      } else if (event.target.matches('#about-me')) {
+        that.aboutMeClick(projects)
+        // BACK UP CLICK
+      } else if (event.target.matches('#back-up')) {
+        that.backUpClick(projects)
+      } else {
+        return
+      }
+    }, false)
+    // MOUSE HOVER EVENTS
+    document.body.addEventListener('mouseenter', (event) => {
+      // MOUSE HOVER MINIATURE
+      if (event.target.matches('.miniature')) {
+        const id = event.target.getAttribute('item')
+        that.miniatureMouseOver(projects.find(obj => obj.id === id ))
+      // MOUSE HOVER FOOTER NAV
+      } else if (event.target.matches('.footer-nav-item') && pageStatus === 'main-page') {
+        const nb = event.target.getAttribute('id').slice(-1)
+        that.footerNavMouseHover(projects.find(obj => obj.nb === parseInt(nb)))
+      } else {
+        return
+      }
+    }, true)
+    // MOUSE OUT EVENTS
+    document.body.addEventListener('mouseleave', (event) => {
+      // MOUSE OUT MINIATURE
+      if (event.target.matches('.miniature')) {
+        const id = event.target.getAttribute('item')
+        that.miniatureMouseOut(projects.find(obj => obj.id === id ))
+      // MOUSE OUT FOOTER NAVIGATION
+      } else if (event.target.matches('.footer-nav-item') && pageStatus === 'main-page') {
+        const nb = event.target.getAttribute('id').slice(-1)
+        that.footerNavMouseOut(projects.find(obj => obj.nb === parseInt(nb)))
+      } else {
+        return
+      }
+    }, true)
   }
 }

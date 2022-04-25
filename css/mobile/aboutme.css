@@ -1,0 +1,142 @@
+/* ABOUT ME STYLES FOR MOBILE LAYOUT
+______________________________________________________ */
+@media only screen and (max-width: 540px) and (orientation: portrait) {
+  #about-me-details {
+    position: relative;
+    height: auto;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  #about-me-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 80px;
+  }
+  #about-me-title span {
+    display: none;
+  }
+  #about-me-title h2 {
+    margin: 0;
+    font-family: monospace!important;
+    font-size: 3.5rem;
+  }
+  /* BACK UP BUTTON */
+  #back-up {
+    position: relative;
+    font-family: sans-serif;
+    font-size: .9rem;
+    text-transform: uppercase;
+    text-align: right;
+    cursor: pointer;
+    opacity: 1;
+    transition: all .2s ease-in-out;
+  }
+  #back-up::after {
+    content: ' ↑';
+    font-size: 1.5rem;
+    opacity: .75;
+    transition: all .1s ease-in-out;
+  }
+  #back-up::before {
+    content: '↑ ';
+    font-size: 1.5rem;
+    opacity: .75;
+    transition: all .1s ease-in-out;
+  }
+  #back-up:hover {
+    opacity: 1;
+  }
+  #back-up:hover::after, #back-up:hover::before {
+    opacity: 1;
+  }
+  /* MAIN SECTION */
+  #about-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  #bio-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    line-height: 1.5rem;
+    text-align: justify;
+    border-radius: 4px;
+    padding: 15px;
+    background: transparent;
+    width: auto;
+  }
+  #bio-container button {
+    position: relative;
+    text-align: center;
+    border: none;
+    background: transparent;
+    color: antiquewhite;
+    padding: 18px;
+    margin: 40px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all .2s ease-in-out;
+  }
+  #bio-container button:hover {
+    color: maroon;
+  }
+  #bio-container button::before {
+    position: absolute;
+    content: ' ';
+    left:0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    border-bottom: 3px solid transparent;
+    border-right: 3px solid transparent;
+    transition: opacity .1s linear, width .1s ease-in-out .1s, border-bottom .1s ease-in-out .1s, height .1s ease-in-out .2s, border-right .1s ease-in-out .2s;
+  }
+  #bio-container button:hover::before {
+    height: 90%;
+    width: 100%;
+    opacity: 1;
+    border-bottom: 3px solid maroon;
+    border-right:  3px solid maroon;
+  }
+  #bio-container button::after {
+    position: absolute;
+    content: ' ';
+    right:0;
+    top: 0;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    border-top: 3px solid transparent;
+    border-left: 3px solid transparent;
+    transition: opacity .1s linear, width .1s ease-in-out .3s, border-top .1s ease-in-out .3s, height .1s ease-in-out .4s, border-left .1s ease-in-out .4s;
+  }
+  #bio-container button:hover::after {
+    height: 90%;
+    width: 100%;
+    opacity: 1;
+    border-top: 3px solid maroon;
+    border-left: 3px solid maroon;
+  }
+  /* BG PICTURE */
+  .portrait {
+    opacity: 0;
+    background-image: url('../../Graphics/aboutme/portrait.webp');
+    background-size: 45%;
+    background-blend-mode: luminosity;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    transition: opacity .2s ease-in-out .4s;
+  }
+  .show {
+    opacity: 1;
+    background: rgb(35, 36, 37)!important;
+  }
+
+}

@@ -1,0 +1,132 @@
+/* 5. PROJECT DETAILS LAYOUT
+______________________________________________________ */
+/* Project title div */
+#project-title::before {
+	content: "“";
+}
+#project-title {
+	display: block;
+  font-size: 2.8rem;
+	text-align: center;
+}
+#project-title::after {
+	content: "”";
+}
+#skills {
+	margin-top: 50px;
+  position: relative;
+	width: 370px;
+}
+#skills img {
+  position: absolute;
+	opacity: .15;
+	transition: all 1s ease-in-out;
+}
+#skills img:first-child {
+  top: -90px;
+  left: 117px;
+}
+#skills img:nth-child(2) {
+  top: -60px;
+  left: 165px;
+}
+#skills ul {
+}
+#skills li {
+	list-style-type: square;
+}
+#skills-title {
+	text-transform: uppercase;
+	font-size: 1.5rem;
+}
+#snapshots {
+	display: flex;
+	height: 100%;
+	width: 600px;
+}
+#snapshots.right {
+  margin-right: 64px;
+}
+#skills.left {
+  margin-left: 64px;
+}
+.block {
+	margin-left: 10px;
+  padding-bottom: 30px;
+	display: flex;
+	flex-direction: column;
+	align-self: flex-end;
+	cursor: pointer;
+}
+.block img {
+	opacity: .9;
+	border: 3px solid #1f1d1d;
+	border-radius: 4px;
+	transition: all .2s ease-in-out;
+}
+.block:hover img {
+	opacity: 1;
+	transform: scale(1.01);
+}
+.block:hover .block-mirror {
+	transform: scaleY(-1) scale(1.01);
+}
+.block p {
+	opacity: .50;
+	font-size: .9rem;
+  margin-bottom: .9rem;
+}
+.block-mirror {
+	height: 30px;
+	opacity: .4;
+	transform: scaleY(-1);
+	background-position: bottom;
+	border-radius: 0 0 4px 4px;
+	border: 2px solid;
+	transition: all .2s ease-in-out;
+}
+/* Big navigation arrows */
+.arrow {
+  position: relative;
+	background: white;
+	border-radius: 60px;
+  width: 60px;
+  height: 60px;
+  opacity: .1;
+	cursor: pointer;
+  transition: all .1s ease-in-out;
+  align-self: center;
+}
+.arrow:hover {
+	opacity: .7;
+}
+.arrow:first-child {
+  transform: translateX(-20px);
+}
+.arrow:last-child {
+  transform: translateX(20px);
+}
+#left::after {
+  position: absolute;
+	content: ' ';
+  height: 20px;
+  width: 20px;
+  left: 24px;
+  top: 20px;
+  transform: rotateZ(225deg);
+  border-top: 3px solid rgb(34, 32, 29, .4);
+  border-right: 3px solid rgb(34, 32, 29, .4);
+  border-radius: 3px;
+}
+#right::after {
+  position: absolute;
+	content: ' ';
+  height: 20px;
+  width: 20px;
+  right: 24px;
+  top: 20px;
+  transform: rotateZ(45deg);
+  border-top: 3px solid rgb(34, 32, 29, .4);
+  border-right: 3px solid rgb(34, 32, 29, .4);
+  border-radius: 3px;
+}
