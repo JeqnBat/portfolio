@@ -26,6 +26,7 @@ ______________________________________________________ */
 @import url("desktop/detailspage.css");
 @import url("desktop/footer.css");
 @import url("desktop/aboutme.css");
+@import url("desktop/responsive.css");
 /* Mobile */
 @import url("mobile/global.css");
 @import url("mobile/homescreen.css");

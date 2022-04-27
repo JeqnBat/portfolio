@@ -1,0 +1,33 @@
+/* DESKTOP LAYOUT ADJUSTEMENT FOR WIDE & SMALLER SCREENS
+______________________________________________________ */
+/* Prevent header 'jump' between page details load */
+@media only screen and (max-width: 1280px) {
+  #central-nav {
+    height: 230px!important;
+  }
+}
+@media only screen and (max-width: 1366px) {
+  #central-nav {
+    height: 250px!important;
+  }
+}
+/* Lower footer on wider screens */
+@media only screen and (max-width: 1536px) {
+  #footer {
+   height: 130px;
+  }
+}
+
+/* Lower footer on wider screens */
+@media only screen and (max-width: 1920px) {
+  #skills {
+    margin-top: 100px;
+  }
+  #central-nav {
+    margin-top: 100px;
+  }
+  #footer {
+    height: 250px;
+  }
+}
+
