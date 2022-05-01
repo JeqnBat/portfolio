@@ -96,11 +96,11 @@ const projectsDB = [
                           `Choose a relevant WordPress Theme`
                          ]
                 },
-    'img'     : { 'mini'    : `Graphics/miniatures/MINIATURE2.jpg`,
-                  'resp'    : `Graphics/miniatures/RESPONSIVE2.jpg`,
-                  'mobile'  : `Graphics/miniatures/MOBILE_mini2.jpg`,
-                  'desktop' : `Graphics/miniatures/DESKTOP_mini2.jpg`,
-                  'tablet'  : `Graphics/miniatures/TABLET_mini2.jpg`
+    'img'     : { 'mini'    : `Graphics/miniatures/MINIATURE2.webp`,
+                  'resp'    : `Graphics/miniatures/RESPONSIVE2.webp`,
+                  'mobile'  : `Graphics/miniatures/MOBILE_mini2.webp`,
+                  'desktop' : `Graphics/miniatures/DESKTOP_mini2.webp`,
+                  'tablet'  : `Graphics/miniatures/TABLET_mini2.webp`
                 },
     'tech'    : ['css3','photoshop', 'wordpress', 'elementor'],
     'date'    : { 'FR' : `23 janvier 2019`,
@@ -136,11 +136,11 @@ const projectsDB = [
                           `Write detailed specifications of the project`
                          ]
                 },
-    'img'     : { 'mini'    : `Graphics/miniatures/MINIATURE3.jpg`,
-                  'resp'    : `Graphics/miniatures/RESPONSIVE3.jpg`,
-                  'mobile'  : `Graphics/miniatures/MOBILE_mini3.jpg`,
-                  'desktop' : `Graphics/miniatures/DESKTOP_mini3.jpg`,
-                  'tablet'  : `Graphics/miniatures/TABLET_mini3.jpg`
+    'img'     : { 'mini'    : `Graphics/miniatures/MINIATURE3.webp`,
+                  'resp'    : `Graphics/miniatures/RESPONSIVE3.webp`,
+                  'mobile'  : `Graphics/miniatures/MOBILE_mini3.webp`,
+                  'desktop' : `Graphics/miniatures/DESKTOP_mini3.webp`,
+                  'tablet'  : `Graphics/miniatures/TABLET_mini3.webp`
                 },
     'tech'    : ['photoshop', 'wordpress', 'elementor', 'mockups'],
     'date'    : { 'FR' : `24 mars 2019`,
@@ -174,11 +174,11 @@ const projectsDB = [
                           `Implement the data diagram into the database`
                          ]
                 },
-    'img'     : { 'mini'    : `Graphics/miniatures/MINIATURE4.jpg`,
-                  'resp'    : `Graphics/miniatures/RESPONSIVE4.jpg`,
-                  'mobile'  : `Graphics/miniatures/MOBILE_mini4.jpg`,
-                  'desktop' : `Graphics/miniatures/DESKTOP_mini4.jpg`,
-                  'tablet'  : `Graphics/miniatures/TABLET_mini4.jpg`
+    'img'     : { 'mini'    : `Graphics/miniatures/MINIATURE4.webp`,
+                  'resp'    : `Graphics/miniatures/RESPONSIVE4.webp`,
+                  'mobile'  : `Graphics/miniatures/MOBILE_mini4.webp`,
+                  'desktop' : `Graphics/miniatures/DESKTOP_mini4.webp`,
+                  'tablet'  : `Graphics/miniatures/TABLET_mini4.webp`
                 },
     'tech'    : ['UML', 'mysql'],
     'date'    : { 'FR' : `4 août 2019`,
@@ -207,11 +207,11 @@ const projectsDB = [
                           `Deploy JavaScript's syntax in a program`
                          ]
                 },
-    'img'     : { 'mini'    : `Graphics/miniatures/MINIATURE5.jpg`,
-                  'resp'    : `Graphics/miniatures/RESPONSIVE5.jpg`,
-                  'mobile'  : `Graphics/miniatures/MOBILE_mini5.jpg`,
-                  'desktop' : `Graphics/miniatures/DESKTOP_mini5.jpg`,
-                  'tablet'  : `Graphics/miniatures/TABLET_mini5.jpg`
+    'img'     : { 'mini'    : `Graphics/miniatures/MINIATURE5.webp`,
+                  'resp'    : `Graphics/miniatures/RESPONSIVE5.webp`,
+                  'mobile'  : `Graphics/miniatures/MOBILE_mini5.webp`,
+                  'desktop' : `Graphics/miniatures/DESKTOP_mini5.webp`,
+                  'tablet'  : `Graphics/miniatures/TABLET_mini5.webp`
                 },
     'tech'    : ['javascript', 'bootstrap', 'photoshop', 'css3'],
     'date'    : { 'FR' : `1er août 2019`,
@@ -241,11 +241,11 @@ const projectsDB = [
                           `Use jQuery in a web application`
                          ]
                 },
-    'img'     : { 'mini'    : `Graphics/miniatures/MINIATURE6.jpg`,
-                  'resp'    : `Graphics/miniatures/RESPONSIVE6.jpg`,
-                  'mobile'  : `Graphics/miniatures/MOBILE_mini6.jpg`,
-                  'desktop' : `Graphics/miniatures/DESKTOP_mini6.jpg`,
-                  'tablet'  : `Graphics/miniatures/TABLET_mini6.jpg`
+    'img'     : { 'mini'    : `Graphics/miniatures/MINIATURE6.webp`,
+                  'resp'    : `Graphics/miniatures/RESPONSIVE6.webp`,
+                  'mobile'  : `Graphics/miniatures/MOBILE_mini6.webp`,
+                  'desktop' : `Graphics/miniatures/DESKTOP_mini6.webp`,
+                  'tablet'  : `Graphics/miniatures/TABLET_mini6.webp`
                 },
     'tech'    : ['javascript', 'jquery', 'poo', 'css3'],
     'date'    : { 'FR' : `6 mars 2020`,
@@ -275,11 +275,11 @@ const projectsDB = [
                           `Use external APIs w/ Javascript`
                          ]
                 },
-    'img'     : { 'mini'    : `Graphics/miniatures/MINIATURE7.jpg`,
-                  'resp'    : `Graphics/miniatures/RESPONSIVE7.jpg`,
-                  'mobile'  : `Graphics/miniatures/MOBILE_mini7.jpg`,
-                  'desktop' : `Graphics/miniatures/DESKTOP_mini7.jpg`,
-                  'tablet'  : `Graphics/miniatures/TABLET_mini7.jpg`
+    'img'     : { 'mini'    : `Graphics/miniatures/MINIATURE7.webp`,
+                  'resp'    : `Graphics/miniatures/RESPONSIVE7.webp`,
+                  'mobile'  : `Graphics/miniatures/MOBILE_mini7.webp`,
+                  'desktop' : `Graphics/miniatures/DESKTOP_mini7.webp`,
+                  'tablet'  : `Graphics/miniatures/TABLET_mini7.webp`
                 },
     'tech'    : ['javascript', 'jquery', 'postman', 'git'],
     'date'    : { 'FR' : `6 mai 2020`,
@@ -313,11 +313,11 @@ const projectsDB = [
                           `Take on an existing Javascript project`
                          ]
                 },
-    'img'     : { 'mini'    : `Graphics/miniatures/MINIATURE8.jpg`,
-                  'resp'    : `Graphics/miniatures/RESPONSIVE8.jpg`,
-                  'mobile'  : `Graphics/miniatures/MOBILE_mini8.jpg`,
-                  'desktop' : `Graphics/miniatures/DESKTOP_mini8.jpg`,
-                  'tablet'  : `Graphics/miniatures/TABLET_mini8.jpg`
+    'img'     : { 'mini'    : `Graphics/miniatures/MINIATURE8.webp`,
+                  'resp'    : `Graphics/miniatures/RESPONSIVE8.webp`,
+                  'mobile'  : `Graphics/miniatures/MOBILE_mini8.webp`,
+                  'desktop' : `Graphics/miniatures/DESKTOP_mini8.webp`,
+                  'tablet'  : `Graphics/miniatures/TABLET_mini8.webp`
                 },
     'tech'    : ['javascript', 'lighthouse', 'git','jasmine'],
     'date'    : { 'FR' : `1er août 2020`,
